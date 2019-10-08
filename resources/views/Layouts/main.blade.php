@@ -35,9 +35,9 @@
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 </head>
 <body>
-@include('layouts.header')
-@include('layouts.sidebar')
+@include('Layouts.header')
+@include('Layouts.sidebar')
 @yield('content')
-@include('layouts.footer')
+@include('Layouts.footer')
 </body>
 </html>
