@@ -1,12 +1,12 @@
 <!--sidebar-menu-->
 <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
   <ul>
-    <li <?php if(Route::current()->uri() == 'dashboard') echo 'class="active"'; ?>><a href="{{ route('dashboard.index') }}"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
-    <li <?php if(Route::current()->uri() == 'charts') echo 'class="active"'; ?>> <a href="{{ route('charts.index') }}"><i class="icon icon-signal"></i> <span>Charts &amp; graphs</span></a> </li>
+    <li <?php if(Route::current()->uri() == 'dashboard') echo 'class="active"'; ?>><a href="{{ route('dashboard.index') }}"><i class="icon icon-home"></i> <span>Tablero</span></a> </li>
+    <li <?php if(Route::current()->uri() == 'charts') echo 'class="active"'; ?>> <a href="{{ route('charts.index') }}"><i class="icon icon-signal"></i> <span>Indicadores</span></a> </li>
     <li <?php if(Route::current()->uri() == 'widgets') echo 'class="active"'; ?>> <a href="{{ route('widgets.index') }}"><i class="icon icon-inbox"></i> <span>Widgets</span></a> </li>
     <li <?php if(Route::current()->uri() == 'tables') echo 'class="active"'; ?>><a href="{{ route('tables.index') }}"><i class="icon icon-th"></i> <span>Tables</span></a></li>
     <li <?php if(Route::current()->uri() == 'grid') echo 'class="active"'; ?>><a href="{{ route('grid.index') }}"><i class="icon icon-fullscreen"></i> <span>Full width</span></a></li>
-    <li class="submenu <?php if(Route::current()->uri() == 'form-common' || Route::current()->uri() == 'form-validation' || Route::current()->uri() == 'form-wizard') echo 'active'; ?>"> <a href="#"><i class="icon icon-th-list"></i> <span>Forms</span> <span class="label label-important">3</span></a>
+    <li class="submenu <?php if(Route::current()->uri() == 'form-common' || Route::current()->uri() == 'form-validation' || Route::current()->uri() == 'form-wizard') echo 'active'; ?>"> <a href="#"><i class="icon icon-th-list"></i> <span>Planificaciones</span> <span class="label label-important">3</span></a>
       <ul>
         <li><a href="{{ route('forms.common') }}">Basic Form</a></li>
         <li><a href="{{ route('forms.validation') }}">Form with Validation</a></li>
@@ -29,7 +29,7 @@
       <ul>
         <li><a href="{{ route('addons.index2') }}">Dashboard2</a></li>
         <li><a href="{{ route('addons.gallery') }}">Gallery</a></li>
-        <li><a href="{{ route('addons.calendar') }}">Calendar</a></li>
+        <li><a href="{{ route('addons.calendar') }}">Calendario</a></li>
         <li><a href="{{ route('addons.invoice') }}">Invoice</a></li>
         <li><a href="{{ route('addons.chat') }}">Chat option</a></li>
       </ul>

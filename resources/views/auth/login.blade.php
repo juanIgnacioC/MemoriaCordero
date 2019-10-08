@@ -128,12 +128,21 @@
                 <div class="control-group">
                     <div class="controls">
                         <div class="" align="right">
+                            <label for="register">
+                            <a href="{{ route('register') }}" class="btn btn-primary stretched-link">Registro</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div class="control-group">
+                    <div class="controls">
+                        <div class="" align="right">
                             <label for="remember">
                             <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                             Remember Me</label>
                         </div>
                     </div>
-                </div>
+                </div>-->
 
                 <div class="form-actions">
                     <span class="pull-left"><a href="#" class="flip-link btn btn-info" id="to-recover">Lost password?</a></span>
