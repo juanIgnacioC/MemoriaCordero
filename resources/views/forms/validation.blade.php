@@ -4,107 +4,44 @@
 <div id="content">
   <div id="content-header">
     <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Form elements</a> <a href="#" class="current">Validation</a> </div>
-    <h1>Form validation</h1>
+    <h1>Ingresa Unidades</h1>
   </div>
   <div class="container-fluid"><hr>
     <div class="row-fluid">
       <div class="span12">
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
-            <h5>Form validation</h5>
+            <h5>Nueva Unidad</h5>
           </div>
           <div class="widget-content nopadding">
+            {{$instanciaPlani->id}}
+            {{$instanciaPlani->anio}}
+            {{$instanciaPlani->idInstanciaEstablecimiento}}
+            {{$instanciaPlani->idRepositorio}}
+
             <form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">
               <div class="control-group">
-                <label class="control-label">Your Name</label>
+                <label class="control-label">Periodo</label>
                 <div class="controls">
                   <input type="text" name="required" id="required">
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label">Your Email</label>
+                <label class="control-label">Fecha inicio (dd-mm)</label>
                 <div class="controls">
-                  <input type="text" name="email" id="email">
-                </div>
+                  <input type="text" data-date="09-03-2020" data-date-format="dd-mm-yyyy" value="09-03-2020" class="datepicker span11">
+                  <span class="help-block">Fecha con formato  (dd-mm-yy)</span> </div>
               </div>
               <div class="control-group">
-                <label class="control-label">Date (only Number)</label>
+                <label class="control-label">Fecha termino (dd-mm)</label>
                 <div class="controls">
-                  <input type="text" name="date" id="date">
-                </div>
-              </div>
-              <div class="control-group">
-                <label class="control-label">URL (Start with http://)</label>
-                <div class="controls">
-                  <input type="text" name="url" id="url">
-                </div>
+                  <input type="text" data-date="10-03-2020" data-date-format="dd-mm-yyyy" value="10-03-2020" class="datepicker span11">
+                  <span class="help-block">Fecha con formato  (dd-mm-yy)</span> </div>
               </div>
               <div class="form-actions">
-                <input type="submit" value="Validate" class="btn btn-success">
+                <input type="submit" value="Ingresar" class="btn btn-success">
               </div>
             </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span12">
-        <div class="widget-box">
-          <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
-            <h5>Numeric validation</h5>
-          </div>
-          <div class="widget-content nopadding">
-            <form class="form-horizontal" method="post" action="#" name="number_validate" id="number_validate" novalidate="novalidate">
-              <div class="control-group">
-                <label class="control-label">Minimal Salary</label>
-                <div class="controls">
-                  <input type="text" name="min" id="min" />
-                </div>
-              </div>
-              <div class="control-group">
-                <label class="control-label">Maximum Salary</label>
-                <div class="controls">
-                  <input type="text" name="max" id="max" />
-                </div>
-              </div>
-              <div class="control-group">
-                <label class="control-label">Only digit</label>
-                <div class="controls">
-                  <input type="text" name="number" id="number" />
-                </div>
-              </div>
-              <div class="form-actions">
-                <input type="submit" value="Validate" class="btn btn-success">
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="row-fluid">
-        <div class="span12">
-          <div class="widget-box">
-            <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
-              <h5>Security validation</h5>
-            </div>
-            <div class="widget-content nopadding">
-              <form class="form-horizontal" method="post" action="#" name="password_validate" id="password_validate" novalidate="novalidate">
-                <div class="control-group">
-                  <label class="control-label">Password</label>
-                  <div class="controls">
-                    <input type="password" name="pwd" id="pwd" />
-                  </div>
-                </div>
-                <div class="control-group">
-                  <label class="control-label">Confirm password</label>
-                  <div class="controls">
-                    <input type="password" name="pwd2" id="pwd2" />
-                  </div>
-                </div>
-                <div class="form-actions">
-                  <input type="submit" value="Validate" class="btn btn-success">
-                </div>
-              </form>
-            </div>
           </div>
         </div>
       </div>
@@ -112,12 +49,21 @@
   </div>
 </div>
 
-<script src="js/jquery.min.js"></script> 
-<script src="js/jquery.ui.custom.js"></script> 
-<script src="js/bootstrap.min.js"></script> 
-<script src="js/jquery.uniform.js"></script> 
-<script src="js/select2.min.js"></script> 
-<script src="js/jquery.validate.js"></script> 
-<script src="js/matrix.js"></script> 
-<script src="js/matrix.form_validation.js"></script>
+<script src="{{ asset('js/jquery.min.js') }}"></script> 
+<script src="{{ asset('js/jquery.ui.custom.js') }}"></script> 
+<script src="{{ asset('js/bootstrap.min.js') }}"></script> 
+<script src="{{ asset('js/bootstrap-colorpicker.js') }}"></script> 
+<script src="{{ asset('js/bootstrap-datepicker.js') }}"></script> 
+<script src="{{ asset('js/jquery.toggle.buttons.js') }}"></script> 
+<script src="{{ asset('js/masked.js') }}"></script> 
+<script src="{{ asset('js/jquery.uniform.js') }}"></script> 
+<script src="{{ asset('js/select2.min.js') }}"></script> 
+<script src="{{ asset('js/matrix.js') }}"></script> 
+<script src="{{ asset('js/matrix.form_common.js') }}"></script> 
+<script src="{{ asset('js/wysihtml5-0.3.0.js') }}"></script> 
+<script src="{{ asset('js/jquery.peity.min.js') }}"></script> 
+<script src="{{ asset('js/bootstrap-wysihtml5.js') }}"></script> 
+<script>
+  $('.textarea_editor').wysihtml5();
+</script>
 @endsection

@@ -23,6 +23,14 @@ Route::get('/widgets', 'WidgetsController@index')->name('widgets.index');
 Route::get('/tables', 'TablesController@index')->name('tables.index');
 Route::get('/grid', 'GridController@index')->name('grid.index');
 Route::get('/form-common', 'FormsController@common')->name('forms.common');
+
+Route::post('/form-common/createPlaniAnio', 'FormsController@createPlaniAnio')->name('forms.createPlaniAnio');
+
+Route::get('/planifications', 'FormsController@planifications')->name('forms.planifications');
+Route::get('/planificationsFilter', 'FormsController@planificationsFilter')->name('forms.planificationsFilter');
+
+//Route::get('/form-common-createInstanciaPlaniAño', 'FormsController@createInstanciaPlaniAño')->name('forms.createInstanciaPlaniAño');
+Route::get('/form-planification', 'PlanificationController@index')->name('forms.index');
 Route::get('/form-validation', 'FormsController@validation')->name('forms.validation');
 Route::get('/form-wizard', 'FormsController@wizard')->name('forms.wizard');
 Route::get('/buttons', 'ButtonsController@index')->name('buttons.index');

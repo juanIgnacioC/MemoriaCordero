@@ -15,14 +15,14 @@
       <ul class="quick-actions">
         <li class="bg_lb"> <a href="{{ route('dashboard.index') }}"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> Mi Tablero </a> </li>
         <li class="bg_lo span3"> <a href="form-common"> <i class="icon-th-list"></i> Planificaciones</a> </li>
-        <li class="bg_lb"> <a href="{{ route('addons.calendar') }}"> <i class="icon-calendar"></i>Calendario</a> </li>
-        <li class="bg_lo"> <a href="{{ route('tables.index') }}"> <i class="icon-th"></i> Tables</a> </li>
+        <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i> Establecimientos</a> </li>
+        <li class="bg_lo"> <a href="{{ route('tables.index') }}"> <i class="icon-th"></i> Alumnos</a> </li>
         <li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i> Full width</a> </li>
         <li class="bg_lg span3"> <a href="{{ route('charts.index') }}"> <i class="icon-signal"></i> Indicadores</a> </li>
-        <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i> Buttons</a> </li>
-        <li class="bg_lg"> <a href="{{ route('addons.calendar') }}"> <i class="icon-pencil"></i> Elementes</a> </li>
-        <li class="bg_ly"> <a href="{{ route('widgets.index') }}"> <i class="icon-inbox"></i><span class="label label-success">101</span> Widgets </a> </li>
-        <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i> Error</a> </li>
+        <li class="bg_lb"> <a href="{{ route('addons.calendar') }}"> <i class="icon-calendar"></i>Calendario</a> </li>
+        <li class="bg_lg"> <a href="{{ route('addons.calendar') }}"> <i class="icon-pencil"></i> Correcciones</a> </li>
+        <li class="bg_ly"> <a href="{{ route('widgets.index') }}"> <i class="icon-inbox"></i><span class="label label-success">101</span> Repositorio </a> </li>
+        <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i> Informaciones</a> </li>
 
       </ul>
     </div>
@@ -32,7 +32,7 @@
     <div class="row-fluid">
       <div class="widget-box">
         <div class="widget-title bg_lg"><span class="icon"><i class="icon-signal"></i></span>
-          <h5>Site Analytics</h5>
+          <h5>Desempeño General</h5>
         </div>
         <div class="widget-content" >
           <div class="row-fluid">

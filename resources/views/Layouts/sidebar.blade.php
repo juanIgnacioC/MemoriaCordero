@@ -8,8 +8,9 @@
     <li <?php if(Route::current()->uri() == 'grid') echo 'class="active"'; ?>><a href="{{ route('grid.index') }}"><i class="icon icon-fullscreen"></i> <span>Full width</span></a></li>
     <li class="submenu <?php if(Route::current()->uri() == 'form-common' || Route::current()->uri() == 'form-validation' || Route::current()->uri() == 'form-wizard') echo 'active'; ?>"> <a href="#"><i class="icon icon-th-list"></i> <span>Planificaciones</span> <span class="label label-important">3</span></a>
       <ul>
-        <li><a href="{{ route('forms.common') }}">Basic Form</a></li>
-        <li><a href="{{ route('forms.validation') }}">Form with Validation</a></li>
+        <li><a href="{{ route('forms.planifications') }}">Planificaciones</a></li>
+        <li><a href="{{ route('forms.common') }}">Crear Planificación</a></li>
+        <li><a href="{{ route('forms.validation') }}">Crear Unidad Planificación</a></li>
         <li><a href="{{ route('forms.wizard') }}">Form with Wizard</a></li>
       </ul>
     </li>
