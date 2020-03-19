@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Asignatura;
 use App\Curso;
 use App\InstanciaPlaniAño;
+use App\Unidad;
+use App\InstanciaUnidad;
 use App\Establecimiento;
 use App\InstanciaEstablecimiento;
 use App\RepositorioPlanificacion;
@@ -130,41 +132,134 @@ class FormsController extends Controller
     public function createPlaniUnidad(Request $request)
     {
         $request->validate([
+            'Periodo'=>'required',
+            'NuevoNombre'=>'required',
+            'NuevoNumero'=>'required',
+            'fechaInicio' =>'required',
+            'fechaTermino'=>'required',
+            'idInstanciaPlaniAño'=>'required',
+        ]);
+
+        //Datos crear InstanciaPlaniAño
+        $Periodo = $request->get('Periodo');
+
+        //$json2 = '{"nombre":Conoc}';
+        /*$json2 = '{"nombre": "Conocer hasta el número 10.000", "id": "1"}';
+
+        dump($json2);
+        $obj = json_decode($json2);
+        dump($obj);
+        dump($obj->{'nombre'});
+        dd($obj->{'id'});*/
+
+
+        $NuevoNombre = $request->get('NuevoNombre');
+        $NuevoNombre = str_replace("'", "\"", $NuevoNombre);
+        dump($NuevoNombre);
+
+        $json = json_decode($NuevoNombre);
+        dump($json);
+
+        $NuevoNombre = ($json->{'nombre'});
+        $idUnidadFK = ($json->{'id'});
+        
+        $fechaInicio = $request->get('fechaInicio');
+        $fechaTermino = $request->get('fechaTermino');
+        //cast format
+        $fechaInicio = date('Y-m-d', strtotime($fechaInicio));
+        $fechaTermino = date('Y-m-d', strtotime($fechaTermino));
+
+        $NuevoNumero = $request->get('NuevoNumero');
+        $idInstanciaPlaniAño = $request->get('idInstanciaPlaniAño');
+        //$idUnidadFK = $request->get('idUnidadFK');
+
+
+        $InstanciaUnidad = new InstanciaUnidad([
+            'Periodo' => $Periodo,
+            'NuevoNombre' => $NuevoNombre,
+            'NuevoNumero' => $NuevoNumero,
+            'fechaInicio' => $fechaInicio,
+            'fechaTermino' => $fechaTermino,
+            'idInstanciaPlaniAño' => $idInstanciaPlaniAño,
+            'idUnidadFK' => $idUnidadFK
+        ]);
+
+        dump($InstanciaUnidad);
+
+        $InstanciaUnidad->save();
+
+        //retornar a vista vista unidades
+        return redirect(route('forms.planifications'));
+        //return redirect(route('forms.validation', ['instanciaPlani', $instanciaPlani]));
+    }
+
+    public function validationEx(Request $request)
+    {
+    	$request->validate([
             'anio'=>'required',
             'curso'=>'required',
             'asignatura'=>'required',
-            'establecimiento' =>'required'
+            'idInstanciaPlaniAño' =>'required'
         ]);
+        dump("llega a validation");
 
         //Datos crear InstanciaPlaniAño
         $anio = $request->get('anio');
         $curso = $request->get('curso');
         $asignatura = $request->get('asignatura');
-        $establecimiento = $request->get('establecimiento');
+        $idInstanciaPlaniAño = $request->get('idInstanciaPlaniAño');
 
-        $repositorio = RepositorioPlanificacion::where('idCurso', $curso)
-            ->where('idAsignatura', $asignatura)
-            ->first();
+        $instanciaPlani = InstanciaPlaniAño::where('id', $idInstanciaPlaniAño)
+        ->first();
+            /*->where('idAsignatura', $asignatura)
+            ->first();*/
 
-            //dd($repositorio);
+        //dump($instanciaPlani);
 
+        /*$html = view('forms.validation')->with(compact('instanciaPlani'))->render();
+        dump($html);
+        return response()->json(['html' => $html]);*/
 
-        $instanciaPlani = new InstanciaPlaniAño([
-            'anio' => $anio,
-            'idInstanciaEstablecimiento' => $establecimiento,
-            'idRepositorio' => $repositorio['id']
-        ]);
+        //viendo este
+        /*$response = array('status' =>'success','plani' => $instanciaPlani);
+        return response()->json($response);*/
 
-        $instanciaPlani->save();
+        //return response()->json(['plani' => $instanciaPlani]);
 
+        //return response()->json(['url'=>url('/loadDashboard')])
 
-        return view('forms.validation', ['instanciaPlani'=> $instanciaPlani]);
+        //return view('forms.validation', ['instanciaPlani'=> $instanciaPlani]);
+        return view('forms.validation');
         //return redirect(route('forms.validation', ['instanciaPlani', $instanciaPlani]));
     }
 
-    public function validation()
+    public function validation(Request $request)
     {
-    	return view('forms.validation');
+        $request->validate([
+            'curso'=>'required',
+            'asignatura'=>'required',
+            'idInstanciaPlaniAño' =>'required'
+        ]);
+        dump("llega a validation");
+
+        //Datos get InstanciaPlaniAño
+        $curso = $request->get('curso');
+        $asignatura = $request->get('asignatura');
+        $idInstanciaPlaniAño = $request->get('idInstanciaPlaniAño');
+
+        $instanciaPlani = InstanciaPlaniAño::where('id', $idInstanciaPlaniAño)
+        ->first();
+
+        //dd($instanciaPlani->idRepositorio);
+        $unidades = Unidad::where('idRepositorio', $instanciaPlani->idRepositorio)->get();
+
+        dump($instanciaPlani);
+        dump($unidades);
+
+
+        return view('forms.validation', ['instanciaPlani'=> $instanciaPlani, 'curso'=> $curso, 'asignatura'=> $asignatura, 'unidades'=> $unidades]);
+        //return view('forms.validation');
+        //return redirect(route('forms.validation', ['instanciaPlani', $instanciaPlani]));
     }
 
     public function wizard()

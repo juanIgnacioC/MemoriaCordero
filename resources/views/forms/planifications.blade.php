@@ -73,6 +73,7 @@
     <a href="{{ route('forms.common') }}" class="btn btn-success">
       <span class="glyphicon glyphicon-plus"></span> Agregar Planificación
     </a>
+    <input type="hidden" id="token" value="{{ csrf_token() }}" readonly>
 
     <div id="listado">
     <div class="row-fluid">
@@ -110,9 +111,9 @@
                     </td>
                     
 
-                    <td><a href="{{ route('forms.createPlaniAnio') ,['instanciaPlani'=> $row<?=$i?>]) }}" class="btn btn-primary">Planificar
+                    <td><a href="form-validation?asignatura=<?=$row['nombreAsignatura']?>&curso=<?=$row['nombreCurso']?>&idInstanciaPlaniAño=<?=$row['id']?>" class="btn btn-primary">Planificar
                     </a></td>
-                    <td><button class="btn btn-danger" onclick="planificar(<?=$i?>)">Eliminar</button></td>
+                    <td><button id="eliminar<?=$i?>" name="eliminar<?=$i?>" class="btn btn-danger" >Eliminar</button></td>
                   </tr>
                 <?$i++;endforeach;?>
               </tbody>
@@ -133,26 +134,52 @@
 <script src="js/jquery.dataTables.min.js"></script> 
 <script src="js/matrix.js"></script> 
 <script src="js/matrix.tables.js"></script>
+<script src="js/planificar.js"></script>
 @endsection
 
 <script type="text/javascript">
 
-function planificar(indice){
-    var idPlani = $("#id"+indice).val();
+/*$("#planificar0").click(function (e) {
+    e.preventDefault();
+    var idInstanciaPlaniAño = $("#id"+indice).val();
+
+    var curso = $("#nombreCurso"+indice).val();
+    var asignatura = $("#nombreAsignatura"+indice).val();
+    var anio = $("#anio"+indice).val();
+    var token = '{{csrf_token()}}';// ó $("#token").val() si lo tienes en una etiqueta html.
+    console.log("post");
+    console.log(token);
+    var data={curso:curso,
+        asignatura:asignatura,
+        anio:anio,
+        idInstanciaPlaniAño:idInstanciaPlaniAño,
+        _token:token};
+    $.ajax({
+        type: "post",
+        url: "{{route('forms.validation')}}",
+        data: data,
+        success: function (msg) {
+                alert("Se ha realizado el POST con exito "+msg);
+        }
+    });
+});*/
+
+/*function planificar(indice){
+    var idInstanciaPlaniAño = $("#id"+indice).val();
 
     var curso = $("#nombreCurso"+indice).val();
     var asignatura = $("#nombreAsignatura"+indice).val();
     var anio = $("#anio"+indice).val();
 
-    console.log(instanciaPlani);
+    console.log(idInstanciaPlaniAño);
 
     $.post(
-      {{ route('forms.createPlaniUnidad') }},
+      {{ route('forms.validation') }},
       {
         curso:curso,
         asignatura:asignatura,
         anio:anio,
-        idPlani:idPlani
+        idInstanciaPlaniAño:idInstanciaPlaniAño
       },function(){
         $("#listado").hide('slow');
         //cambiar cargar datos
@@ -161,6 +188,6 @@ function planificar(indice){
       }
     );
 
-  }
+  }*/
 
 </script>

@@ -11,33 +11,53 @@
       <div class="span12">
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
-            <h5>Nueva Unidad</h5>
+            <h5>Nueva Unidad: {{$curso}} {{$asignatura}} {{$instanciaPlani->anio}} </h5>
           </div>
           <div class="widget-content nopadding">
             {{$instanciaPlani->id}}
-            {{$instanciaPlani->anio}}
-            {{$instanciaPlani->idInstanciaEstablecimiento}}
-            {{$instanciaPlani->idRepositorio}}
 
-            <form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">
+            <form action="{{ route('forms.createPlaniUnidad') }}" method="post" class="form-horizontal">
+            @csrf
+              <input type="hidden" name="idInstanciaPlaniAño" value={{$instanciaPlani->id}}>
               <div class="control-group">
                 <label class="control-label">Periodo</label>
                 <div class="controls">
-                  <input type="text" name="required" id="required">
+                  <input type="text" name="Periodo" id="Periodo">
                 </div>
               </div>
+
+              <div class="control-group">
+              <label class="control-label">Nombre</label>
+              <div class="controls">
+                <select &nbsp; class="form-control" name="NuevoNombre" id="NuevoNombre">
+                  @for ($i = 0; $i < count($unidades); $i++)
+                    <option value="{'nombre':'&nbsp;{{$unidades[$i]->nombre}}','id':'{{$unidades[$i]->id}}'}">{{$unidades[$i]->id}}. {{$unidades[$i]->nombre}}</option>
+                  @endfor
+                </select>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label">Número Unidad</label>
+              <div class="controls">
+                <input type="text" name="NuevoNumero" id="NuevoNumero">
+              </div>
+            </div>
+
               <div class="control-group">
                 <label class="control-label">Fecha inicio (dd-mm)</label>
                 <div class="controls">
-                  <input type="text" data-date="09-03-2020" data-date-format="dd-mm-yyyy" value="09-03-2020" class="datepicker span11">
+                  <input type="text" name="fechaInicio" data-date="02-03-2020" data-date-format="dd-mm-yyyy" value="02-03-2020" class="datepicker span11">
                   <span class="help-block">Fecha con formato  (dd-mm-yy)</span> </div>
               </div>
+
               <div class="control-group">
                 <label class="control-label">Fecha termino (dd-mm)</label>
                 <div class="controls">
-                  <input type="text" data-date="10-03-2020" data-date-format="dd-mm-yyyy" value="10-03-2020" class="datepicker span11">
+                  <input type="text" name="fechaTermino" data-date="30-03-2020" data-date-format="dd-mm-yyyy" value="30-03-2020" class="datepicker span11">
                   <span class="help-block">Fecha con formato  (dd-mm-yy)</span> </div>
               </div>
+
               <div class="form-actions">
                 <input type="submit" value="Ingresar" class="btn btn-success">
               </div>
@@ -50,6 +70,7 @@
 </div>
 
 <script src="{{ asset('js/jquery.min.js') }}"></script> 
+<script src="{{ asset('js/planificar.js') }}"></script> 
 <script src="{{ asset('js/jquery.ui.custom.js') }}"></script> 
 <script src="{{ asset('js/bootstrap.min.js') }}"></script> 
 <script src="{{ asset('js/bootstrap-colorpicker.js') }}"></script> 
