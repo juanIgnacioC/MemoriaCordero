@@ -152,8 +152,8 @@ class FormsController extends Controller
         dump($obj->{'nombre'});
         dd($obj->{'id'});*/
 
-
         $NuevoNombre = $request->get('NuevoNombre');
+        //valid format json
         $NuevoNombre = str_replace("'", "\"", $NuevoNombre);
         dump($NuevoNombre);
 
@@ -188,8 +188,11 @@ class FormsController extends Controller
 
         $InstanciaUnidad->save();
 
-        //retornar a vista vista unidades
+        //retornar a vista vista unidades. luego?
+        //return redirect(route('plani.planification'));
         return redirect(route('forms.planifications'));
+        
+
         //return redirect(route('forms.validation', ['instanciaPlani', $instanciaPlani]));
     }
 

@@ -14,7 +14,7 @@
     <div class="quick-actions_homepage">
       <ul class="quick-actions">
         <li class="bg_lb"> <a href="{{ route('dashboard.index') }}"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> Mi Tablero </a> </li>
-        <li class="bg_lo span3"> <a href="form-common"> <i class="icon-th-list"></i> Planificaciones</a> </li>
+        <li class="bg_lo span3"> <a href="planifications"> <i class="icon-th-list"></i> Planificaciones</a> </li>
         <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i> Establecimientos</a> </li>
         <li class="bg_lo"> <a href="{{ route('tables.index') }}"> <i class="icon-th"></i> Alumnos</a> </li>
         <li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i> Full width</a> </li>

@@ -30,11 +30,13 @@ Route::get('/planifications', 'FormsController@planifications')->name('forms.pla
 Route::get('/planificationsFilter', 'FormsController@planificationsFilter')->name('forms.planificationsFilter');
 
 //Route::get('/form-common-createInstanciaPlaniAño', 'FormsController@createInstanciaPlaniAño')->name('forms.createInstanciaPlaniAño');
-Route::get('/form-planification', 'PlanificationController@index')->name('forms.index');
+//Route::get('/form-planification', 'PlanificationController@index')->name('forms.index');
 
 Route::post('/form-validation/createPlaniUnidad', 'FormsController@createPlaniUnidad')->name('forms.createPlaniUnidad');
 
 Route::get('/form-validation', 'FormsController@validation')->name('forms.validation');
+
+Route::get('/planification', 'PlanificationsController@index')->name('planifications.unidades');
 
 Route::get('/form-wizard', 'FormsController@wizard')->name('forms.wizard');
 Route::get('/buttons', 'ButtonsController@index')->name('buttons.index');
