@@ -17,7 +17,8 @@
 <link href="{{ asset('font-awesome/css/font-awesome.css" rel="stylesheet') }}" />
 <link rel="stylesheet" href="{{ asset('css/jquery.gritter.css') }}" />
 
-
+<link rel="stylesheet" href="css/jquery-editable-select.css" />
+<link rel="stylesheet" href="css/jquery-editable-select.min.css" />
 
 <link rel="stylesheet" href="css/bootstrap.min.css" />
 <link rel="stylesheet" href="css/bootstrap-responsive.min.css" />

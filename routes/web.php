@@ -37,6 +37,7 @@ Route::post('/form-validation/createPlaniUnidad', 'FormsController@createPlaniUn
 Route::get('/form-validation', 'FormsController@validation')->name('forms.validation');
 
 Route::get('/planification', 'PlanificationsController@index')->name('planifications.unidades');
+Route::get('/contents', 'PlanificationsController@contents')->name('planifications.contents');
 
 Route::get('/form-wizard', 'FormsController@wizard')->name('forms.wizard');
 Route::get('/buttons', 'ButtonsController@index')->name('buttons.index');

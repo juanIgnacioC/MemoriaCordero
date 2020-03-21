@@ -186,10 +186,12 @@
 </pre>
           </div>
         </div>
+
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"> <i class="icon-hand-right"></i> </span>
             <h5>Pop-up dialogs</h5>
           </div>
+
           <div class="widget-content"> <a href="#myModal" data-toggle="modal" class="btn btn-success">View Popup</a> <a href="#myAlert" data-toggle="modal" class="btn btn-warning">Alert</a> <a href="#myModal2" data-toggle="modal" class="btn btn-info">image Popup</a>
             <div id="myModal" class="modal hide">
               <div class="modal-header">
@@ -200,6 +202,7 @@
                 <p>Here is the text coming you can put also image if you want…</p>
               </div>
             </div>
+
             <div id="myModal2" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
@@ -210,6 +213,7 @@
               </div>
               <div class="modal-footer"><a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a> </div>
             </div>
+
             <div id="myAlert" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
@@ -220,8 +224,10 @@
               </div>
               <div class="modal-footer"> <a data-dismiss="modal" class="btn btn-primary" href="#">Confirm</a> <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
             </div>
+
           </div>
         </div>
+        
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"> <i class="icon-hand-right"></i> </span>
             <h5>Tooltip directions</h5>

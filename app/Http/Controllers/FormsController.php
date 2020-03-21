@@ -123,7 +123,6 @@ class FormsController extends Controller
         $instanciaPlani->save();
 
 
-
         //return view('forms.planifications');
         //return redirect(route('forms.validation', ['instanciaPlani', $instanciaPlani]));
         return redirect(route('forms.planifications'));
@@ -138,6 +137,7 @@ class FormsController extends Controller
             'fechaInicio' =>'required',
             'fechaTermino'=>'required',
             'idInstanciaPlaniAño'=>'required',
+            'objetivoGeneral'=>'required'
         ]);
 
         //Datos crear InstanciaPlaniAño
@@ -153,15 +153,17 @@ class FormsController extends Controller
         dd($obj->{'id'});*/
 
         $NuevoNombre = $request->get('NuevoNombre');
+        $idUnidadFK = $request->get('idUnidadFK');
         //valid format json
-        $NuevoNombre = str_replace("'", "\"", $NuevoNombre);
+        //$NuevoNombre = str_replace("'", "\"", $NuevoNombre);
+        dump($idUnidadFK);
         dump($NuevoNombre);
 
-        $json = json_decode($NuevoNombre);
-        dump($json);
+        /*$json = json_decode($NuevoNombre);
+        dump($json);*/
 
-        $NuevoNombre = ($json->{'nombre'});
-        $idUnidadFK = ($json->{'id'});
+        //$NuevoNombre = ($json->{'nombre'});
+        //$idUnidadFK = ($json->{'id'});
         
         $fechaInicio = $request->get('fechaInicio');
         $fechaTermino = $request->get('fechaTermino');
@@ -171,12 +173,14 @@ class FormsController extends Controller
 
         $NuevoNumero = $request->get('NuevoNumero');
         $idInstanciaPlaniAño = $request->get('idInstanciaPlaniAño');
-        //$idUnidadFK = $request->get('idUnidadFK');
-
+        
+        $objetivoGeneral = $request->get('objetivoGeneral');
+        dump($objetivoGeneral);
 
         $InstanciaUnidad = new InstanciaUnidad([
             'Periodo' => $Periodo,
             'NuevoNombre' => $NuevoNombre,
+            'NuevoObjetivoGeneral' => $objetivoGeneral,
             'NuevoNumero' => $NuevoNumero,
             'fechaInicio' => $fechaInicio,
             'fechaTermino' => $fechaTermino,
@@ -188,12 +192,19 @@ class FormsController extends Controller
 
         $InstanciaUnidad->save();
 
-        //retornar a vista vista unidades. luego?
+        //retornar a vista vista unidades
+        $curso = $request->get('curso');
+        $asignatura = $request->get('asignatura');
+        dump($curso);
+        dump($asignatura);
         //return redirect(route('plani.planification'));
-        return redirect(route('forms.planifications'));
+        /*"planification?asignatura=<?=$row['nombreAsignatura']?>&curso=<?=$row['nombreCurso']?>&idInstanciaPlaniAño=<?=$row['id']?>"*/
         
+        //return redirect(route('forms.planifications'));
+        
+        //return view('planifications.unidades', ['idInstanciaPlaniAño'=> $idInstanciaPlaniAño, 'curso'=> $curso, 'asignatura'=> $asignatura]);
 
-        //return redirect(route('forms.validation', ['instanciaPlani', $instanciaPlani]));
+        return redirect(route('planifications.unidades', ['asignatura'=> $asignatura, 'curso' => $curso, 'idInstanciaPlaniAño'=> $idInstanciaPlaniAño]) );
     }
 
     public function validationEx(Request $request)

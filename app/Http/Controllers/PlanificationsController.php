@@ -48,4 +48,33 @@ class PlanificationsController extends Controller
 
 		//return view('planifications.unidades');
     }
+
+    public function contents(Request $request)
+    {	
+    	$request->validate([
+            'curso'=>'required',
+            'asignatura'=>'required',
+            'id' =>'required'
+        ]);
+        dump("llega a contents unidad");
+
+        //Datos get InstanciaPlaniAño
+        $curso = $request->get('curso');
+        $asignatura = $request->get('asignatura');
+        $id = $request->get('id');
+
+        $instanciaUnidad = InstanciaUnidad::where('id', $id)
+        ->first();
+
+        //dd($instanciaPlani->idRepositorio);
+        //$unidades = Unidad::where('idRepositorio', $instanciaPlani->idRepositorio)->get();
+
+        dump($instanciaUnidad);
+        //dump($unidades);
+
+
+        return view('planifications.contents', ['curso'=> $curso, 'asignatura'=> $asignatura, 'instanciaUnidad'=> $instanciaUnidad]);
+
+		//return view('planifications.unidades');
+    }
 }
