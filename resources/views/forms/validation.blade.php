@@ -3,7 +3,7 @@
 @section('content')
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{ route('forms.planifications') }}" class="tip-bottom">Planificaciones</a> <a href="#" class="current">Planificación</a> <a href="#" class="current">Agregar Unidad</a>  </div>
+    <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{ route('forms.planifications') }}" class="tip-bottom">Planificaciones</a> <a href="planification?asignatura={{$asignatura}}&curso={{$curso}}&idInstanciaPlaniAño={{$instanciaPlani->id}}" class="current">Planificación</a> <a href="#" class="current">Agregar Unidad</a>  </div>
     <h1>Ingresa Unidades</h1>
   </div>
   <div class="container-fluid"><hr>
@@ -19,6 +19,12 @@
             <form action="{{ route('forms.createPlaniUnidad') }}" method="post" class="form-horizontal">
             @csrf
               <input type="hidden" name="idInstanciaPlaniAño" value={{$instanciaPlani->id}}>
+
+              <input type="hidden" id="idUnidadFK" name="idUnidadFK" value="">
+
+              <input type="hidden" id="asignatura" name="asignatura" value="&nbsp;{{$asignatura}}">
+              <input type="hidden" id="curso" name="curso" value="&nbsp;{{$curso}}">
+
               <div class="control-group">
                 <label class="control-label">Periodo</label>
                 <div class="controls">
@@ -27,20 +33,33 @@
               </div>
 
               <div class="control-group">
+              <label class="control-label">Número Unidad</label>
+              <div class="controls">
+                <input type="text" name="NuevoNumero" id="NuevoNumero">
+              </div>
+            </div>
+
+              <div class="control-group">
               <label class="control-label">Nombre</label>
               <div class="controls">
-                <select &nbsp; class="form-control" name="NuevoNombre" id="NuevoNombre">
+                <select id="NuevoNombre" name="NuevoNombre">
                   @for ($i = 0; $i < count($unidades); $i++)
-                    <option value="{'nombre':'&nbsp;{{$unidades[$i]->nombre}}','id':'{{$unidades[$i]->id}}'}">{{$unidades[$i]->id}}. {{$unidades[$i]->nombre}}</option>
+                    <option value={{$unidades[$i]->id}}>{{$unidades[$i]->nombre}}</option>
                   @endfor
                 </select>
+                <code id="last-selected"></code>
               </div>
             </div>
 
             <div class="control-group">
-              <label class="control-label">Número Unidad</label>
+              <label class="control-label">Objetivo General</label>
               <div class="controls">
-                <input type="text" name="NuevoNumero" id="NuevoNumero">
+                <select id="objetivoGeneral" name="objetivoGeneral">
+                  @for ($i = 0; $i < count($unidades); $i++)
+                    <option value={{$unidades[$i]->id}}>{{$unidades[$i]->objetivoGeneral}}</option>
+                  @endfor
+                </select>
+                <code id="last-selected2"></code>
               </div>
             </div>
 
@@ -69,8 +88,16 @@
   </div>
 </div>
 
-<script src="{{ asset('js/jquery.min.js') }}"></script> 
+<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="//rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.js"></script>
+<link href="//rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.css" rel="stylesheet">
+
 <script src="{{ asset('js/planificar.js') }}"></script> 
+<script src="js/jquery.min.js"></script> 
+
+<script src="{{ asset('js/jquery-editable-select.js') }}"></script> 
+<script src="{{ asset('js/jquery-editable-select.min.js') }}"></script>
+
 <script src="{{ asset('js/jquery.ui.custom.js') }}"></script> 
 <script src="{{ asset('js/bootstrap.min.js') }}"></script> 
 <script src="{{ asset('js/bootstrap-colorpicker.js') }}"></script> 

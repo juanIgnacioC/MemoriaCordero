@@ -46,6 +46,7 @@
             </ul>
           </div>
         </div>
+        
         <div class="accordion" id="collapse-group">
           <div class="accordion-group widget-box">
             <div class="accordion-heading">
@@ -78,6 +79,7 @@
             </div>
           </div>
         </div>
+
         <div class="widget-box collapsible">
           <div class="widget-title"> <a href="#collapseOne" data-toggle="collapse"> <span class="icon"><i class="icon-arrow-right"></i></span>
             <h5>Toggle, Open by default</h5>
@@ -98,6 +100,7 @@
             <div class="widget-content"> This box is now open </div>
           </div>
         </div>
+
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"> <i class="icon-refresh"></i> </span>
             <h5>News updates</h5>
@@ -114,7 +117,9 @@
           </div>
         </div>
       </div>
+
       <div class="span6">
+
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"><i class="icon-time"></i></span>
             <h5>To Do List</h5>
@@ -148,6 +153,7 @@
             </table>
           </div>
         </div>
+
         <div class="widget-box">
           <div class="widget-title">
             <ul class="nav nav-tabs">
@@ -182,6 +188,7 @@
             </ul>
           </div>
         </div>
+
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"><i class="icon-ok"></i></span>
             <h5>To Do list</h5>
@@ -213,6 +220,7 @@
             </div>
           </div>
         </div>
+
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"><i class="icon-ok"></i></span>
             <h5>To Do list</h5>

@@ -10,6 +10,7 @@ class InstanciaUnidad extends Model
         'id',
         'Periodo',
         'NuevoNombre',
+        'NuevoObjetivoGeneral',
         'NuevoNumero',
         'fechaInicio',
         'fechaTermino',
