@@ -38,6 +38,13 @@ Route::get('/form-validation', 'FormsController@validation')->name('forms.valida
 
 Route::get('/planification', 'PlanificationsController@index')->name('planifications.unidades');
 Route::get('/contents', 'PlanificationsController@contents')->name('planifications.contents');
+Route::get('/abilities', 'PlanificationsController@abilities')->name('planifications.abilities');
+Route::post('/abilities/createAbilities', 'PlanificationsController@createAbilities')->name('planifications.createAbilities');
+
+Route::get('/attitudes', 'PlanificationsController@attitudes')->name('planifications.attitudes');
+Route::post('/attitudes/createAttitudes', 'PlanificationsController@createAttitudes')->name('planifications.createAttitudes');
+
+
 
 Route::get('/form-wizard', 'FormsController@wizard')->name('forms.wizard');
 Route::get('/buttons', 'ButtonsController@index')->name('buttons.index');

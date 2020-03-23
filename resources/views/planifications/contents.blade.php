@@ -9,10 +9,6 @@
     
     <hr>
 
-    <a href="form-validation?asignatura={{$asignatura}}&curso={{$curso}}&idInstanciaPlaniAño={{$instanciaUnidad->idInstanciaPlaniAño}}" class="btn btn-primary" class="btn btn-success">
-      <span class="glyphicon glyphicon-plus"></span> Agregar Unidad
-    </a>
-
     <input type="hidden" id="token" value="{{ csrf_token() }}" readonly>
 
     <div id="listado">
@@ -21,32 +17,20 @@
 
         <div class="widget-title"> <a href="#collapseOne" data-toggle="collapse"> <span class="icon"><i class="icon-book"></i></span>
           <h5>Habilidades</h5>
-          </a> </div>
+          </a> <div name="agregarHabilidad" id="agregarHabilidad" class="pull-right" style="vertical-align: middle; margin-right: 5px;"> <a class="tip" href="abilities?asignatura={{$asignatura}}&curso={{$curso}}&id={{$instanciaUnidad->id}}" title="Agregar">Agregar<i class="icon-plus-sign"></i></a> </div>
+        </div>
 
-        <div class="collapse in" id="collapseOne">
+        <div class="collapse" id="collapseOne">
           <div class="widget-content">
             <div class="todo">
               <ul>
-                <li class="clearfix">
-                  <div class="txt"> Luanch This theme on Themeforest <span class="by label">Nirav</span> <span class="date badge badge-important">Today</span> </div>
-                  <div class="pull-right"> <a class="tip" href="#" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
-                </li>
-                <li class="clearfix">
-                  <div class="txt"> Manage Pending Orders <span class="by label">Alex</span> <span class="date badge badge-warning">Today</span> </div>
-                  <div class="pull-right"> <a class="tip" href="#" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
-                </li>
-                <li class="clearfix">
-                  <div class="txt"> MAke your desk clean <span class="by label">Admin</span> <span class="date badge badge-success">Tomorrow</span> </div>
-                  <div class="pull-right"> <a class="tip" href="#" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
-                </li>
-                <li class="clearfix">
-                  <div class="txt"> Today we celebrate the great looking theme <span class="by label">Admin</span> <span class="date badge badge-info">08.03.2013</span> </div>
-                  <div class="pull-right"> <a class="tip" href="#" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
-                </li>
-                <li class="clearfix">
-                  <div class="txt"> Manage all the orders <span class="by label">Mark</span> <span class="date badge badge-info">12.03.2013</span> </div>
-                  <div class="pull-right"> <a class="tip" href="#" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
-                </li>
+                @for ($i = 0; $i < count($habilidades); $i++)
+                  <li class="clearfix">
+                    <div class="txt" id="habilidad{{$i}}"> {{$habilidades[$i]->NuevoNombre}} <span class="by label">Admin</span> <span class="date badge badge-info">Habilidad</span> </div>
+                    <div class="pull-right"> <a class="tip" href="" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
+                  </li>
+                @endfor
+
               </ul>
             </div>
           </div>
@@ -54,45 +38,132 @@
 
         <div class="widget-title"> <a href="#collapseTwo" data-toggle="collapse"> <span class="icon"><i class="icon-book"></i></span>
           <h5>Actitudes</h5>
-          </a> </div>
+          </a> <div name="agregarActitud" id="agregarActitud" class="pull-right" style="vertical-align: middle; margin-right: 5px;"> <a class="tip" href="attitudes?asignatura={{$asignatura}}&curso={{$curso}}&id={{$instanciaUnidad->id}}" title="Agregar">Agregar<i class="icon-plus-sign"></i></a> </div>
+        </div>
         <div class="collapse" id="collapseTwo">
           <div class="widget-content">
             <div class="todo">
               <ul>
-                <li class="clearfix">
-                  <div class="txt"> Luanch This theme on Themeforest <span class="by label">Nirav</span> <span class="date badge badge-important">Today</span> </div>
-                  <div class="pull-right"> <a class="tip" href="#" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
-                </li>
-                <li class="clearfix">
-                  <div class="txt"> Manage Pending Orders <span class="by label">Alex</span> <span class="date badge badge-warning">Today</span> </div>
-                  <div class="pull-right"> <a class="tip" href="#" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
-                </li>
-                <li class="clearfix">
-                  <div class="txt"> MAke your desk clean <span class="by label">Admin</span> <span class="date badge badge-success">Tomorrow</span> </div>
-                  <div class="pull-right"> <a class="tip" href="#" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
-                </li>
-                <li class="clearfix">
-                  <div class="txt"> Today we celebrate the great looking theme <span class="by label">Admin</span> <span class="date badge badge-info">08.03.2013</span> </div>
-                  <div class="pull-right"> <a class="tip" href="#" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
-                </li>
-                <li class="clearfix">
-                  <div class="txt"> Manage all the orders <span class="by label">Mark</span> <span class="date badge badge-info">12.03.2013</span> </div>
-                  <div class="pull-right"> <a class="tip" href="#" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
-                </li>
+                @for ($i = 0; $i < count($actitudes); $i++)
+                  <li class="clearfix">
+                    <div class="txt" id="actitud{{$i}}"> {{$actitudes[$i]->NuevoNombre}} <span class="by label">Admin</span> <span class="date badge badge-info">Actitud</span> </div>
+                    <div class="pull-right"> <a class="tip" href="" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
+                  </li>
+                @endfor
               </ul>
             </div>
           </div>
         </div>
 
         <div class="widget-title"> <a href="#collapseThree" data-toggle="collapse"> <span class="icon"><i class="icon-book"></i></span>
-          <h5>Toggle, closed by default</h5>
-          </a> </div>
+          <h5>Objetivos de aprendizaje transversales (OAT) </h5>
+          </a> <div name="agregarOAT" id="agregarOAT" class="pull-right" style="vertical-align: middle; margin-right: 5px;"> <a class="tip" href="attitudes?asignatura={{$asignatura}}&curso={{$curso}}&id={{$instanciaUnidad->id}}" title="Agregar">Agregar<i class="icon-plus-sign"></i></a> </div>
+        </div>
         <div class="collapse" id="collapseThree">
-          <div class="widget-content"> This box is now open </div>
+          <div class="widget-content">
+            <div class="todo">
+              <ul>
+                @isset($oat)
+                @for ($i = 0; $i < count($oat); $i++)
+                  <li class="clearfix">
+                    <div class="txt" id="oat{{$i}}"> {{$oat[$i]->NuevoNombre}} <span class="by label">Admin</span> <span class="date badge badge-info">OAT</span> </div>
+                    <div class="pull-right"> <a class="tip" href="" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
+                  </li>
+                @endfor
+                @endisset
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="widget-title"> <a href="#collapseFour data-toggle="collapse"> <span class="icon"><i class="icon-book"></i></span>
+          <h5>Diseños universales del aprendizaje (DUA) </h5>
+          </a> <div name="agregarDUA" id="agregarDUA" class="pull-right" style="vertical-align: middle; margin-right: 5px;"> <a class="tip" href="attitudes?asignatura={{$asignatura}}&curso={{$curso}}&id={{$instanciaUnidad->id}}" title="Agregar">Agregar<i class="icon-plus-sign"></i></a> </div>
+        </div>
+        <div class="collapse" id="collapseFour">
+          <div class="widget-content">
+            <div class="todo">
+              <ul>
+                @isset($dua)
+                @for ($i = 0; $i < count($dua); $i++)
+                  <li class="clearfix">
+                    <div class="txt" id="dua{{$i}}"> {{$dua[$i]->NuevoNombre}} <span class="by label">Admin</span> <span class="date badge badge-info">DUA</span> </div>
+                    <div class="pull-right"> <a class="tip" href="" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
+                  </li>
+                @endfor
+                @endisset
+              </ul>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+    <hr>
+    <a href="form-validation?asignatura={{$asignatura}}&curso={{$curso}}&idInstanciaPlaniAño={{$instanciaUnidad->idInstanciaPlaniAño}}" class="btn btn-primary" class="btn btn-success">
+      <span class="glyphicon glyphicon-plus"></span> Agregar Objetivo
+    </a>
+    <div id="listado2">
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+            <h5>Objetivos</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <table class="table table-bordered data-table">
+              <thead>
+                <tr>
+                  <th>Objetivo Aprendizaje (OA)</th>
+                  <th>Conocimientos Previos</th>
+                  <th>Actividades</th>
+                  <th>Indicadores</th>
+                  <th>Evaluación</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                @isset($objetivos)
+                <?$i=0;foreach($objetivos as $row):?>
+                  <tr class="trhideclass<?=$i?>">
+
+                    <td><input type="hidden" id="NuevoNumero<?=$i?>" value="<?=$row['NuevoNumero']?>" readonly>
+                      <p><?=$row['NuevoNumero']?></p>
+                    </td>
+
+                    <td><input type="hidden" id="id<?=$i?>" value="<?=$row['id']?>" readonly>
+                      <input type="hidden" id="NuevoNombre<?=$i?>" value="<?=$row['NuevoNombre']?>" readonly>
+                      <p><?=$row['NuevoNombre']?></p>
+                    </td>
+
+                    <td><input type="hidden" id="Periodo<?=$i?>" value="<?=$row['Periodo']?>" readonly>
+                      <p><?=$row['Periodo']?></p>
+                    </td>
+
+                    <td><input type="hidden" id="fechaInicio<?=$i?>" value="<?=$row['fechaInicio']?>" readonly>
+                      <p><?=$row['fechaInicio']?></p>
+                    </td>
+
+                    <td><input type="hidden" id="fechaTermino<?=$i?>" value="<?=$row['fechaTermino']?>" readonly>
+                      <p><?=$row['fechaTermino']?></p>
+                    </td>
+                    
+
+                    <td><a href="contents?asignatura={{$asignatura}}&curso={{$curso}}&id=<?=$row['id']?>" class="btn btn-primary">Planificar
+                    </a></td>
+                    <td><button id="eliminar<?=$i?>" name="eliminar<?=$i?>" class="btn btn-danger" >Eliminar</button></td>
+                  </tr>
+                <?$i++;endforeach;?>
+                @endisset
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-
-
+    </div>
     </div>
   </div>
 </div>

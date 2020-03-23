@@ -99,59 +99,124 @@ $('#objetivoGeneral')
         //$('#idUnidadFK').val(li.val());
     });
 
-$('#basic').editableSelect();
-$('#no-filter').editableSelect({ filter: false });
-/*$('#NuevoNombre')
-  .editableSelect()
-  .on('select.editable-select', function (e, li) {
-      $('#last-selected').html(
-          li.val() + '. ' + li.text()
-      );
-  });*/
 
-$('.btn-group > .btn, .btn[data-toggle="button"]').click(function() {
-var buttonClasses = ['btn-primary','btn-danger','btn-warning','btn-success','btn-info','btn-inverse'];
-var $this = $(this);
-    
+$('#nombreAbility')
+    .editableSelect({ filter: false, effects: 'slide' })
+    .on('select.editable-select', function (e, li) {
+        /*$('#last-ability').html(
+            li.val() + '. ' + li.text()
+        );*/
+        $('#last-ability').val(li.val());
+        //$('#idHabilidadFK').val(li.val());
+        //mostrarTodos();
+        //filtrar(li.val());
+    });
 
-    
-    if ($(this).attr('class-toggle') != undefined && !$(this).hasClass('disabled')) {
-        
-        var btnGroup = $this.parent('.btn-group');
-        var btnToggleClass = $this.attr('class-toggle');
-        var btnCurrentClass = $this.hasAnyClass(buttonClasses);
-        
-        
-        if (btnGroup.attr('data-toggle') == 'buttons-radio') {
-                if($this.hasClass('active')) {
-                    return false;
-                }
-            var activeButton = btnGroup.find('.btn.active');
-            var activeBtnClass = activeButton.hasAnyClass(buttonClasses);
-            
-            activeButton.removeClass(activeBtnClass).addClass(activeButton.attr('class-toggle')).attr('class-toggle',activeBtnClass);
-            
-         
-        }
+//no se selecciona ninguna opcion de nombres o se modifica
+/*$('#nombreAbility').change(function() {
+  console.log("click");
+  mostrarTodos();
+  filtrar($('#last-ability').val());
 
-      
-            $this.removeClass(btnCurrentClass).addClass(btnToggleClass).attr('class-toggle',btnCurrentClass);
-       
+  if($('#nombreAbility').val() == ""){
+    mostrarTodos();
+    $('#last-ability').text("");
+    $('#last-ability').val("");
+  }
+  //console.log(li.val());
+});*/
 
-    }
+//$('#newAbility').addEventListener('click', onClickCreateAbility);
+/*document.getElementById("frmSubmit").onsubmit = function onSubmit(form) {
+  console.log("submit");
+  return;
+}*/
 
+function jsonH() {
+  var inputs = $('input#nombreAbility');
+  var localVal;
+  var array = [];
+  var json;
+  for (var i = 0; i < inputs.length; i++) {
+    localVal = ($($('input#nombreAbility')[i]).val() );
+    array.push(localVal);
+  }
 
+  json = JSON.stringify(array); 
+  console.log(json);
 
-});    
+  $('#Habilidadesjson').val(json);
 
-$.fn.hasAnyClass = function(classesToCheck) {
-        for (var i = 0; i < classesToCheck.length; i++) {
-            if (this.hasClass(classesToCheck[i])) {
-                return classesToCheck[i];
-            }
-        }
-        return false;
-    }
+  return "0";
+  }
+
+  function jsonA() {
+  var inputs = $('input#nombreAbility');
+  var localVal;
+  var array = [];
+  var json;
+  for (var i = 0; i < inputs.length; i++) {
+    localVal = ($($('input#nombreAbility')[i]).val() );
+    array.push(localVal);
+  }
+
+  json = JSON.stringify(array); 
+  console.log(json);
+
+  $('#Actitudesjson').val(json);
+
+  return "0";
+  }
+
+$('#newAbility').click(function() {
+      onClickCreateAbility();
+
+      //ingresar opciones nuevo dropdown
+      ($('select')).editableSelect({ filter: false, effects: 'slide' });
+      var opciones = $($('.es-list')[0]).html();
+      var posNuevo = $('.es-list').length - 1;
+      $($('.es-list')[posNuevo]).html(opciones);
+});
+
+function onClickCreateAbility() {
+  //console.log("clickNewHabilidad");
+  //var button    = event.target,
+  var container = document.querySelector('#listado'),
+      component;
+
+  component = createAbilityComponent();
+  container.appendChild(component);
+}
+
+function createAbilityComponent() {
+
+  var elements    = [],
+      rootElement = document.createElement('div');
+      rootElement.className = "control-group";
+
+  //elements.push('<div class="control-group">');
+  //var nuevo = $($('.control-group')[0]).editableSelect({ filter: false, effects: 'slide' });
+  //nuevo = $(nuevo).html();
+  
+  //var dropdown = ('<select id="nombreAbility" name="nombreAbility"><option value=""></option></select>');
+  /*var dropdown = document.createElement("select");
+  dropdown.id = "nombreAbility";
+  dropdown.name = "nombreAbility";
+  console.log(dropdown);*/
+
+  //dropdown.editableSelect({ filter: false, effects: 'slide' });
+
+  elements.push('<label class="control-label">Nombre</label>');
+  //elements.push('<div class="controls">');
+  elements.push('<div class="controls"><select id="nombreAbility" name="nombreAbility"></select></div>');
+  //elements.push(dropdown);
+  elements.push('</div>');
+  //elements.push(nuevo);
+
+  rootElement.innerHTML = elements.join('');
+  
+  return rootElement;
+}
 
 
 /*$("#planificar0").click(function (e) {
@@ -181,6 +246,10 @@ $.fn.hasAnyClass = function(classesToCheck) {
 
 /*document.getElementById('planificar0').addEventListener('click', function() {
       console.log("holi");
+    });*/
+
+/*$('#agregarHabilidad').click(function() {
+      agregarHabilidad();
     });*/
 
 function planificar(indice){

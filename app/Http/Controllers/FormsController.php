@@ -143,27 +143,11 @@ class FormsController extends Controller
         //Datos crear InstanciaPlaniAño
         $Periodo = $request->get('Periodo');
 
-        //$json2 = '{"nombre":Conoc}';
-        /*$json2 = '{"nombre": "Conocer hasta el número 10.000", "id": "1"}';
-
-        dump($json2);
-        $obj = json_decode($json2);
-        dump($obj);
-        dump($obj->{'nombre'});
-        dd($obj->{'id'});*/
-
         $NuevoNombre = $request->get('NuevoNombre');
         $idUnidadFK = $request->get('idUnidadFK');
-        //valid format json
-        //$NuevoNombre = str_replace("'", "\"", $NuevoNombre);
+
         dump($idUnidadFK);
         dump($NuevoNombre);
-
-        /*$json = json_decode($NuevoNombre);
-        dump($json);*/
-
-        //$NuevoNombre = ($json->{'nombre'});
-        //$idUnidadFK = ($json->{'id'});
         
         $fechaInicio = $request->get('fechaInicio');
         $fechaTermino = $request->get('fechaTermino');
@@ -197,9 +181,7 @@ class FormsController extends Controller
         $asignatura = $request->get('asignatura');
         dump($curso);
         dump($asignatura);
-        //return redirect(route('plani.planification'));
-        /*"planification?asignatura=<?=$row['nombreAsignatura']?>&curso=<?=$row['nombreCurso']?>&idInstanciaPlaniAño=<?=$row['id']?>"*/
-        
+
         //return redirect(route('forms.planifications'));
         
         //return view('planifications.unidades', ['idInstanciaPlaniAño'=> $idInstanciaPlaniAño, 'curso'=> $curso, 'asignatura'=> $asignatura]);
