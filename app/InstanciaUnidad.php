@@ -15,7 +15,7 @@ class InstanciaUnidad extends Model
         'fechaInicio',
         'fechaTermino',
         'idInstanciaPlaniAño',
-        'idUnidadFK',
+        'idUnidadFK'
     ];
     protected $table = "InstanciaUnidad";
     public $timestamps = false;

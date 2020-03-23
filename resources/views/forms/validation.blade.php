@@ -21,6 +21,7 @@
               <input type="hidden" name="idInstanciaPlaniAño" value={{$instanciaPlani->id}}>
 
               <input type="hidden" id="idUnidadFK" name="idUnidadFK" value="">
+              <input type="hidden" id="habilidadesJson" name="habilidadesJson" value="">
 
               <input type="hidden" id="asignatura" name="asignatura" value="&nbsp;{{$asignatura}}">
               <input type="hidden" id="curso" name="curso" value="&nbsp;{{$curso}}">
