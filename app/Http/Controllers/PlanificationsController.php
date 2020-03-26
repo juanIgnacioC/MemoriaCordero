@@ -78,7 +78,7 @@ class PlanificationsController extends Controller
             'asignatura'=>'required',
             'id' =>'required'
         ]);
-        dump("llega a contents unidad");
+        //dump("llega a contents unidad");
 
         //Datos get InstanciaPlaniAño
         $curso = $request->get('curso');
@@ -88,15 +88,15 @@ class PlanificationsController extends Controller
         $instanciaUnidad = InstanciaUnidad::where('id', $id)
         ->first();
 
-        dump($instanciaUnidad);
+        //dump($instanciaUnidad);
 
 
         //instancias habilidades y actitudes
         $habilidades = InstanciaUnidadHabilidad::obtener($instanciaUnidad->id);
-        dump($habilidades);
+        //dump($habilidades);
 
         $actitudes = InstanciaUnidadActitud::obtener($instanciaUnidad->id);
-        dump($actitudes);
+        //dump($actitudes);
 
         //instancias dataPlaniUnidad
         $dataPlaniUnidad = InstanciaUnidadObjetivo::dataPlaniUnidad($instanciaUnidad->id);

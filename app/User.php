@@ -51,6 +51,16 @@ class User extends Authenticatable
 
     }
 
+    public static function privilegioDirectivo($type)
+    {   
+        if($type == '2' || $type == '3'){
+            return true;
+        }
+        
+        return false;
+
+    }
+
     public static function privilegioAdministrador($type)
     {   
         if($type == '3'){
@@ -60,4 +70,25 @@ class User extends Authenticatable
         return false;
 
     }
+
+    public static function privilegioDocenteExclusivo($type)
+    {   
+        if($type == '1'){
+            return true;
+        }
+        
+        return false;
+
+    }
+
+    public static function privilegioDirectivoExclusivo($type)
+    {   
+        if($type == '2'){
+            return true;
+        }
+        
+        return false;
+
+    }
+
 }

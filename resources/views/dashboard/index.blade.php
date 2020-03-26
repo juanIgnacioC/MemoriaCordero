@@ -20,7 +20,7 @@
         <li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i> Full width</a> </li>
         <li class="bg_lg span3"> <a href="{{ route('charts.index') }}"> <i class="icon-signal"></i> Indicadores</a> </li>
         <li class="bg_lb"> <a href="{{ route('addons.calendar') }}"> <i class="icon-calendar"></i>Calendario</a> </li>
-        <li class="bg_lg"> <a href="{{ route('addons.calendar') }}"> <i class="icon-pencil"></i> Correcciones</a> </li>
+        <li class="bg_lg"> <a href="{{ route('directivo.index') }}"> <i class="icon-pencil"></i> Correcciones</a> </li>
         <li class="bg_ly"> <a href="{{ route('widgets.index') }}"> <i class="icon-inbox"></i><span class="label label-success">101</span> Repositorio </a> </li>
         <li class="bg_lr"> <a href="{{ route('admin.users') }}"> <i class="icon-info-sign"></i> Administrador</a> </li>
 

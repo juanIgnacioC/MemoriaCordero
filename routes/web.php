@@ -53,6 +53,14 @@ Route::post('/guardarCambios', 'AdministradorController@guardarCambios')->name('
 Route::get('/establecimientos', 'AdministradorController@establecimientos')->name('admin.establecimientos');
 Route::post('/establecimientos/createInstanciaEstablecimiento', 'AdministradorController@createInstanciaEstablecimiento')->name('admin.createInstanciaEstablecimiento');
 
+Route::get('/solicitar', 'DirectivoController@solicitar')->name('directivo.solicitar');
+Route::post('/solicitarCorreccion', 'DirectivoController@solicitarCorreccion')->name('directivo.solicitarCorreccion');
+
+Route::get('/revision', 'DirectivoController@revision')->name('directivo.revision');
+Route::post('/solicitarRevision', 'DirectivoController@solicitarRevision')->name('directivo.solicitarRevision');
+
+Route::get('/directivo', 'DirectivoController@index')->name('directivo.index');
+
 
 
 Route::get('/form-wizard', 'FormsController@wizard')->name('forms.wizard');
