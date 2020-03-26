@@ -50,4 +50,14 @@ class User extends Authenticatable
         return false;
 
     }
+
+    public static function privilegioAdministrador($type)
+    {   
+        if($type == '3'){
+            return true;
+        }
+        
+        return false;
+
+    }
 }

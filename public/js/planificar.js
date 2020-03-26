@@ -419,6 +419,55 @@ function createIndicadorComponent() {
       agregarHabilidad();
     });*/
 
+function editarUsuario(indice) {
+    console.log("editar")
+    console.log(indice);
+    $("#idEdit").val($("#id"+indice).val());
+    $("#nombreEdit").val($("#nombreUsuario"+indice).val());
+    $("#correoEdit").val($("#correoUsuario"+indice).val());
+    $("#tipoEdit").val($("#tipoUsuario"+indice).val());
+    $("#myModal1").modal('show');
+    return("0");
+  }
+
+  function guardarCambios() {
+    var id    = $("#idEdit").val();
+    var name = $("#nombreEdit").val();
+    var email = $("#correoEdit").val();
+    var type  = $("#tipoEdit").val();
+    //var token = '{{csrf_token()}}';
+    var token = $("#token").val();
+
+    var base_url = "<? echo base_url()?>";
+    $.post(
+      "guardarCambios",
+      {
+        id:id,
+        name: name,
+        email: email,
+        type: type,
+        _token:token
+      },function(){
+        $("#myModal1").modal('hide');
+        $("#listado").hide('slow');
+        //cambiar cargar datos
+        cargarDatos();
+        $("#listado").show('slow');
+      }
+    );
+  }
+
+  function cargarDatos(){
+    var base_url = "<? echo base_url()?>";
+    $.get(
+      "users",
+      {},
+      function(url,data){
+        $("#listado").html(url,data);
+      }
+    );
+  }
+
 function planificar(indice){
     var idInstanciaPlaniAño = $("#id"+indice).val();
 
@@ -440,6 +489,10 @@ function planificar(indice){
         $("#listado").hide('slow');
         //cambiar cargar datos
         //cargarDatos();
+        //probando en editar asincronia
+        $.when(cargarDatos()).done(function(){
+          $("#listado").show('slow');
+        });
         $("#listado").show('slow');
       }
     );

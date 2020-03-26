@@ -12,4 +12,5 @@ class Establecimiento extends Model
         'isSemestral'       
     ];
     protected $table = "Establecimiento";
+    public $timestamps = false;
 }
