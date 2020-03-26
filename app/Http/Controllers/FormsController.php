@@ -45,24 +45,27 @@ class FormsController extends Controller
     {
         //Incluir parametros o hacer nuevo metodo
         $user = Auth::user();
-        $userId =  $user['id'];
+        if($user->privilegioDocente($user['type']) ) {
+            $userId =  $user['id'];
 
-        //Join establecimiento instanciaEstablecimiento y docente/
-        //dropdown seleccionar establecimiento y año
-        $establecimientos = InstanciaEstablecimiento::obtenerInstancias($userId);
-        $anios = InstanciaPlaniAño::obtenerAnios($establecimientos->get(0));
+            //Join establecimiento instanciaEstablecimiento y docente/
+            //dropdown seleccionar establecimiento y año
+            $establecimientos = InstanciaEstablecimiento::obtenerInstancias($userId);
+            $anios = InstanciaPlaniAño::obtenerAnios($establecimientos->get(0));
 
-        //obtener instancias solo de los establecimientos del docente
-        //$instanciasPlaniAño = InstanciaPlaniAño::obtenerPlanificacionesEstablecimiento($establecimientos);
+            //obtener instancias solo de los establecimientos del docente
+            //$instanciasPlaniAño = InstanciaPlaniAño::obtenerPlanificacionesEstablecimiento($establecimientos);
 
-        //obtener instancias solo del establecimiento y año seleccionado
-        $instanciasPlaniAño = InstanciaPlaniAño::obtenerPlanificacionesEstablecimientoAnio($establecimientos->get(0), $anios->get(0));
+            //obtener instancias solo del establecimiento y año seleccionado
+            $instanciasPlaniAño = InstanciaPlaniAño::obtenerPlanificacionesEstablecimientoAnio($establecimientos->get(0), $anios->get(0));
 
-        /*dump($instanciasPlaniAño);
-        dump($establecimientos);
-        dump($anios);*/
+            /*dump($instanciasPlaniAño);
+            dump($establecimientos);
+            dump($anios);*/
 
-        return view('forms.planifications', ['instanciasPlaniAño'=> $instanciasPlaniAño, 'establecimientos'=> $establecimientos, 'anios'=> $anios]);
+            return view('forms.planifications', ['instanciasPlaniAño'=> $instanciasPlaniAño, 'establecimientos'=> $establecimientos, 'anios'=> $anios]);
+        }
+        return view('errors.privilegios');
     }
 
     public function planificationsFilter(Request $request)

@@ -16,7 +16,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'type'
+    ];
+
+    protected $attributes = [
+        'type' => '1'
     ];
 
     /**
@@ -36,4 +40,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function privilegioDocente($type)
+    {   
+        if($type == '1' || $type == '3'){
+            return true;
+        }
+        
+        return false;
+
+    }
 }

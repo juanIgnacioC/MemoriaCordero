@@ -4,7 +4,9 @@
 <div id="content">
 <div id="content-header">
   <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{ route('forms.planifications') }}" class="tip-bottom">Planificaciones</a> <a href="planification?asignatura={{$asignatura}}&curso={{$curso}}&idInstanciaPlaniAño={{$instanciaUnidad->idInstanciaPlaniAño}}" class="current">Planificación</a>  <a href="#" class="current">Unidad</a></div>
-  <h1>Unidad {{$instanciaUnidad->NuevoNumero}}:  {{$instanciaUnidad->NuevoNombre}}. {{$curso}} {{$asignatura}} </h1>
+  <h1>Unidad {{$instanciaUnidad->NuevoNumero}}:  {{$instanciaUnidad->NuevoNombre}}. {{$curso}} {{$asignatura}}
+  </h1>
+  <h1><strong>Objetivo general</strong>: {{$instanciaUnidad->NuevoObjetivoGeneral}}</h1>
 </div>
     
     <hr>
@@ -76,7 +78,7 @@
           </div>
         </div>
 
-        <div class="widget-title"> <a href="#collapseFour data-toggle="collapse"> <span class="icon"><i class="icon-book"></i></span>
+        <div class="widget-title"> <a href="#collapseFour" data-toggle="collapse"> <span class="icon"><i class="icon-book"></i></span>
           <h5>Diseños universales del aprendizaje (DUA) </h5>
           </a> <div name="agregarDUA" id="agregarDUA" class="pull-right" style="vertical-align: middle; margin-right: 5px;"> <a class="tip" href="attitudes?asignatura={{$asignatura}}&curso={{$curso}}&id={{$instanciaUnidad->id}}" title="Agregar">Agregar<i class="icon-plus-sign"></i></a> </div>
         </div>
@@ -102,7 +104,7 @@
     </div>
 
     <hr>
-    <a href="form-validation?asignatura={{$asignatura}}&curso={{$curso}}&idInstanciaPlaniAño={{$instanciaUnidad->idInstanciaPlaniAño}}" class="btn btn-primary" class="btn btn-success">
+    <a href="objectives?asignatura={{$asignatura}}&curso={{$curso}}&id={{$instanciaUnidad->id}}" class="btn btn-primary" class="btn btn-success">
       <span class="glyphicon glyphicon-plus"></span> Agregar Objetivo
     </a>
     <div id="listado2">
@@ -126,33 +128,47 @@
                 </tr>
               </thead>
               <tbody>
-                @isset($objetivos)
-                <?$i=0;foreach($objetivos as $row):?>
+                @isset($dataPlaniUnidad)
+                <?$i=0;foreach($dataPlaniUnidad as $row):?>
                   <tr class="trhideclass<?=$i?>">
 
-                    <td><input type="hidden" id="NuevoNumero<?=$i?>" value="<?=$row['NuevoNumero']?>" readonly>
-                      <p><?=$row['NuevoNumero']?></p>
-                    </td>
-
                     <td><input type="hidden" id="id<?=$i?>" value="<?=$row['id']?>" readonly>
-                      <input type="hidden" id="NuevoNombre<?=$i?>" value="<?=$row['NuevoNombre']?>" readonly>
-                      <p><?=$row['NuevoNombre']?></p>
+                      <input type="hidden" id="nombreObjetivo<?=$i?>" value="<?=$row['nombreObjetivo']->NuevoNombre?>" readonly>
+                      <p><?=$row['nombreObjetivo']->NuevoNombre?></p>
                     </td>
 
-                    <td><input type="hidden" id="Periodo<?=$i?>" value="<?=$row['Periodo']?>" readonly>
-                      <p><?=$row['Periodo']?></p>
+                    <td>                    
+                      <?for ($j = 0; $j < $row['conocimientos']->count(); $j++) {
+                        ?><input type="hidden" id="conocimientos<?=$j?>" value="<?=$row['conocimientos'][$j]->id?>" readonly>
+                        <p><?
+
+                        echo $row['conocimientos'][$j]->nuevoNombre;
+                        ?></p> <?
+                      }
+                      ?>
                     </td>
 
-                    <td><input type="hidden" id="fechaInicio<?=$i?>" value="<?=$row['fechaInicio']?>" readonly>
-                      <p><?=$row['fechaInicio']?></p>
+                    <td><input type="hidden" id="actividades<?=$i?>" value="<?=$row['actividades']->nombre?>" readonly>
+                      <p><?=$row['actividades']->nombre?></p>
                     </td>
 
-                    <td><input type="hidden" id="fechaTermino<?=$i?>" value="<?=$row['fechaTermino']?>" readonly>
-                      <p><?=$row['fechaTermino']?></p>
+                    <td>                    
+                      <?for ($j = 0; $j < $row['indicadores']->count(); $j++) {
+                        ?><input type="hidden" id="indicadores<?=$j?>" value="<?=$row['indicadores'][$j]->id?>" readonly>
+                        <p><?
+
+                        echo $row['indicadores'][$j]->nuevoNombre;
+                        ?></p> <?
+                      }
+                      ?>
+                    </td>
+
+                    <td><input type="hidden" id="evaluacion<?=$i?>" value="<?=$row['evaluacion']->nombre?>" readonly>
+                      <p><?=$row['evaluacion']->nombre?></p>
                     </td>
                     
 
-                    <td><a href="contents?asignatura={{$asignatura}}&curso={{$curso}}&id=<?=$row['id']?>" class="btn btn-primary">Planificar
+                    <td><a href="contents?asignatura={{$asignatura}}&curso={{$curso}}&id=<?=$row['id']?>" class="btn btn-primary">Editar
                     </a></td>
                     <td><button id="eliminar<?=$i?>" name="eliminar<?=$i?>" class="btn btn-danger" >Eliminar</button></td>
                   </tr>
