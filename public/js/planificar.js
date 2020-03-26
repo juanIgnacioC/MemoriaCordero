@@ -112,6 +112,57 @@ $('#nombreAbility')
         //filtrar(li.val());
     });
 
+
+$('#nombreObjetivo')
+    .editableSelect({ filter: false, effects: 'slide' })
+    .on('select.editable-select', function (e, li) {
+        /*$('#last-objective').html(
+            li.val() + '. ' + li.text()
+        );*/
+        $('#last-objective').val(li.val());
+        $('#idUnidadObjetivo').val(li.val());
+        //mostrarTodos();
+        //filtrar(li.val());
+    });
+
+$('#nombreConocimiento')
+    .editableSelect({ filter: false, effects: 'slide' })
+    .on('select.editable-select', function (e, li) {
+        /*$('#last-ability').html(
+            li.val() + '. ' + li.text()
+        );*/
+        //$('#last-objective').val(li.val());
+        //$('#idHabilidadFK').val(li.val());
+        //mostrarTodos();
+        //filtrar(li.val());
+    });
+
+$('#indicador')
+    .editableSelect({ filter: false, effects: 'slide' })
+    .on('select.editable-select', function (e, li) {
+        /*$('#last-ability').html(
+            li.val() + '. ' + li.text()
+        );*/
+        //$('#last-objective').val(li.val());
+        //$('#idHabilidadFK').val(li.val());
+        //mostrarTodos();
+        //filtrar(li.val());
+    });
+
+$('#evaluacion')
+    .editableSelect({effects: 'slide' })
+    .on('select.editable-select', function (e, li) {
+        /*$('#last-ability').html(
+            li.val() + '. ' + li.text()
+        );*/
+        //$('#last-objective').val(li.val());
+        //$('#idHabilidadFK').val(li.val());
+        //mostrarTodos();
+        //filtrar(li.val());
+    });
+
+
+
 //no se selecciona ninguna opcion de nombres o se modifica
 /*$('#nombreAbility').change(function() {
   console.log("click");
@@ -168,6 +219,38 @@ function jsonH() {
   return "0";
   }
 
+function jsonO() {
+  var conocimientos = $('input#nombreConocimiento');
+  var indicadores = $('input#indicador');
+  var localVal;
+
+  var arrayConocimientos = [];
+  var arrayIndicadores = [];
+  var json;
+  var json2;
+
+  //conocimientos json
+  for (var i = 0; i < conocimientos.length; i++) {
+    localVal = ($($('input#nombreConocimiento')[i]).val() );
+    arrayConocimientos.push(localVal);
+  }
+  //indicadores json
+  for (var i = 0; i < indicadores.length; i++) {
+    localVal = ($($('input#indicador')[i]).val() );
+    arrayIndicadores.push(localVal);
+  }
+
+  json = JSON.stringify(arrayConocimientos); 
+  json2 = JSON.stringify(arrayIndicadores); 
+  console.log(json);
+  console.log(json2);
+
+  $('#Conocimientosjson').val(json);
+  $('#Indicadoresjson').val(json2);
+
+  return "0";
+}
+
 $('#newAbility').click(function() {
       onClickCreateAbility();
 
@@ -177,6 +260,7 @@ $('#newAbility').click(function() {
       var posNuevo = $('.es-list').length - 1;
       $($('.es-list')[posNuevo]).html(opciones);
 });
+
 
 function onClickCreateAbility() {
   //console.log("clickNewHabilidad");
@@ -209,6 +293,89 @@ function createAbilityComponent() {
   elements.push('<label class="control-label">Nombre</label>');
   //elements.push('<div class="controls">');
   elements.push('<div class="controls"><select id="nombreAbility" name="nombreAbility"></select></div>');
+  //elements.push(dropdown);
+  elements.push('</div>');
+  //elements.push(nuevo);
+
+  rootElement.innerHTML = elements.join('');
+  
+  return rootElement;
+}
+
+
+$('#newConocimiento').click(function() {
+      onClickCreateConocimiento();
+
+      //ingresar opciones nuevo dropdown
+      ($('select#nombreConocimiento')).editableSelect({ filter: false, effects: 'slide' });
+      var opciones = $($('.es-list')[2]).html();
+      var posNuevo = $('.es-list').length - 1;
+      $($('.es-list')[posNuevo]).html(opciones);
+});
+
+
+function onClickCreateConocimiento() {
+  //console.log("clickNewHabilidad");
+  //var button    = event.target,
+  var container = document.querySelector('#listado'),
+      component;
+
+  component = createConocimientoComponent();
+  container.appendChild(component);
+}
+
+function createConocimientoComponent() {
+
+  var elements    = [],
+      rootElement = document.createElement('div');
+      rootElement.className = "control-group";
+
+
+  elements.push('<label class="control-label">Conocimiento Previo</label>');
+  //elements.push('<div class="controls">');
+  elements.push('<div class="controls"><select id="nombreConocimiento" name="nombreConocimiento"></select></div>');
+  //elements.push(dropdown);
+  elements.push('</div>');
+  //elements.push(nuevo);
+
+  rootElement.innerHTML = elements.join('');
+  
+  return rootElement;
+}
+
+
+
+$('#newIndicador').click(function() {
+      onClickCreateIndicador();
+
+      //ingresar opciones nuevo dropdown
+      ($('select#indicador')).editableSelect({ filter: false, effects: 'slide' });
+      var opciones = $($('.es-list')[3]).html();
+      var posNuevo = $('.es-list').length - 1;
+      $($('.es-list')[posNuevo]).html(opciones);
+});
+
+
+function onClickCreateIndicador() {
+  //console.log("clickNewHabilidad");
+  //var button    = event.target,
+  var container = document.querySelector('#listado'),
+      component;
+
+  component = createIndicadorComponent();
+  container.appendChild(component);
+}
+
+function createIndicadorComponent() {
+
+  var elements    = [],
+      rootElement = document.createElement('div');
+      rootElement.className = "control-group";
+
+
+  elements.push('<label class="control-label">Indicador Evaluación</label>');
+  //elements.push('<div class="controls">');
+  elements.push('<div class="controls"><select id="indicador" name="indicador"></select></div>');
   //elements.push(dropdown);
   elements.push('</div>');
   //elements.push(nuevo);

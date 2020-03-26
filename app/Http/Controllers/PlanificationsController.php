@@ -17,6 +17,20 @@ use App\Actitud;
 use App\UnidadActitud;
 use App\InstanciaUnidadActitud;
 
+use App\Objetivo;
+use App\UnidadObjetivo;
+
+use App\ConocimientoPrevio;
+use App\SubEje;
+use App\Indicador;
+
+use App\InstanciaObjetivo;
+use App\InstanciaUnidadObjetivo;
+use App\InstanciasConocimientoPrevio;
+use App\InstanciaIndicador;
+use App\InstanciaActividad;
+use App\InstanciaEvaluacion;
+
 class PlanificationsController extends Controller
 {
     public function __construct()
@@ -84,7 +98,10 @@ class PlanificationsController extends Controller
         $actitudes = InstanciaUnidadActitud::obtener($instanciaUnidad->id);
         dump($actitudes);
 
-        return view('planifications.contents', ['curso'=> $curso, 'asignatura'=> $asignatura, 'instanciaUnidad'=> $instanciaUnidad, 'habilidades'=> $habilidades, 'actitudes'=> $actitudes]);
+        //instancias dataPlaniUnidad
+        $dataPlaniUnidad = InstanciaUnidadObjetivo::dataPlaniUnidad($instanciaUnidad->id);
+
+        return view('planifications.contents', ['curso'=> $curso, 'asignatura'=> $asignatura, 'instanciaUnidad'=> $instanciaUnidad, 'habilidades'=> $habilidades, 'actitudes'=> $actitudes, 'dataPlaniUnidad'=> $dataPlaniUnidad]);
         //return view('planifications.contents', ['curso'=> $curso, 'asignatura'=> $asignatura, 'instanciaUnidad'=> $instanciaUnidad, 'habilidades'=> $habilidades]);
 
 		//return view('planifications.unidades');
@@ -238,6 +255,154 @@ class PlanificationsController extends Controller
 
             $InstanciaUnidadActitud->save();
 
+        }
+
+        //retornar a vista vista unidad
+        $curso = $request->get('curso');
+        $asignatura = $request->get('asignatura');
+        dump($curso);
+        dump($asignatura);
+
+        return redirect(route('planifications.contents', ['asignatura'=> $asignatura, 'curso'=> $curso, 'id'=> $instanciaUnidad]) );
+    }
+
+
+    public function objectives(Request $request)
+    {   
+        $request->validate([
+            'curso'=>'required',
+            'asignatura'=>'required',
+            'id' =>'required'
+        ]);
+        dump("llega a contents unidad objetivos");
+
+        //Datos get InstanciaUnidad y habilidades decode
+        $curso = $request->get('curso');
+        $asignatura = $request->get('asignatura');
+        $id = $request->get('id');
+
+        $instanciaUnidad = InstanciaUnidad::where('id', $id)
+        ->first();
+
+        //obtener datos repositorio
+        //
+        $instanciaPlani = InstanciaPlaniAño::where('id', $instanciaUnidad->idInstanciaPlaniAño)
+        ->first();
+
+        $idRepositorio = $instanciaPlani->idRepositorio;
+
+        //habilidades con referencia a unidad de repositorio
+        $idUnidad = $instanciaUnidad->idUnidadFK;
+
+        $objetivos = UnidadObjetivo::obtenerObjetivos($idUnidad, $idRepositorio);
+
+        dump($objetivos);
+
+        $subEjes = SubEje::obtenerSubEjes($objetivos);
+
+        dump($subEjes);
+
+        $conocimientos = ConocimientoPrevio::obtenerConocimientos($idUnidad, $idRepositorio);
+        dump($conocimientos);
+
+        $indicadores = Indicador::obtenerIndicadores($objetivos);
+        dump($indicadores);
+
+
+        return view('planifications.objectives', ['curso'=> $curso, 'asignatura'=> $asignatura, 'instanciaUnidad'=> $instanciaUnidad, 'objetivos'=> $objetivos, 'subEjes'=> $subEjes,'conocimientos'=> $conocimientos,'indicadores'=> $indicadores]);
+    }
+
+    public function createObjectives(Request $request)
+    {
+        $request->validate([
+            'curso'=>'required',
+            'asignatura'=>'required',
+            'Conocimientosjson'=>'required',
+            'Indicadoresjson'=>'required',
+            'idInstanciaUnidad'=>'required',
+            'nombreObjetivo'=>'required',
+            'idUnidadObjetivo'=>'required',
+            'subEje'=>'required'
+
+        ]);
+        dump("create Objectives");
+
+        $json = $request->get('Conocimientosjson');
+        $json2 = $request->get('Indicadoresjson');
+
+        $idInstanciaUnidad = $request->get('idInstanciaUnidad');
+        $idSubEje = $request->get('subEje');
+
+        $nombreObjetivo = $request->get('nombreObjetivo');
+        dump($nombreObjetivo);
+        $idUnidadObjetivo = $request->get('idUnidadObjetivo');
+
+        $instanciaUnidad = InstanciaUnidad::where('id', $idInstanciaUnidad)
+        ->first();
+
+        dump($instanciaUnidad);
+
+        //guardar objetivos
+        $InstanciaObjetivo = new InstanciaObjetivo([
+            'NuevoNombre' => $nombreObjetivo,
+            'idSubEje' => $idSubEje
+            ]);
+        //dump($InstanciaObjetivo);
+        $InstanciaObjetivo->save();
+
+        $InstanciaUnidadObjetivo = new InstanciaUnidadObjetivo([
+            'idInstanciaUnidad' => $instanciaUnidad->id,
+            'idInstanciaObjetivo' => $InstanciaObjetivo->id
+            ]);
+        //dd($InstanciaUnidadObjetivo);
+        $InstanciaUnidadObjetivo->save();
+
+
+        //recorrer json con nombres de conocimientos e indicadores
+        $obj = json_decode($json);
+        $obj2 = json_decode($json2);
+
+        //InstanciasConocimientos
+        foreach ($obj as $NuevoNombre) {
+            $InstanciasConocimientoPrevio = new InstanciasConocimientoPrevio([
+            'nuevoNombre' => $NuevoNombre,
+            'idInstanciaUnidadObjetivo' => $InstanciaUnidadObjetivo->id
+            ]);
+
+            //dd($InstanciasConocimientoPrevio);
+
+            $InstanciasConocimientoPrevio->save();
+        }
+        //Instancias Indicadores
+        foreach ($obj2 as $NuevoNombre) {
+            $InstanciaIndicador = new InstanciaIndicador([
+            'nuevoNombre' => $NuevoNombre,
+            'idInstanciaUnidadObjetivo' => $InstanciaUnidadObjetivo->id
+            ]);
+
+            //dd($InstanciaIndicador);
+
+            $InstanciaIndicador->save();
+        }
+
+        //Instancia actividad
+        $actividades = $request->get('actividades');
+        if($actividades != null){
+            $InstanciaActividad = new InstanciaActividad([
+                'nombre' => $actividades,
+                'idInstanciaUnidadObjetivo' => $InstanciaUnidadObjetivo->id
+                ]);
+            $InstanciaActividad->save();
+        }
+
+        //Instancia actividad
+        $evaluacion = $request->get('evaluacion');
+        if($evaluacion != null){
+            $InstanciaEvaluacion = new InstanciaEvaluacion([
+                'nombre' => $evaluacion,
+                'idInstanciaUnidadObjetivo' => $InstanciaUnidadObjetivo->id
+                ]);
+            $InstanciaEvaluacion->save();
         }
 
         //retornar a vista vista unidad

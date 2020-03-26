@@ -41,6 +41,9 @@ Route::get('/contents', 'PlanificationsController@contents')->name('planificatio
 Route::get('/abilities', 'PlanificationsController@abilities')->name('planifications.abilities');
 Route::post('/abilities/createAbilities', 'PlanificationsController@createAbilities')->name('planifications.createAbilities');
 
+Route::get('/objectives', 'PlanificationsController@objectives')->name('planifications.objectives');
+Route::post('/abilities/createObjectives', 'PlanificationsController@createObjectives')->name('planifications.createObjectives');
+
 Route::get('/attitudes', 'PlanificationsController@attitudes')->name('planifications.attitudes');
 Route::post('/attitudes/createAttitudes', 'PlanificationsController@createAttitudes')->name('planifications.createAttitudes');
 
@@ -58,6 +61,7 @@ Route::get('/error-403', 'ErrorsController@error403')->name('errors.error403');
 Route::get('/error-404', 'ErrorsController@error404')->name('errors.error404');
 Route::get('/error-405', 'ErrorsController@error405')->name('errors.error405');
 Route::get('/error-500', 'ErrorsController@error500')->name('errors.error500');
+Route::get('/error-privilegio', 'ErrorsController@privilegios')->name('errors.privilegios');
 
 Route::get('/logout', 'LogoutController@index')->name('logout');
 

@@ -31,4 +31,9 @@ class ErrorsController extends Controller
     	return view('errors.error500');
     }
 
+    public function privilegios()
+    {
+        return view('errors.privilegios');
+    }
+
 }
