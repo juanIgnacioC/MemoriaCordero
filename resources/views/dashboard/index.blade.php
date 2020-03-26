@@ -22,7 +22,7 @@
         <li class="bg_lb"> <a href="{{ route('addons.calendar') }}"> <i class="icon-calendar"></i>Calendario</a> </li>
         <li class="bg_lg"> <a href="{{ route('addons.calendar') }}"> <i class="icon-pencil"></i> Correcciones</a> </li>
         <li class="bg_ly"> <a href="{{ route('widgets.index') }}"> <i class="icon-inbox"></i><span class="label label-success">101</span> Repositorio </a> </li>
-        <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i> Informaciones</a> </li>
+        <li class="bg_lr"> <a href="{{ route('admin.users') }}"> <i class="icon-info-sign"></i> Administrador</a> </li>
 
       </ul>
     </div>
