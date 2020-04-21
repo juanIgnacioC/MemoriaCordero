@@ -30,19 +30,19 @@
             <div class="control-group">
               <label class="control-label">Directivo :</label>
               <div class="controls">
-                <input type="hidden" name="idDirectivo" value={{$directivo}}>
+                <input type="hidden" name="idDirectivo" value={{$directivo->id}}>
                 <input type="hidden" name="anio" value={{$anio}}>
                 <input type="hidden" name="idCorreccionAntigua" value={{$idCorreccionAntigua}}>
                 <input type="hidden" name="correccionesJson" value={{$correccionesJson}}>
-                <input type="text" class="form-control" name = "user" value="{{$directivo}}" disabled="disabled"/>
+                <input type="text" class="form-control" name = "user" value="{{$directivo->name}}" disabled="disabled"/>
               </div>
             </div>
 
             <div class="control-group">
               <label class="control-label">Usuario :</label>
               <div class="controls">
-                <input type="hidden" name="idUser" value={{$user->id}}>
-                <input type="hidden" name="idInstanciaUnidad" value={{$instanciaUnidad->id}}>
+                <input type="hidden" name="idUser" value="{{$user->id}}">
+                <input type="hidden" name="idInstanciaUnidad" value="{{$instanciaUnidad->id}}">
                 <input type="hidden" name="estado" value="1">
                 <input type="text" class="form-control" name = "user" value="{{$user->name}}" disabled="disabled"/>
               </div>

@@ -57,6 +57,8 @@ Route::get('/solicitar', 'DirectivoController@solicitar')->name('directivo.solic
 Route::post('/solicitarCorreccion', 'DirectivoController@solicitarCorreccion')->name('directivo.solicitarCorreccion');
 
 Route::get('/revision', 'DirectivoController@revision')->name('directivo.revision');
+Route::get('/revisionDirectivo', 'DirectivoController@revisionDirectivo')->name('directivo.revisionDirectivo');
+
 Route::post('/solicitarRevision', 'DirectivoController@solicitarRevision')->name('directivo.solicitarRevision');
 
 Route::get('/directivo', 'DirectivoController@index')->name('directivo.index');

@@ -30,8 +30,23 @@ class DirectivoController extends Controller
         if($user->privilegioDocente($user['type']) ) {
             $correcciones = Correccion::docente($user['id']);
             //dd($correcciones);
+            if(!$correcciones->isEmpty()){
+                dd("mayor");
+                $obj = json_decode($correcciones);
+                //dd($obj[0]->idInstanciaUnidad);
+                $correcciones2 = $obj[0];
+
+                $idDirectivo = $correcciones2->idDirectivo;
+                //dd($directivo);
+                $directivo = User::where('id', $idDirectivo)
+                ->first();
+                //dd($directivo);
+
+                return view('directivo.docente', ['correcciones'=> $correcciones, 'directivo'=> $directivo]);
+            }
 
             return view('directivo.docente', ['correcciones'=> $correcciones]);
+            
         }
 
         if($user->privilegioDirectivoExclusivo($user['type']) ) {
@@ -76,9 +91,13 @@ class DirectivoController extends Controller
 
             $directivo = InstanciaEstablecimiento::obtenerDirectivo($instanciasEstablecimiento->idEstablecimiento);
 
-            //return view('directivo.users', ['users'=> $users]);
+            $correccion = $request->get('correccion');
+            //dd($correccion);
+
+            //Si se solicita una corrección desde una revisión se agrega $correccion
+            return view('directivo.solicitar', ['instanciaUnidad'=> $instanciaUnidad, 'curso'=> $curso, 'asignatura'=> $asignatura, 'user'=> $user, 'anio'=> $anio, 'directivo'=> $directivo, 'correccionPrevia'=> $correccion]);
         }
-        return view('directivo.solicitar', ['instanciaUnidad'=> $instanciaUnidad, 'curso'=> $curso, 'asignatura'=> $asignatura, 'user'=> $user, 'anio'=> $anio, 'directivo'=> $directivo]);
+        
     }
 
     public function solicitarCorreccion(Request $request)
@@ -86,7 +105,6 @@ class DirectivoController extends Controller
         $request->validate([
             'idInstanciaUnidad'=>'required'
         ]);
-        dump("solicitarCorreccion");
 
         $idDocente = $request->get('idDocente');
         $idInstanciaUnidad = $request->get('idInstanciaUnidad');
@@ -98,6 +116,16 @@ class DirectivoController extends Controller
         $idUsuario = $request->get('idUser');
         $idDirectivo = $request->get('idDirectivo');
 
+        //Se finaliza la correccion previa
+        $correccionPrevia = $request->get('correccionPrevia');
+        if($correccionPrevia != null){
+            $correcccionAntigua = Correccion::where('id', $correccionPrevia)
+            ->first();
+            //dd($correcccionAntigua);
+
+            $correcccionAntigua->estado = "3";
+            $correcccionAntigua->save();
+        }
         
         $correcccion = new Correccion([
             'idDocente' => $idDocente,
@@ -142,6 +170,8 @@ class DirectivoController extends Controller
             $instanciaUnidad = InstanciaUnidad::where('id', $idInstanciaUnidad)
             ->first();
 
+            //dd($instanciaUnidad->id);
+
 
             $anio = $correcciones->anio;
             //dump($anio);
@@ -151,15 +181,51 @@ class DirectivoController extends Controller
             $idCorreccionAntigua = $correcciones->id;
 
             //return view('directivo.users', ['users'=> $users]);
+        
+        return redirect(route('directivo.revisionDirectivo', ['instanciaUnidad'=> $instanciaUnidad, 'curso'=> $curso, 'asignatura'=> $asignatura, 'user'=> $usuario, 'anio'=> $anio, 'directivo'=> $directivo, 'correccionesJson'=> $correccionesJson, 'idCorreccionAntigua'=> $idCorreccionAntigua]));
         }
+    }
+
+    public function revisionDirectivo(Request $request)
+    {
+        $request->validate([
+            
+        ]);
+
+        $user = Auth::user();
+        if($user->privilegioDirectivoExclusivo($user['type']) ) {
+
+            $idInstanciaUnidad = $request->get('instanciaUnidad');
+
+            $instanciaUnidad = InstanciaUnidad::where('id', $idInstanciaUnidad)
+            ->first();
+
+            $curso = $request->get('curso');
+            $asignatura = $request->get('asignatura');
+            $anio = $request->get('anio');;
+            //dump($anio);
+
+            $idUsuario = $request->get('user');
+            $usuario = User::where('id', $idUsuario)
+            ->first();
+
+            $idDirectivo = $request->get('directivo');
+            $directivo = User::where('id', $idDirectivo)
+            ->first();
+
+            $correccionesJson = $request->get('correccionesJson');
+            $idCorreccionAntigua = $request->get('idCorreccionAntigua');
+
+
+            //return view('directivo.users', ['users'=> $users]);
+        
         return view('directivo.revision', ['instanciaUnidad'=> $instanciaUnidad, 'curso'=> $curso, 'asignatura'=> $asignatura, 'user'=> $usuario, 'anio'=> $anio, 'directivo'=> $directivo, 'correccionesJson'=> $correccionesJson, 'idCorreccionAntigua'=> $idCorreccionAntigua]);
+        }
     }
 
 
     public function solicitarRevision(Request $request)
     {
-
-        dump("solicitarRevision");
 
         $idCorreccionAntigua = $request->get('idCorreccionAntigua');
         $correcccionAntigua = Correccion::where('id', $idCorreccionAntigua)
@@ -197,7 +263,7 @@ class DirectivoController extends Controller
         $instanciaUnidad = InstanciaUnidad::where('id', $idInstanciaUnidad)
         ->first();
 
-        return redirect(route('planifications.contents', ['asignatura'=> $asignatura, 'curso'=> $curso, 'id'=> $instanciaUnidad]) );
+        return redirect(route('directivo.index'));
     }     
 
 }

@@ -26,7 +26,7 @@
                   <th>Número unidad</th>
                   <th>Asignatura</th>
                   <th>Curso</th>
-                  <th>Docente</th>
+                  <th>Directivo</th>
                   <th>Nombre Unidad</th>
                   <th>Observaciones</th>
                   <th></th>
@@ -52,7 +52,7 @@
                     </td>
 
                     <td><input type="hidden" id="usuario<?=$i?>" value="<?=$row['idUsuario']?>" readonly>
-                      <p><?=$row['nombreUsuario']?></p>
+                      <p>{{$directivo->name}}</p>
                     </td>
 
                     <td><input type="hidden" id="instanciaUnidad<?=$i?>" value="<?=$row['idInstanciaUnidad']?>" readonly>
@@ -66,8 +66,9 @@
 
                     <td><a href="contents?asignatura=<?=$row['asignatura']?>&curso=<?=$row['curso']?>&id=<?=$row['idInstanciaUnidad']?>" target="_blank" class="btn btn-primary">Visualizar
                     </a></td>
-                    <td><a href="revision?correcciones={{$correcciones}}<?[$i]?>" class="btn btn-success">Corregir
-                    </a></td>
+                    <td><a href="solicitar?asignatura=<?=$row['asignatura']?>&curso=<?=$row['curso']?>&idInstanciaUnidad=<?=$row['idInstanciaUnidad']?>&correccion=<?=$row['id']?>" class="btn btn-success" class="btn btn-success">
+                    <span class="glyphicon glyphicon-plus"></span> Solicitar corrección
+                  </a></td>
                   </tr>
                 <?$i++;endforeach;?>
                 @endisset

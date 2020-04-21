@@ -23,7 +23,10 @@
             <div class="control-group">
               <label class="control-label">Observaciones :</label>
               <div class="controls">
-                <input type="text" class="form-control" name = "correcciones" value= ""/>
+                <input type="text" class="form-control" name = "correcciones" value= "" required="required" />
+                @if(isset($correccionPrevia))
+                <input type="hidden" class="form-control" name = "correccionPrevia" value= "{{$correccionPrevia}}"/>
+                @endif
               </div>
             </div>
 
