@@ -15,7 +15,8 @@ class Correccion extends Model
         'correcciones',
         'estado',
         'idUsuario',
-        'idDirectivo'
+        'idDirectivo',
+        'flujo'
     ];
     protected $table = "Correccion";
     public $timestamps = false;
@@ -35,14 +36,28 @@ class Correccion extends Model
     }
 
     public static function docente($userId)
-    {
+    { 
         //dump("correcciones directivo");
         //obtener correcciones revisadas de un docente
         $correcciones = Correccion::where('idUsuario', $userId)
         ->leftJoin('users', 'users.id', '=', 'Correccion.idUsuario')
         ->leftJoin('InstanciaUnidad', 'InstanciaUnidad.id', '=', 'Correccion.idInstanciaUnidad')
         ->where('estado', "2")
-        ->select('Correccion.id', 'idInstanciaUnidad', 'asignatura', 'curso', 'anio', 'correcciones', 'estado', 'idUsuario', 'idDirectivo', 'users.name as nombreUsuario', 'type', 'Periodo', 'NuevoNombre as nombreInstanciaUnidad', 'NuevoObjetivoGeneral', 'NuevoNumero', 'idUnidadFK')
+        ->select('Correccion.id', 'idInstanciaUnidad', 'asignatura', 'curso', 'anio', 'correcciones', 'estado', 'flujo', 'idUsuario', 'idDirectivo', 'users.name as nombreUsuario', 'type', 'Periodo', 'NuevoNombre as nombreInstanciaUnidad', 'NuevoObjetivoGeneral', 'NuevoNumero', 'idUnidadFK')
+        ->get();
+        //dd($correcciones);
+        return $correcciones;
+    }
+
+    public static function docenteRealizadas($userId)
+    { 
+        //dump("correcciones directivo");
+        //obtener correcciones revisadas de un docente
+        $correcciones = Correccion::where('idUsuario', $userId)
+        ->leftJoin('users', 'users.id', '=', 'Correccion.idUsuario')
+        ->leftJoin('InstanciaUnidad', 'InstanciaUnidad.id', '=', 'Correccion.idInstanciaUnidad')
+        ->select('Correccion.id', 'idInstanciaUnidad', 'asignatura', 'curso', 'anio', 'correcciones', 'estado', 'flujo', 'idUsuario', 'idDirectivo', 'users.name as nombreUsuario', 'type', 'Periodo', 'NuevoNombre as nombreInstanciaUnidad', 'NuevoObjetivoGeneral', 'NuevoNumero', 'idUnidadFK')
+        ->orderBy('idInstanciaUnidad', 'asc')
         ->get();
         //dd($correcciones);
         return $correcciones;

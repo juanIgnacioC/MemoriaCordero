@@ -20,6 +20,12 @@
 <link rel="stylesheet" href="css/jquery-editable-select.css" />
 <link rel="stylesheet" href="css/jquery-editable-select.min.css" />
 
+<link rel="stylesheet" href="css/bootstrap-toggle.css" />
+<link rel="stylesheet" href="css/bootstrap-toggle.min.css" />
+<link rel="stylesheet" href="css/bootstrap2-toggle.css" />
+<link rel="stylesheet" href="css/bootstrap2-toggle.min.css" />
+
+
 <link rel="stylesheet" href="css/bootstrap.min.css" />
 <link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
 <link rel="stylesheet" href="css/colorpicker.css" />

@@ -19,6 +19,7 @@
         "sass-loader": "^7.1.0"
     },
     "dependencies": {
+        "bootstrap4-toggle": "^3.6.1",
         "jquery-editable-select": "^2.2.5"
     }
 }

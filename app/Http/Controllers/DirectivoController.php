@@ -31,7 +31,6 @@ class DirectivoController extends Controller
             $correcciones = Correccion::docente($user['id']);
             //dd($correcciones);
             if(!$correcciones->isEmpty()){
-                dd("mayor");
                 $obj = json_decode($correcciones);
                 //dd($obj[0]->idInstanciaUnidad);
                 $correcciones2 = $obj[0];
@@ -42,10 +41,23 @@ class DirectivoController extends Controller
                 ->first();
                 //dd($directivo);
 
-                return view('directivo.docente', ['correcciones'=> $correcciones, 'directivo'=> $directivo]);
+                $correccionesRealizadas = Correccion::docenteRealizadas($user['id']);
+
+                return view('directivo.docente', ['correcciones'=> $correcciones, 'directivo'=> $directivo, 'correccionesRealizadas'=> $correccionesRealizadas]);
             }
 
-            return view('directivo.docente', ['correcciones'=> $correcciones]);
+            $correccionesRealizadas = Correccion::docenteRealizadas($user['id']);
+
+            $obj = json_decode($correccionesRealizadas);
+            //dd($obj[0]->idInstanciaUnidad);
+            $correcciones2 = $obj[0];
+
+            $idDirectivo = $correcciones2->idDirectivo;
+            //dd($directivo);
+            $directivo = User::where('id', $idDirectivo)
+            ->first();
+
+            return view('directivo.docente', ['correcciones'=> $correcciones, 'correccionesRealizadas'=> $correccionesRealizadas, 'directivo'=> $directivo]);
             
         }
 
@@ -115,6 +127,8 @@ class DirectivoController extends Controller
         $estado = $request->get('estado');
         $idUsuario = $request->get('idUser');
         $idDirectivo = $request->get('idDirectivo');
+        //Se inicia una solicitud de corrección, estado: inicio corrección
+        $flujo = "1";
 
         //Se finaliza la correccion previa
         $correccionPrevia = $request->get('correccionPrevia');
@@ -125,6 +139,8 @@ class DirectivoController extends Controller
 
             $correcccionAntigua->estado = "3";
             $correcccionAntigua->save();
+            //Se corrige una revisión del directivo, estado: Solicita corrección
+            $flujo = "3";
         }
         
         $correcccion = new Correccion([
@@ -136,7 +152,8 @@ class DirectivoController extends Controller
             'correcciones' => $correcciones,
             'estado' => $estado,
             'idUsuario' => $idUsuario,
-            'idDirectivo' => $idDirectivo
+            'idDirectivo' => $idDirectivo,
+            'flujo' => $flujo
         ]);
         //dd($correcccion);
         $correcccion->save();
@@ -245,6 +262,17 @@ class DirectivoController extends Controller
         $idUsuario = $request->get('idUser');
         $idDirectivo = $request->get('idDirectivo');
 
+        $estadoPlani = $request->get('estadoPlani');
+        if($estadoPlani == "true"){
+            //Planificación aceptada, estado: Revisión final
+            $flujo = "4";
+        }
+        else{
+            //Planificación rechazada, estado: Revisada
+            $flujo = "2";
+        }
+        
+        //comprobar si es el final y usar flujo 4
         
         $correcccion = new Correccion([
             'idDocente' => $idDocente,
@@ -255,7 +283,8 @@ class DirectivoController extends Controller
             'correcciones' => $correcciones,
             'estado' => $estado,
             'idUsuario' => $idUsuario,
-            'idDirectivo' => $idDirectivo
+            'idDirectivo' => $idDirectivo,
+            'flujo' => $flujo
         ]);
         //dd($correcccion);
         $correcccion->save();
