@@ -45,7 +45,7 @@ class PlanificationsController extends Controller
             'asignatura'=>'required',
             'idInstanciaPlaniAño' =>'required'
         ]);
-        dump("llega a planification unidades");
+        //dump("llega a planification unidades");
 
         //Datos get InstanciaPlaniAño
         $curso = $request->get('curso');
@@ -61,8 +61,8 @@ class PlanificationsController extends Controller
         //dd($instanciaPlani->idRepositorio);
         //$unidades = Unidad::where('idRepositorio', $instanciaPlani->idRepositorio)->get();
 
-        dump($instanciaPlani);
-        dump($instanciaUnidades);
+        //dump($instanciaPlani);
+        //dump($instanciaUnidades);
         //dump($unidades);
 
 
@@ -114,7 +114,7 @@ class PlanificationsController extends Controller
             'asignatura'=>'required',
             'id' =>'required'
         ]);
-        dump("llega a contents unidad habilidades");
+        //dump("llega a contents unidad habilidades");
 
         //Datos get InstanciaUnidad y habilidades decode
         $curso = $request->get('curso');
@@ -137,7 +137,7 @@ class PlanificationsController extends Controller
         $habilidades = UnidadHabilidad::obtenerHabilidades($idUnidad, $idRepositorio);
         //$actitudes = UnidadActitud::obtenerActitudes($idUnidad, $idRepositorio);
 
-        dump($habilidades);
+        //dump($habilidades);
 
 
         return view('planifications.habilities', ['curso'=> $curso, 'asignatura'=> $asignatura, 'instanciaUnidad'=> $instanciaUnidad, 'habilidades'=> $habilidades]);
@@ -163,16 +163,16 @@ class PlanificationsController extends Controller
 
         //recorrer json con nombres de habilidades
         $obj = json_decode($json);
-        dump($obj);
+        //dump($obj);
         foreach ($obj as $NuevoNombre) {
-            dump($NuevoNombre);
+            //dump($NuevoNombre);
 
             $InstanciaUnidadHabilidad = new InstanciaUnidadHabilidad([
             'NuevoNombre' => $NuevoNombre,
             'idInstanciaUnidad' => $instanciaUnidad->id
             ]);
 
-            dump($InstanciaUnidadHabilidad);
+            //dump($InstanciaUnidadHabilidad);
 
             $InstanciaUnidadHabilidad->save();
 
@@ -181,8 +181,8 @@ class PlanificationsController extends Controller
         //retornar a vista vista unidad
         $curso = $request->get('curso');
         $asignatura = $request->get('asignatura');
-        dump($curso);
-        dump($asignatura);
+        //dump($curso);
+        //dump($asignatura);
 
         return redirect(route('planifications.contents', ['asignatura'=> $asignatura, 'curso'=> $curso, 'id'=> $instanciaUnidad]) );
     }
@@ -195,7 +195,7 @@ class PlanificationsController extends Controller
             'asignatura'=>'required',
             'id' =>'required'
         ]);
-        dump("llega a contents unidad actitudes");
+        //dump("llega a contents unidad actitudes");
 
         //Datos get InstanciaUnidad y habilidades decode
         $curso = $request->get('curso');
@@ -217,7 +217,7 @@ class PlanificationsController extends Controller
 
         $actitudes = UnidadActitud::obtenerActitudes($idUnidad, $idRepositorio);
 
-        dump($actitudes);
+        //dump($actitudes);
 
         return view('planifications.attitudes', ['curso'=> $curso, 'asignatura'=> $asignatura, 'instanciaUnidad'=> $instanciaUnidad, 'actitudes'=> $actitudes]);
     }
@@ -242,16 +242,16 @@ class PlanificationsController extends Controller
 
         //recorrer json con nombres de habilidades
         $obj = json_decode($json);
-        dump($obj);
+        //dump($obj);
         foreach ($obj as $NuevoNombre) {
-            dump($NuevoNombre);
+            //dump($NuevoNombre);
 
             $InstanciaUnidadActitud = new InstanciaUnidadActitud([
             'NuevoNombre' => $NuevoNombre,
             'idInstanciaUnidad' => $instanciaUnidad->id
             ]);
 
-            dump($InstanciaUnidadActitud);
+            //dump($InstanciaUnidadActitud);
 
             $InstanciaUnidadActitud->save();
 
@@ -260,8 +260,8 @@ class PlanificationsController extends Controller
         //retornar a vista vista unidad
         $curso = $request->get('curso');
         $asignatura = $request->get('asignatura');
-        dump($curso);
-        dump($asignatura);
+        //dump($curso);
+        //dump($asignatura);
 
         return redirect(route('planifications.contents', ['asignatura'=> $asignatura, 'curso'=> $curso, 'id'=> $instanciaUnidad]) );
     }
@@ -274,7 +274,7 @@ class PlanificationsController extends Controller
             'asignatura'=>'required',
             'id' =>'required'
         ]);
-        dump("llega a contents unidad objetivos");
+        //dump("llega a contents unidad objetivos");
 
         //Datos get InstanciaUnidad y habilidades decode
         $curso = $request->get('curso');
@@ -296,17 +296,17 @@ class PlanificationsController extends Controller
 
         $objetivos = UnidadObjetivo::obtenerObjetivos($idUnidad, $idRepositorio);
 
-        dump($objetivos);
+        //dump($objetivos);
 
         $subEjes = SubEje::obtenerSubEjes($objetivos);
 
-        dump($subEjes);
+        //dump($subEjes);
 
         $conocimientos = ConocimientoPrevio::obtenerConocimientos($idUnidad, $idRepositorio);
-        dump($conocimientos);
+        //dump($conocimientos);
 
         $indicadores = Indicador::obtenerIndicadores($objetivos);
-        dump($indicadores);
+        //dump($indicadores);
 
 
         return view('planifications.objectives', ['curso'=> $curso, 'asignatura'=> $asignatura, 'instanciaUnidad'=> $instanciaUnidad, 'objetivos'=> $objetivos, 'subEjes'=> $subEjes,'conocimientos'=> $conocimientos,'indicadores'=> $indicadores]);
@@ -325,7 +325,7 @@ class PlanificationsController extends Controller
             'subEje'=>'required'
 
         ]);
-        dump("create Objectives");
+        //dump("create Objectives");
 
         $json = $request->get('Conocimientosjson');
         $json2 = $request->get('Indicadoresjson');
@@ -334,13 +334,13 @@ class PlanificationsController extends Controller
         $idSubEje = $request->get('subEje');
 
         $nombreObjetivo = $request->get('nombreObjetivo');
-        dump($nombreObjetivo);
+        //dump($nombreObjetivo);
         $idUnidadObjetivo = $request->get('idUnidadObjetivo');
 
         $instanciaUnidad = InstanciaUnidad::where('id', $idInstanciaUnidad)
         ->first();
 
-        dump($instanciaUnidad);
+        //dump($instanciaUnidad);
 
         //guardar objetivos
         $InstanciaObjetivo = new InstanciaObjetivo([
@@ -408,8 +408,8 @@ class PlanificationsController extends Controller
         //retornar a vista vista unidad
         $curso = $request->get('curso');
         $asignatura = $request->get('asignatura');
-        dump($curso);
-        dump($asignatura);
+        //dump($curso);
+        //dump($asignatura);
 
         return redirect(route('planifications.contents', ['asignatura'=> $asignatura, 'curso'=> $curso, 'id'=> $instanciaUnidad]) );
     }

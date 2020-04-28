@@ -3,7 +3,7 @@
 @section('content')
 <div id="content">
 <div id="content-header">
-  <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{ route('forms.planifications') }}" class="tip-bottom">Administrador</a> <a href="#" class="current">Enlazar establecimiento</a> </div>
+  <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{ route('admin.users') }}" class="tip-bottom">Administrador</a> <a href="#" class="current">Enlazar establecimiento</a> </div>
   <h1>Enlazar establecimiento a: {{$user->name}}</h1>
 </div>
 <div class="container-fluid">
