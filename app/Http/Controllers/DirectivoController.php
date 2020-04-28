@@ -161,7 +161,8 @@ class DirectivoController extends Controller
         $instanciaUnidad = InstanciaUnidad::where('id', $idInstanciaUnidad)
         ->first();
 
-        return redirect(route('planifications.contents', ['asignatura'=> $asignatura, 'curso'=> $curso, 'id'=> $instanciaUnidad]) );
+        //return redirect(route('planifications.contents', ['asignatura'=> $asignatura, 'curso'=> $curso, 'id'=> $instanciaUnidad]) );
+        return redirect(route('directivo.index'));
     }       
 
 

@@ -14,7 +14,6 @@
             <h5>Nueva Unidad: {{$curso}} {{$asignatura}} {{$instanciaPlani->anio}} </h5>
           </div>
           <div class="widget-content nopadding">
-            {{$instanciaPlani->id}}
 
             <form action="{{ route('forms.createPlaniUnidad') }}" method="post" class="form-horizontal">
             @csrf

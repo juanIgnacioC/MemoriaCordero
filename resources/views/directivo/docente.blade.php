@@ -133,7 +133,7 @@
                     </td>
 
                     <td><input type="hidden" id="curso<?=$i?>" value="<?=$row['curso']?>" readonly>
-                      <p><?=$row['estado']?></p>
+                      <p><?=$row['curso']?></p>
                     </td>
 
                     <td><input type="hidden" id="usuario<?=$i?>" value="<?=$row['idUsuario']?>" readonly>
