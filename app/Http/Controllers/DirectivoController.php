@@ -27,7 +27,7 @@ class DirectivoController extends Controller
     {
         $user = Auth::user();
 
-        if($user->privilegioDocente($user['type']) ) {
+        if($user->privilegioDocenteExclusivo($user['type']) ) {
             $correcciones = Correccion::docente($user['id']);
             //dd($correcciones);
             if(!$correcciones->isEmpty()){
@@ -67,6 +67,14 @@ class DirectivoController extends Controller
             $correccionesRealizadas = Correccion::directivoRealizadas($user['id']);
 
             return view('directivo.directivo', ['correcciones'=> $correcciones, 'correccionesRealizadas'=> $correccionesRealizadas]);
+        }
+
+        if($user->privilegioAdministrador($user['type']) ) {
+
+            $correcciones = Correccion::administrador();
+            $correccionesRealizadas = Correccion::administradorRealizadas();
+
+            return view('directivo.administrador', ['correcciones'=> $correcciones, 'correccionesRealizadas'=> $correccionesRealizadas]);
         }
 
         return view('errors.privilegios');
