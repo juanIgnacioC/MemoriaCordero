@@ -19,7 +19,6 @@ class Correccion extends Model
         'flujo'
     ];
     protected $table = "Correccion";
-    public $timestamps = false;
 
     public static function directivo($userId)
     {
@@ -57,6 +56,20 @@ class Correccion extends Model
         ->leftJoin('users', 'users.id', '=', 'Correccion.idUsuario')
         ->leftJoin('InstanciaUnidad', 'InstanciaUnidad.id', '=', 'Correccion.idInstanciaUnidad')
         ->select('Correccion.id', 'idInstanciaUnidad', 'asignatura', 'curso', 'anio', 'correcciones', 'estado', 'flujo', 'idUsuario', 'idDirectivo', 'users.name as nombreUsuario', 'type', 'Periodo', 'NuevoNombre as nombreInstanciaUnidad', 'NuevoObjetivoGeneral', 'NuevoNumero', 'idUnidadFK')
+        ->orderBy('idInstanciaUnidad', 'asc')
+        ->get();
+        //dd($correcciones);
+        return $correcciones;
+    }
+
+    public static function directivoRealizadas($userId)
+    {
+        //dump("correcciones directivo");
+        //obtener correcciones pendientes de un directivo
+        $correcciones = Correccion::where('idDirectivo', $userId)
+        ->leftJoin('users', 'users.id', '=', 'Correccion.idUsuario')
+        ->leftJoin('InstanciaUnidad', 'InstanciaUnidad.id', '=', 'Correccion.idInstanciaUnidad')
+        ->select('Correccion.id', 'idInstanciaUnidad', 'asignatura', 'curso', 'anio', 'correcciones', 'estado', 'flujo' , 'idUsuario', 'idDirectivo', 'users.name as nombreUsuario', 'type', 'Periodo', 'NuevoNombre as nombreInstanciaUnidad', 'NuevoObjetivoGeneral', 'NuevoNumero', 'idUnidadFK')
         ->orderBy('idInstanciaUnidad', 'asc')
         ->get();
         //dd($correcciones);

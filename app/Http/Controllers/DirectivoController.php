@@ -64,9 +64,9 @@ class DirectivoController extends Controller
         if($user->privilegioDirectivoExclusivo($user['type']) ) {
 
             $correcciones = Correccion::directivo($user['id']);
-            //dd($correcciones);
+            $correccionesRealizadas = Correccion::directivoRealizadas($user['id']);
 
-            return view('directivo.directivo', ['correcciones'=> $correcciones]);
+            return view('directivo.directivo', ['correcciones'=> $correcciones, 'correccionesRealizadas'=> $correccionesRealizadas]);
         }
 
         return view('errors.privilegios');
@@ -177,8 +177,10 @@ class DirectivoController extends Controller
 
             $correccionesJson = $request->get('correcciones');
             $obj = json_decode($correccionesJson);
+            //dd($obj->idInstanciaUnidad);
             //dd($obj[0]->idInstanciaUnidad);
-            $correcciones = $obj[0];
+            $correcciones = $obj;
+            //$correcciones = $obj[0];
             //dd($correcciones);
 
             $idInstanciaUnidad = $correcciones->idInstanciaUnidad;
