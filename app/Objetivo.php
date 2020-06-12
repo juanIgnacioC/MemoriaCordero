@@ -8,6 +8,7 @@ class Objetivo extends Model
 {
     protected $fillable = [
         'id',
+        'idObj',
         'nombre',
         'idSubEje'
     ];

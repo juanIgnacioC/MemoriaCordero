@@ -71,6 +71,13 @@ Route::get('/interface', 'InterfaceController@index')->name('interface.index');
 Route::get('/addons-index2', 'AddonsController@index2')->name('addons.index2');
 Route::get('/addons-gallery', 'AddonsController@gallery')->name('addons.gallery');
 Route::get('/addons-calendar', 'AddonsController@calendar')->name('addons.calendar');
+
+Route::get('/calendarUnidad', 'AddonsController@calendarUnidad')->name('addons.calendarUnidad');
+Route::post('/createClase', 'AddonsController@createClase')->name('addons.createClase');
+Route::post('/updateClase', 'AddonsController@updateClase')->name('addons.updateClase');
+Route::post('/updateClaseTime', 'AddonsController@updateClaseTime')->name('addons.updateClaseTime');
+Route::post('/updateClaseDetail', 'AddonsController@updateClaseDetail')->name('addons.updateClaseDetail');
+
 Route::get('/addons-invoice', 'AddonsController@invoice')->name('addons.invoice');
 Route::get('/addons-chat', 'AddonsController@chat')->name('addons.chat');
 Route::get('/error-403', 'ErrorsController@error403')->name('errors.error403');

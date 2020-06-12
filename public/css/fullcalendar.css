@@ -168,10 +168,16 @@ html .fc, .fc table {
     display: none;
 }
 .fc-event {
-    border-style: solid;
-    border-width: 0;
-    cursor: default;
-    font-size: 0.85em;
+    border-radius: 0px;
+    border: none;
+    cursor: move;
+    color: #fff !important;
+    font-size: 13px;
+    margin: 1px -1px 0 -1px;
+
+    padding: 5px 5px;
+    text-align: center;
+    background: #40c4ff;
 }
 a.fc-event, .fc-event-draggable {
     cursor: pointer;
@@ -183,8 +189,8 @@ a.fc-event {
     text-align: right;
 }
 .fc-event-skin {
-    background-color: #fb7a2c;
-    border-color: #000000;
+    background-color: #2961ff;
+    border-color: #2961ff;
     border-radius: 2px 2px 2px 2px;
     color: #FFFFFF;
     display: block;
@@ -399,6 +405,52 @@ table.fc-border-separate {
 .fc-agenda .ui-resizable-resizing {
 }
 
-#external-events .external-event {
-	margin-bottom: 5px; cursor:all-scroll;
+#wrap {
+    width: 1100px;
+    margin: 0 auto;
+  }
+
+#external-events {
+    float: left;
+    width: 150px;
+    padding: 0px;
+    border: 1px solid #ccc;
+    background: #eee;
+    text-align: left;
+  }
+
+#external-events p {
+    margin: 1.5em 0;
+    font-size: 11px;
+    color: #666;
+  }
+
+#external-events p input {
+    margin: 0;
+    vertical-align: middle;
 }
+
+#external-events .external-event {
+	margin-bottom: 10px;
+    cursor:all-scroll;
+    background-color: #2961ff;
+}
+
+#external-events button {
+    height:20px;
+    width:20px;
+    vertical-align: middle;
+    background-color: #e7e7e7; color: black;
+    text-align: center;
+}
+
+#fullcalendar {
+    float: right;
+    width: 900px;
+
+    padding-top: 20px;
+    padding-right: 40px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    
+  }

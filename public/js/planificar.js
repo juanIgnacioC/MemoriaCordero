@@ -120,8 +120,19 @@ $('#nombreObjetivo')
         /*$('#last-objective').html(
             li.val() + '. ' + li.text()
         );*/
-        $('#last-objective').val(li.val());
-        $('#idUnidadObjetivo').val(li.val());
+        
+        //console.log("vallsls");
+        //console.log(li.val());
+        
+        var id = $('#id'+li.val() ).val();
+        var idObj = $('#idObj'+li.val() ).val();
+        //console.log("id");
+        //console.log(id);
+        //console.log(idObj);
+
+        $('#last-objective').val(idObj);
+        $('#idUnidadObjetivo').val(id);
+        $('#idObj').val(idObj);
         //mostrarTodos();
         //filtrar(li.val());
     });
@@ -419,6 +430,48 @@ function createIndicadorComponent() {
 /*$('#agregarHabilidad').click(function() {
       agregarHabilidad();
     });*/
+
+function modalObjetivo(indice) {
+    console.log("modalObjetivo");
+    console.log(indice);
+    var row = $("#RowObjetivo"+indice).val();
+    var json = JSON.parse(row);
+    console.log(json);
+    //console.log(json['nombreObjetivo']);
+    //console.log(json['nombreObjetivo']['idObj']);
+    //console.log(row['nombreObjetivo']->idObj);
+    //console.log(row);
+    $("#nombreObjetivoEdit").val(json['nombreObjetivo']['NuevoNombre']);
+    $("#actividadesEdit").val(json['actividades']['nombre']);
+
+    var conocimientos = json['conocimientos'];
+    //console.log(conocimientos);
+    for (var i = 0; i < conocimientos.length; i++) {
+      localCon = conocimientos[i]['nuevoNombre'];
+      //console.log(localCon);
+      //arrayConocimientos.push(localVal);
+      $("#conocimientosEdit").val(localCon);
+      //$("#conocimientosEdit").val($("#conocimientosEdit").val() + localCon); ver append p, o mejor nuevo input, para pasar a form..json?
+    }
+    //indicadoresEdit For
+    var indicadores = json['indicadores'];
+    //console.log(indicadores);
+    for (var i = 0; i < indicadores.length; i++) {
+      localIndicador = indicadores[i]['nuevoNombre'];
+      //console.log(localIndicador);
+      //arrayConocimientos.push(localVal);
+      $("#indicadoresEdit").val(localIndicador);
+      //$("#conocimientosEdit").val($("#conocimientosEdit").val() + localCon); ver append p, o mejor nuevo input, para pasar a form..json?
+    }
+    
+    $("#evaluacionEdit").val(json['evaluacion']['nombre']);
+    
+    /*$("#nombreEdit").val($("#nombreUsuario"+indice).val());
+    $("#correoEdit").val($("#correoUsuario"+indice).val());
+    $("#tipoEdit").val($("#tipoUsuario"+indice).val());*/
+    $("#myModal1").modal('show');
+    return("0");
+  }
 
 function editarUsuario(indice) {
     console.log("editar")

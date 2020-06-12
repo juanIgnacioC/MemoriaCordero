@@ -7,6 +7,7 @@
     <h1>Calendar</h1>
   </div>
   <div class="container-fluid">
+    <hr>
     <div class="row-fluid">
       <div class="span12">
         <div class="widget-box widget-calendar">
@@ -29,22 +30,27 @@
             </div>
           </div>
           <div class="widget-content">
-            <div class="panel-left">
-              <div id="fullcalendar"></div>
-            </div>
             <div id="external-events" class="panel-right">
-              <div class="panel-title">
-                <h5>Drag Events to the calander</h5>
+              <h5>Drag Events to the calander</h5>
+              <div id='external-events-list'>
+                <div class='fc-event'>My Event 1</div>
+                <div class='fc-event'>My Event 2</div>
+                <div class='fc-event'>My Event 3</div>
+                <div class='fc-event'>My Event 4</div>
+                <div class='fc-event'>My Event 5</div>
               </div>
-              <div class="panel-content">
-                <div class="external-event ui-draggable label label-inverse">My Event 1</div>
-                <div class="external-event ui-draggable label label-inverse" data-class="bg-info"><i class="fa fa-circle text-info m-r-10"></i>Event One</div>
-                <div class="external-event ui-draggable label label-inverse">My Event 2</div>
-                <div class="external-event ui-draggable label label-inverse">My Event 3</div>
-                <div class="external-event ui-draggable label label-inverse">My Event 4</div>
-                <div class="external-event ui-draggable label label-inverse">My Event 5</div>
-              </div>
+              <p>
+                <input type='checkbox' id='drop-remove' />
+                <label for='drop-remove'>remove after drop</label>
+              </p>
             </div>
+
+            <div id='calendar'>
+              
+            </div>
+
+            <div style='clear:both'></div>
+
           </div>
         </div>
       </div>
@@ -52,10 +58,15 @@
   </div>
 </div>
 
-<script src="js/jquery.min.js"></script> 
-<script src="js/jquery.ui.custom.js"></script> 
-<script src="js/bootstrap.min.js"></script> 
-<script src="js/fullcalendar2.min.js"></script> 
-<script src="js/matrix.js"></script> 
-<script src="js/matrix.calendar.js"></script>
+
+
+<script src="js/matrix.js"></script>
+<script src="js/fullcalendar4.js"></script>
+
+<script src='fullcalendar-4.4.2/packages/core/main.js'></script>
+<script src='fullcalendar-4.4.2/packages/interaction/main.js'></script>
+<script src='fullcalendar-4.4.2/packages/bootstrap/main.js'></script>
+<script src='fullcalendar-4.4.2/packages/daygrid/main.js'></script>
+<script src='fullcalendar-4.4.2/packages/timegrid/main.js'></script>
+<script src='fullcalendar-4.4.2/packages/list/main.js'></script>
 @endsection

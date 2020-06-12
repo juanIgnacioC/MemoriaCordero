@@ -111,6 +111,9 @@
     <a href="objectives?asignatura={{$asignatura}}&curso={{$curso}}&id={{$instanciaUnidad->id}}" class="btn btn-primary" class="btn btn-success">
       <span class="glyphicon glyphicon-plus"></span> Agregar Objetivo
     </a>
+    <a href="calendarUnidad?asignatura={{$asignatura}}&curso={{$curso}}&id={{$instanciaUnidad->id}}" class="btn btn-success" class="btn btn-success">
+      <span class="glyphicon glyphicon-plus"></span> Planificación clases
+    </a>
     <div id="listado2">
     <div class="row-fluid">
       <div class="span12">

@@ -100,6 +100,7 @@ class PlanificationsController extends Controller
 
         //instancias dataPlaniUnidad
         $dataPlaniUnidad = InstanciaUnidadObjetivo::dataPlaniUnidad($instanciaUnidad->id);
+        #dump($dataPlaniUnidad);
 
         return view('planifications.contents', ['curso'=> $curso, 'asignatura'=> $asignatura, 'instanciaUnidad'=> $instanciaUnidad, 'habilidades'=> $habilidades, 'actitudes'=> $actitudes, 'dataPlaniUnidad'=> $dataPlaniUnidad]);
         //return view('planifications.contents', ['curso'=> $curso, 'asignatura'=> $asignatura, 'instanciaUnidad'=> $instanciaUnidad, 'habilidades'=> $habilidades]);
@@ -295,8 +296,7 @@ class PlanificationsController extends Controller
         $idUnidad = $instanciaUnidad->idUnidadFK;
 
         $objetivos = UnidadObjetivo::obtenerObjetivos($idUnidad, $idRepositorio);
-
-        //dump($objetivos);
+        #dump($objetivos);
 
         $subEjes = SubEje::obtenerSubEjes($objetivos);
 
@@ -340,12 +340,15 @@ class PlanificationsController extends Controller
         $instanciaUnidad = InstanciaUnidad::where('id', $idInstanciaUnidad)
         ->first();
 
+        $idObj = $request->get('idObj');
+
         //dump($instanciaUnidad);
 
         //guardar objetivos
         $InstanciaObjetivo = new InstanciaObjetivo([
             'NuevoNombre' => $nombreObjetivo,
-            'idSubEje' => $idSubEje
+            'idSubEje' => $idSubEje,
+            'idObj' => $idObj
             ]);
         //dump($InstanciaObjetivo);
         $InstanciaObjetivo->save();

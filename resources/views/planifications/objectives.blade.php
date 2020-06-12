@@ -23,6 +23,8 @@
             <input type="hidden" id="idInstanciaUnidad" name="idInstanciaUnidad" value="{{$instanciaUnidad->id}}">
 
             <input type="hidden" id="idUnidadObjetivo" name="idUnidadObjetivo" value="">
+            <input type="hidden" id="idObj" name="idObj" value="">
+
             <input type="hidden" id="Conocimientosjson" name="Conocimientosjson" value="">
             <input type="hidden" id="Indicadoresjson" name="Indicadoresjson" value="">
 
@@ -33,9 +35,13 @@
               <div class="controls">
                 <select id="nombreObjetivo" name="nombreObjetivo">
                   @for ($i = 0; $i < count($objetivos); $i++)
-                    <option value={{$objetivos[$i]->id}}>{{$objetivos[$i]->nombre}}</option>
+                    <option value='<?=$i?>'>{{$objetivos[$i]->nombre}}</option>
                   @endfor
                 </select>
+                @for ($i = 0; $i < count($objetivos); $i++)
+                    <input type="hidden" id="id<?=$i?>" name="id<?=$i?>" value={{$objetivos[$i]->id}}>
+                    <input type="hidden" id="idObj<?=$i?>" name="idObj<?=$i?>" value='{{$objetivos[$i]->idObj}}'>
+                  @endfor
                 <code id="last-objective"></code>
               </div>
             </div>
@@ -54,7 +60,7 @@
             <div class="control-group">
               <label class="control-label">Actividades</label>
               <div class="controls">
-                <input type="text" id="actividades" name="actividades">
+                <input type="text" id="actividades" name="actividades" required="required">
               </div>
             </div>
 

@@ -22,7 +22,7 @@ class UnidadObjetivo extends Model
 
 			$objetivos = UnidadObjetivo::where('idUnidad', $idUnidad)
 		    ->leftJoin('Objetivo', 'Objetivo.id', '=', 'UnidadObjetivo.idObjetivo')
-		    ->select('UnidadObjetivo.id', 'Objetivo.nombre','Objetivo.id as idObjetivoFK', 'Objetivo.idSubEje')
+		    ->select('UnidadObjetivo.id', 'Objetivo.idObj', 'Objetivo.nombre','Objetivo.id as idObjetivoFK', 'Objetivo.idSubEje')
 		    ->get();
 		    
 		    return $objetivos;
@@ -33,7 +33,7 @@ class UnidadObjetivo extends Model
 			$objetivos = Unidad::where('idRepositorio', $idRepositorio)
 			->leftJoin('UnidadObjetivo', 'UnidadObjetivo.idObjetivo', '=', 'Unidad.id')
 			->leftJoin('Objetivo', 'Objetivo.id', '=', 'UnidadObjetivo.idObjetivo')
-			->select('UnidadObjetivo.id', 'Objetivo.nombre','Objetivo.id as idObjetivoFK')
+			->select('UnidadObjetivo.id', 'Objetivo.idObj', 'Objetivo.nombre','Objetivo.id as idObjetivoFK')
 			->groupBy('idObjetivoFK')
         	->get();
         	
