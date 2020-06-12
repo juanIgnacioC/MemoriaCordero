@@ -18,7 +18,7 @@ class ConocimientoPrevio extends Model
 	{
 		//si existe una referencia a unidad
 		if($idUnidad != null){
-			dump("existe referencia unidad");
+			//dump("existe referencia unidad");
 
 			$conocimientos = ConocimientoPrevio::where('idUnidad', $idUnidad)
 		    ->get();
@@ -26,7 +26,7 @@ class ConocimientoPrevio extends Model
 		    return $conocimientos;
 
 		}elseif($idRepositorio != null) {
-			dump("No existe referencia unidad");
+			//dump("No existe referencia unidad");
 
 			$conocimientos = Unidad::where('idRepositorio', $idRepositorio)
 			->leftJoin('ConocimientoPrevio', 'ConocimientoPrevio.idUnidad', '=', 'Unidad.id')

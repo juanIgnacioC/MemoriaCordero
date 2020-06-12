@@ -19,7 +19,7 @@ class SubEje extends Model
 	{
 		//si existe una referencia a unidad
 		if($objetivos != null){
-			dump("obtener subejes");
+			//dump("obtener subejes");
 			$collection = new Collection();
 
 			foreach ($objetivos as $objetivo) {

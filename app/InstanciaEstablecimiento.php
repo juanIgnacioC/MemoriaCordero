@@ -24,4 +24,15 @@ class InstanciaEstablecimiento extends Model
 	    ->get();
 	    return $establecimientos;
 	}
+
+	public static function obtenerDirectivo($id)
+    {
+        $directivo = InstanciaEstablecimiento::where('InstanciaEstablecimiento.idEstablecimiento', $id)
+        ->leftJoin('users', 'users.id', '=', 'InstanciaEstablecimiento.idDocente')
+        ->where('users.type','2')
+        ->select('users.id', 'users.name', 'users.email', 'users.type')
+        ->first();
+
+	    return $directivo;
+    }
 }

@@ -8,6 +8,7 @@ class InstanciaObjetivo extends Model
 {
     protected $fillable = [
         'id',
+        'idObj',
         'NuevoNombre',
         'idSubEje'
     ];

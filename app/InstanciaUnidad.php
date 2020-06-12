@@ -29,7 +29,7 @@ class InstanciaUnidad extends Model
 			->leftJoin('Asignatura', 'Asignatura.id', '=', 'RepositorioPlanificacion.idAsignatura')
 			->select('InstanciaPlaniAño.id','InstanciaPlaniAño.anio', 'Curso.nombre as nombreCurso', 'Asignatura.nombre as nombreAsignatura')
 			->get();
-			dd($instancia);
+			//dd($instancia);
 		}
 		
 		return $repositorios;

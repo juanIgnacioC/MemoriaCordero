@@ -18,22 +18,22 @@ class UnidadObjetivo extends Model
 	{
 		//si existe una referencia a unidad
 		if($idUnidad != null){
-			dump("existe referencia unidad");
+			//dump("existe referencia unidad");
 
 			$objetivos = UnidadObjetivo::where('idUnidad', $idUnidad)
 		    ->leftJoin('Objetivo', 'Objetivo.id', '=', 'UnidadObjetivo.idObjetivo')
-		    ->select('UnidadObjetivo.id', 'Objetivo.nombre','Objetivo.id as idObjetivoFK', 'Objetivo.idSubEje')
+		    ->select('UnidadObjetivo.id', 'Objetivo.idObj', 'Objetivo.nombre','Objetivo.id as idObjetivoFK', 'Objetivo.idSubEje')
 		    ->get();
 		    
 		    return $objetivos;
 
 		}elseif($idRepositorio != null) {
-			dump("No existe referencia unidad");
+			//dump("No existe referencia unidad");
 
 			$objetivos = Unidad::where('idRepositorio', $idRepositorio)
 			->leftJoin('UnidadObjetivo', 'UnidadObjetivo.idObjetivo', '=', 'Unidad.id')
 			->leftJoin('Objetivo', 'Objetivo.id', '=', 'UnidadObjetivo.idObjetivo')
-			->select('UnidadObjetivo.id', 'Objetivo.nombre','Objetivo.id as idObjetivoFK')
+			->select('UnidadObjetivo.id', 'Objetivo.idObj', 'Objetivo.nombre','Objetivo.id as idObjetivoFK')
 			->groupBy('idObjetivoFK')
         	->get();
         	

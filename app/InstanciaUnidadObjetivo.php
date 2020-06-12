@@ -17,7 +17,7 @@ class InstanciaUnidadObjetivo extends Model
 
     public static function dataPlaniUnidad($idUnidad)
 	{
-		dump("obteniendo dataPlaniUnidad");
+		//dump("obteniendo dataPlaniUnidad");
 		$dataPlaniUnidad = new Collection();
 
 		$instanciasUnidadObjetivo = InstanciaUnidadObjetivo::where('idInstanciaUnidad', $idUnidad)
@@ -26,11 +26,11 @@ class InstanciaUnidadObjetivo extends Model
 	    
 	    //dd($dataPlaniUnidad);
 
-	    dump($instanciasUnidadObjetivo);
+	    //dump($instanciasUnidadObjetivo);
 
 	    for ($i=0; $i < $instanciasUnidadObjetivo->count() ; $i++) {
 	    	$unidadObjetivo = $instanciasUnidadObjetivo[$i];
-	    	dump("For unidadObjetivo");
+	    	//dump("For unidadObjetivo");
 
 	    	//objetivo
 	    	$instanciaObjetivo = InstanciaObjetivo::where('id', $unidadObjetivo->idInstanciaObjetivo)
@@ -63,7 +63,7 @@ class InstanciaUnidadObjetivo extends Model
 	    	//dump($evaluacion);
 
 	    	//crear modelo de datos de plani unidad
-	    	dump("pushing");
+	    	//dump("pushing");
 	    	$data = new DataPlaniUnidad([
 	            'id' => $unidadObjetivo->id,
 		        'nombreObjetivo' => $instanciaObjetivo,
@@ -73,7 +73,7 @@ class InstanciaUnidadObjetivo extends Model
 		        'evaluacion' => $evaluacion,
 		        'idInstanciaUnidad' => $idUnidad
             ]);
-	    	dump($data);
+	    	//dump($data);
 	    	$dataPlaniUnidad->push($data);
 	    }
 	    //dd($dataPlaniUnidad);

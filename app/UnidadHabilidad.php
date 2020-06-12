@@ -19,7 +19,7 @@ class UnidadHabilidad extends Model
 	{
 		//si existe una referencia a unidad
 		if($idUnidad != null){
-			dump("existe referencia unidad");
+			//dump("existe referencia unidad");
 
 			$habilidades = UnidadHabilidad::where('idUnidad', $idUnidad)
 		    ->leftJoin('Habilidad', 'Habilidad.id', '=', 'UnidadHabilidad.idHabilidad')
@@ -29,7 +29,7 @@ class UnidadHabilidad extends Model
 		    return $habilidades;
 
 		}elseif($idRepositorio != null) {
-			dump("No existe referencia unidad");
+			//dump("No existe referencia unidad");
 
 			$habilidades = Unidad::where('idRepositorio', $idRepositorio)
 			->leftJoin('UnidadHabilidad', 'UnidadHabilidad.idUnidad', '=', 'Unidad.id')

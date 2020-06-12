@@ -53,6 +53,16 @@ Route::post('/guardarCambios', 'AdministradorController@guardarCambios')->name('
 Route::get('/establecimientos', 'AdministradorController@establecimientos')->name('admin.establecimientos');
 Route::post('/establecimientos/createInstanciaEstablecimiento', 'AdministradorController@createInstanciaEstablecimiento')->name('admin.createInstanciaEstablecimiento');
 
+Route::get('/solicitar', 'DirectivoController@solicitar')->name('directivo.solicitar');
+Route::post('/solicitarCorreccion', 'DirectivoController@solicitarCorreccion')->name('directivo.solicitarCorreccion');
+
+Route::get('/revision', 'DirectivoController@revision')->name('directivo.revision');
+Route::get('/revisionDirectivo', 'DirectivoController@revisionDirectivo')->name('directivo.revisionDirectivo');
+
+Route::post('/solicitarRevision', 'DirectivoController@solicitarRevision')->name('directivo.solicitarRevision');
+
+Route::get('/directivo', 'DirectivoController@index')->name('directivo.index');
+
 
 
 Route::get('/form-wizard', 'FormsController@wizard')->name('forms.wizard');
@@ -61,6 +71,13 @@ Route::get('/interface', 'InterfaceController@index')->name('interface.index');
 Route::get('/addons-index2', 'AddonsController@index2')->name('addons.index2');
 Route::get('/addons-gallery', 'AddonsController@gallery')->name('addons.gallery');
 Route::get('/addons-calendar', 'AddonsController@calendar')->name('addons.calendar');
+
+Route::get('/calendarUnidad', 'AddonsController@calendarUnidad')->name('addons.calendarUnidad');
+Route::post('/createClase', 'AddonsController@createClase')->name('addons.createClase');
+Route::post('/updateClase', 'AddonsController@updateClase')->name('addons.updateClase');
+Route::post('/updateClaseTime', 'AddonsController@updateClaseTime')->name('addons.updateClaseTime');
+Route::post('/updateClaseDetail', 'AddonsController@updateClaseDetail')->name('addons.updateClaseDetail');
+
 Route::get('/addons-invoice', 'AddonsController@invoice')->name('addons.invoice');
 Route::get('/addons-chat', 'AddonsController@chat')->name('addons.chat');
 Route::get('/error-403', 'ErrorsController@error403')->name('errors.error403');

@@ -10,7 +10,25 @@
 <link rel="stylesheet" href="{{ asset('css/datepicker.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/uniform.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/select2.css') }}" />
+
 <link rel="stylesheet" href="{{ asset('css/fullcalendar.css') }}" />
+
+<!--3
+<link rel="stylesheet" href="{{ asset('css/fullcalendar4.css') }}" />
+
+<link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
+<link href='fullcalendar-4.4.2/packages/core/main.css' rel='stylesheet' />
+<link href='fullcalendar-4.4.2/packages/bootstrap/main.css' rel='stylesheet' />
+<link href='fullcalendar-4.4.2/packages/timegrid/main.css' rel='stylesheet' />
+<link href='fullcalendar-4.4.2/packages/daygrid/main.css' rel='stylesheet' />
+<link href='fullcalendar-4.4.2/packages/list/main.css' rel='stylesheet' />
+-->
+
+<!--2<link rel="stylesheet" href="{{ asset('css/fullcalendar.min.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/calendar.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/style.min.css') }}" />-->
+
+
 <link rel="stylesheet" href="{{ asset('css/matrix-style.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/matrix-media.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/bootstrap-wysihtml5.css') }}" />
@@ -19,6 +37,12 @@
 
 <link rel="stylesheet" href="css/jquery-editable-select.css" />
 <link rel="stylesheet" href="css/jquery-editable-select.min.css" />
+
+<link rel="stylesheet" href="css/bootstrap-toggle.css" />
+<link rel="stylesheet" href="css/bootstrap-toggle.min.css" />
+<link rel="stylesheet" href="css/bootstrap2-toggle.css" />
+<link rel="stylesheet" href="css/bootstrap2-toggle.min.css" />
+
 
 <link rel="stylesheet" href="css/bootstrap.min.css" />
 <link rel="stylesheet" href="css/bootstrap-responsive.min.css" />

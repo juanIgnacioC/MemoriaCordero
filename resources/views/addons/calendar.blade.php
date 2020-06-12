@@ -7,7 +7,6 @@
     <h1>Calendar</h1>
   </div>
   <div class="container-fluid">
-    <hr>
     <div class="row-fluid">
       <div class="span12">
         <div class="widget-box widget-calendar">
@@ -39,6 +38,7 @@
               </div>
               <div class="panel-content">
                 <div class="external-event ui-draggable label label-inverse">My Event 1</div>
+                <div class="external-event ui-draggable label label-inverse" data-class="bg-info"><i class="fa fa-circle text-info m-r-10"></i>Event One</div>
                 <div class="external-event ui-draggable label label-inverse">My Event 2</div>
                 <div class="external-event ui-draggable label label-inverse">My Event 3</div>
                 <div class="external-event ui-draggable label label-inverse">My Event 4</div>
@@ -55,7 +55,7 @@
 <script src="js/jquery.min.js"></script> 
 <script src="js/jquery.ui.custom.js"></script> 
 <script src="js/bootstrap.min.js"></script> 
-<script src="js/fullcalendar.min.js"></script> 
+<script src="js/fullcalendar2.min.js"></script> 
 <script src="js/matrix.js"></script> 
 <script src="js/matrix.calendar.js"></script>
 @endsection

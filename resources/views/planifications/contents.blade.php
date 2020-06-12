@@ -9,7 +9,7 @@
   
   <h1><strong>Objetivo general</strong>: {{$instanciaUnidad->NuevoObjetivoGeneral}}</h1>
 </div>
-    <a href="solicitar?id={{$instanciaUnidad->id}}" class="btn btn-success" class="btn btn-success">
+    <a href="solicitar?asignatura={{$asignatura}}&curso={{$curso}}&idInstanciaUnidad={{$instanciaUnidad->id}}" class="btn btn-success" class="btn btn-success">
       <span class="glyphicon glyphicon-plus"></span> Solicitar corrección
     </a>
     
@@ -111,6 +111,9 @@
     <a href="objectives?asignatura={{$asignatura}}&curso={{$curso}}&id={{$instanciaUnidad->id}}" class="btn btn-primary" class="btn btn-success">
       <span class="glyphicon glyphicon-plus"></span> Agregar Objetivo
     </a>
+    <a href="calendarUnidad?asignatura={{$asignatura}}&curso={{$curso}}&id={{$instanciaUnidad->id}}" class="btn btn-success" class="btn btn-success">
+      <span class="glyphicon glyphicon-plus"></span> Planificación clases
+    </a>
     <div id="listado2">
     <div class="row-fluid">
       <div class="span12">
@@ -172,7 +175,7 @@
                     </td>
                     
 
-                    <td><a href="contents?asignatura={{$asignatura}}&curso={{$curso}}&id=<?=$row['id']?>" class="btn btn-primary">Editar
+                    <td><a href="#" class="btn btn-primary">Editar
                     </a></td>
                     <td><button id="eliminar<?=$i?>" name="eliminar<?=$i?>" class="btn btn-danger" >Eliminar</button></td>
                   </tr>

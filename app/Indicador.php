@@ -19,7 +19,7 @@ class Indicador extends Model
 	{
 		//si existe una referencia a unidad
 		if($objetivos != null){
-			dump("obtener indicadores");
+			//dump("obtener indicadores");
 			$collection = new Collection();
 
 			foreach ($objetivos as $objetivo) {

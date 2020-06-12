@@ -149,8 +149,8 @@ class FormsController extends Controller
         $NuevoNombre = $request->get('NuevoNombre');
         $idUnidadFK = $request->get('idUnidadFK');
 
-        dump($idUnidadFK);
-        dump($NuevoNombre);
+        //dump($idUnidadFK);
+        //dump($NuevoNombre);
         
         $fechaInicio = $request->get('fechaInicio');
         $fechaTermino = $request->get('fechaTermino');
@@ -162,7 +162,7 @@ class FormsController extends Controller
         $idInstanciaPlaniAño = $request->get('idInstanciaPlaniAño');
         
         $objetivoGeneral = $request->get('objetivoGeneral');
-        dump($objetivoGeneral);
+        //dump($objetivoGeneral);
 
         $InstanciaUnidad = new InstanciaUnidad([
             'Periodo' => $Periodo,
@@ -175,15 +175,15 @@ class FormsController extends Controller
             'idUnidadFK' => $idUnidadFK
         ]);
 
-        dump($InstanciaUnidad);
+        //dump($InstanciaUnidad);
 
         $InstanciaUnidad->save();
 
         //retornar a vista vista unidades
         $curso = $request->get('curso');
         $asignatura = $request->get('asignatura');
-        dump($curso);
-        dump($asignatura);
+        //dump($curso);
+        //dump($asignatura);
 
         //return redirect(route('forms.planifications'));
         
@@ -200,7 +200,7 @@ class FormsController extends Controller
             'asignatura'=>'required',
             'idInstanciaPlaniAño' =>'required'
         ]);
-        dump("llega a validation");
+        //dump("llega a validation");
 
         //Datos crear InstanciaPlaniAño
         $anio = $request->get('anio');
@@ -239,7 +239,7 @@ class FormsController extends Controller
             'asignatura'=>'required',
             'idInstanciaPlaniAño' =>'required'
         ]);
-        dump("llega a validation");
+        //dump("llega a validation");
 
         //Datos get InstanciaPlaniAño
         $curso = $request->get('curso');
@@ -252,8 +252,8 @@ class FormsController extends Controller
         //dd($instanciaPlani->idRepositorio);
         $unidades = Unidad::where('idRepositorio', $instanciaPlani->idRepositorio)->get();
 
-        dump($instanciaPlani);
-        dump($unidades);
+        //dump($instanciaPlani);
+        //dump($unidades);
 
 
         return view('forms.validation', ['instanciaPlani'=> $instanciaPlani, 'curso'=> $curso, 'asignatura'=> $asignatura, 'unidades'=> $unidades]);
