@@ -68,11 +68,24 @@
                           @else
                           <option value=3>Administrador</option>
                         @endif
+
+                        @if($row['type'] == "4")
+                          <option value=4 selected>Alumno</option>
+                          @else
+                          <option value=4>Alumno</option>
+                        @endif
                       </select>
                     </td>                    
 
-                    <td><a href="establecimientos?idUsuario=<?=$row['id']?>" class="btn btn-primary">Establecimientos
-                    </a></td>
+                    <td>
+                      @if($row['type'] == "4")
+                      <a href="establecimientosAlumno?idUsuario=<?=$row['id']?>" class="btn btn-primary">Enlazar
+                      </a>
+                        @else
+                          <a href="establecimientos?idUsuario=<?=$row['id']?>" class="btn btn-primary">Establecimientos
+                          </a>
+                      @endif
+                    </td>
 
                     <td><button id="editarUsuario<?=$i?>" name="editar<?=$i?>" onclick="editarUsuario(<?=$i?>)" class="btn btn-info" >Editar</button></td>
 
@@ -123,6 +136,7 @@
                 <option value=1>Docente</option>
                 <option value=2>Directivo</option>
                 <option value=3>Administrador</option>
+                <option value=4>Alumno</option>
               </select>
             </div>
           </div>

@@ -72,4 +72,20 @@ class InstanciaPlaniAño extends Model
 		return $instancia;
 
 	}
+
+	//Data para luego obtener los alumnos
+	public static function obtenerDataAlumnos($idInstanciaPlaniAño)
+	{	
+		$instancia = InstanciaPlaniAño::where('InstanciaPlaniAño.id', $idInstanciaPlaniAño)
+		->leftJoin('RepositorioPlanificacion', 'RepositorioPlanificacion.id', '=', 'InstanciaPlaniAño.idRepositorio')
+		->leftJoin('Curso', 'Curso.id', '=', 'RepositorioPlanificacion.idCurso')
+		->leftJoin('InstanciaEstablecimiento', 'InstanciaEstablecimiento.id', '=', 'InstanciaPlaniAño.idInstanciaEstablecimiento')
+		->leftJoin('Establecimiento', 'Establecimiento.id', '=', 'InstanciaEstablecimiento.idEstablecimiento')
+		->select('InstanciaPlaniAño.id','InstanciaPlaniAño.anio', 'Curso.id as idCurso', 'Curso.nombre as nombreCurso', 'InstanciaPlaniAño.indice', 'InstanciaEstablecimiento.id as idInstanciaEstablecimiento', 'Establecimiento.id as idEstablecimiento', 'Establecimiento.nombre as nombreEstablecimiento')
+		->first();
+		//dd($instancia);
+		
+		return $instancia;
+
+	}
 }
