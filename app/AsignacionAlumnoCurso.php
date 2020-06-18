@@ -4,18 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class InstanciaEstablecimientoAlumno extends Model
+class AsignacionAlumnoCurso extends Model
 {
     protected $fillable = [
         'id',
         'fecha',
-        'idEstablecimiento',
-        'curso',
-        'indice',
         'type',
-        'idAlumno'
+        'idInstanciaEstablecimientoAlumno',
+        'idInstanciaPlaniAnio'
     ];
-    protected $table = "InstanciaEstablecimientoAlumno";
+    protected $table = "AsignacionAlumnoCurso";
     public $timestamps = false;
 
     public static function obtenerAlumnos($idEstablecimiento, $idCurso, $indice, $anio)
@@ -38,6 +36,7 @@ class InstanciaEstablecimientoAlumno extends Model
 	{
 		$establecimientos = InstanciaEstablecimientoAlumno::where('idAlumno', $userId)
 	    ->leftJoin('Establecimiento', 'Establecimiento.id', '=', 'InstanciaEstablecimientoAlumno.idEstablecimiento')
+	    ->select('InstanciaEstablecimientoAlumno.id','Establecimiento.nombre', 'Establecimiento.isSemestral')
 	    ->get();
 	    return $establecimientos;
 	}

@@ -77,4 +77,17 @@ class InstanciaUnidad extends Model
 		return $instancia;
 
 	}
+
+	//Data para obtener clases de un curso y asignatura
+	public static function obtenerClases($idInstanciaPlaniAño)
+	{	
+		$instancia = InstanciaUnidad::where('InstanciaUnidad.idInstanciaPlaniAño', $idInstanciaPlaniAño)
+		->leftJoin('InstanciaClase', 'InstanciaClase.idInstanciaUnidad', '=', 'InstanciaUnidad.id')
+		->whereRaw('yearweek(start) = yearweek(now())' )
+		->select('InstanciaClase.id', 'InstanciaClase.start', 'InstanciaClase.contenidos', 'InstanciaClase.description', 'InstanciaClase.recursos', 'InstanciaUnidad.NuevoNombre as nombreUnidad', 'InstanciaUnidad.NuevoNumero as numeroUnidad', 'InstanciaUnidad.Periodo as periodoUnidad', 'InstanciaUnidad.NuevoObjetivoGeneral as nombreObjetivoGeneral', 'idInstanciaPlaniAño', 'InstanciaUnidad.id as idInstanciaUnidad' )
+		->get();
+
+		return $instancia;
+
+	}
 }

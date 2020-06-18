@@ -3,72 +3,10 @@
 @section('content')
 <div id="content">
 <div id="content-header">
-  <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Alumno</a> </div>
-  <h1>Asignar alumnos</h1>
+  <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Cursos</a> </div>
+  <h1>Cursos a retroalimentar</h1>
 </div>
 
-  <div class="container-fluid">
-    <hr>
-
-    <form action="{{ route('forms.planificationsFilter') }}" method="get" class="form-horizontal">
-
-    @csrf
-
-    <div class="control-group">
-      <label class="control-label">Establecimiento</label>
-      <div class="controls">
-        <select class="form-control" id="establecimientoFilter" name="establecimientoFilter">
-
-          @foreach($establecimientos as $establecimiento)
-
-            @if(isset($establecimientoFilter))
-              @if($establecimiento->id == $establecimientoFilter)
-                <option value={{$establecimiento->id}} selected>{{$establecimiento->nombre}}</option>
-              @else
-                <option value={{$establecimiento->id}}>{{$establecimiento->nombre}}</option>
-              @endif
-
-            @else
-              <option value={{$establecimiento->id}}>{{$establecimiento->nombre}}</option>
-            @endif 
-
-          @endforeach
-        </select>
-      </div>
-    </div>
-
-
-    <div class="control-group" style="margin-top:2px;">
-      <label class="control-label">Año</label>
-      <div class="controls">
-        <select class="form-control" id='anioFilter' name="anioFilter">
-          @foreach($anios as $anio)
-
-            @if(isset($anioFilter))
-              @if($anio->anio == $anioFilter)
-                <option value={{$anio->anio}} selected>{{$anio->anio}}</option>
-              @else
-                <option value={{$anio->anio}}>{{$anio->anio}}</option>
-              @endif
-
-            @else
-              <option value={{$anio->anio}}>{{$anio->anio}}</option>
-            @endif 
-            
-          @endforeach
-        </select>
-      </div>
-    </div>
-
-    <div class="form-actions">
-      <button type="submit" class="btn btn-primary">Filtrar</button>
-    </div>
-
-  </form>
-
-  </div>
-    
-    <hr>
 
     <input type="hidden" id="token" value="{{ csrf_token() }}" readonly>
 
@@ -77,7 +15,7 @@
       <div class="span12">
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-            <h5>Planificaciones</h5>
+            <h5>Cursos</h5>
           </div>
           <div class="widget-content nopadding">
             <table class="table table-bordered data-table">
@@ -107,7 +45,7 @@
                     </td>
                     
 
-                    <td><a href="planificationAlumno?asignatura=<?=$row['nombreAsignatura']?>&idInstanciaPlaniAño=<?=$row['id']?>" class="btn btn-success">Alumnos
+                    <td><a href="clases?asignatura=<?=$row['nombreAsignatura']?>&idInstanciaPlaniAño=<?=$row['id']?>" class="btn btn-success">Clases
                     </a></td>
                   </tr>
                 <?$i++;endforeach;?>

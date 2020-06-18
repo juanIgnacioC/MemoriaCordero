@@ -67,12 +67,13 @@ Route::post('/solicitarRevision', 'DirectivoController@solicitarRevision')->name
 Route::get('/directivo', 'DirectivoController@index')->name('directivo.index');
 
 
-Route::get('/retroalimenta', 'DirectivoController@solicitar')->name('directivo.solicitar');
-Route::post('/ingresaRetroalimentacion', 'DirectivoController@solicitarCorreccion')->name('directivo.solicitarCorreccion');
+Route::get('/clases', 'AlumnoController@clases')->name('alumno.clases');
+Route::get('/retroalimentar', 'AlumnoController@solicitar')->name('alumno.retroalimenta');
+Route::post('/ingresaRetroalimentacion', 'AlumnoController@solicitarCorreccion')->name('alumno.ingresaRetroalimentacion');
 
 Route::get('/alumno', 'AlumnoController@index')->name('alumno.index');
 Route::get('/planificationAlumno', 'AlumnoController@planificationAlumno')->name('alumno.planificationAlumno');
-Route::post('/planificationAlumno/createAsignacionAlumnoCurso', 'AdministradorController@createAsignacionAlumnoCurso')->name('alumno.createAsignacionAlumnoCurso');
+Route::post('/planificationAlumno/createAsignacionAlumnoCurso', 'AlumnoController@createAsignacionAlumnoCurso')->name('alumno.createAsignacionAlumnoCurso');
 
 
 

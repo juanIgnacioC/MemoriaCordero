@@ -14,7 +14,8 @@ use App\InstanciaUnidad;
 use App\InstanciaUnidadObjetivo;
 
 use App\InstanciaEstablecimientoAlumno;
-use App\CorreccionAlumno;
+use App\AsignacionAlumnoCurso;
+use App\Retroalimentacion;
 
 
 class AlumnoController extends Controller
@@ -81,11 +82,33 @@ class AlumnoController extends Controller
             
         }
 
-        if(!$user->privilegioAlumnoExclusivo($user['type']) ) {
-            $correcciones = CorreccionAlumno::directivo($user['id']);
-            $correccionesRealizadas = CorreccionAlumno::directivoRealizadas($user['id']);
+        if($user->privilegioAlumnoExclusivo($user['type']) ) {
+            $userId =  $user['id'];
+            $anio = date('Y');
 
-            return view('alumno.alumno', ['correcciones'=> $correcciones, 'correccionesRealizadas'=> $correccionesRealizadas]);
+            //Join establecimiento instanciaEstablecimiento y docente/
+            //dropdown seleccionar establecimiento y año
+            $establecimientosAlumno = InstanciaEstablecimientoAlumno::obtenerInstancias($userId);
+            ///dump($establecimientosAlumno);
+
+            //obtener instancias solo del establecimiento y año seleccionado
+            $instanciasPlaniAño = InstanciaEstablecimiento::obtenerInstanciasAlumno($establecimientosAlumno->get(0), $anio);
+            ///dump($instanciasPlaniAño);
+
+            //$anios = InstanciaPlaniAño::obtenerAnios($establecimientos->get(0));
+            //dd($anios);
+
+            //obtener instancias solo de los establecimientos del docente
+            //$instanciasPlaniAño = InstanciaPlaniAño::obtenerPlanificacionesEstablecimiento($establecimientos);
+            //dd($fecha);
+            
+            /*$instanciasPlaniAño = InstanciaEst::obtenerPlanificacionesAlumno($establecimientos->get(0), $anio);
+            dd($instanciasPlaniAño);*/
+            /*dump($instanciasPlaniAño);
+            dump($establecimientos);
+            dump($anios);*/
+
+            return view('alumno.alumno', ['instanciasPlaniAño'=> $instanciasPlaniAño]);
         }
 
         if($user->privilegioDirectivoExclusivo($user['type']) ) {
@@ -111,14 +134,12 @@ class AlumnoController extends Controller
     public function planificationAlumno(Request $request)
     {   
         $request->validate([
-            'curso'=>'required',
             'asignatura'=>'required',
             'idInstanciaPlaniAño' =>'required'
         ]);
         //dump("llega a planification unidades");
 
         //Datos get InstanciaPlaniAño
-        $curso = $request->get('curso');
         $asignatura = $request->get('asignatura');
         $idInstanciaPlaniAño = $request->get('idInstanciaPlaniAño');
 
@@ -127,7 +148,7 @@ class AlumnoController extends Controller
 
         //Modelo insplanianio para obtener alumnos de este curso
         $instanciaPlani = InstanciaPlaniAño::obtenerDataAlumnos($idInstanciaPlaniAño);
-        dump($instanciaPlani);
+        ///dump($instanciaPlani);
 
         //Modelo InstanciaEstablecimientoAlumno para obtener los alumnos asignados a esta instancia de curso
         $alumnos = InstanciaEstablecimientoAlumno::obtenerAlumnos($instanciaPlani->idEstablecimiento, $instanciaPlani->idCurso, $instanciaPlani->indice, $instanciaPlani->anio);
@@ -143,7 +164,78 @@ class AlumnoController extends Controller
         //dump($instanciaUnidades);
         //dump($unidades);
 
-        return view('alumno.asignar', ['instanciaPlani'=> $instanciaPlani, 'curso'=> $curso, 'asignatura'=> $asignatura, 'alumnos'=> $alumnos]);
+        return view('alumno.asignar', ['instanciaPlani'=> $instanciaPlani, 'asignatura'=> $asignatura, 'alumnos'=> $alumnos]);
+        //return view('alumno.asignar', ['instanciaPlani'=> $instanciaPlani, 'curso'=> $curso, 'asignatura'=> $asignatura, 'alumnos'=> $alumnos, 'instAlumnos'=> $instAlumnos]);
+
+        //return view('planifications.unidades');
+    }
+
+    public function createAsignacionAlumnoCurso(Request $request)
+    {
+        $request->validate([
+        ]);
+
+        //Datos crear InstanciaPlaniAño
+        //dump("createAsign");
+        $idInstanciaPlaniAnio = $request->get('idInstanciaPlaniAnio');
+        //$check = $request->input('check');
+        $json = $request->get('Alumnosjson');
+        $fecha = date('Y-m-d');
+
+        //recorrer json con alumnos formato: idInstanciaEstablecimientoAlumno||type
+        $obj = json_decode($json);
+        //dump($obj);
+        foreach ($obj as $alumno) {
+            //dump($alumno);
+            //parse format
+            $data = explode('||', $alumno);
+            $idInstanciaEstablecimientoAlumno = $data[0];
+            if($data[1] == "false"){
+                $type = 0;
+            }
+            else{
+                $type = 1;
+            }
+
+            $asignacionAlumnoCurso = new AsignacionAlumnoCurso([
+            'idInstanciaPlaniAnio' => $idInstanciaPlaniAnio,
+            'idInstanciaEstablecimientoAlumno' => $idInstanciaEstablecimientoAlumno,
+            'fecha' => $fecha,
+            'type' => $type
+            ]);
+            //dd($asignacionAlumnoCurso);
+            $asignacionAlumnoCurso->save();
+
+        }
+
+        //return view('forms.planifications');
+        //return redirect(route('forms.validation', ['instanciaPlani', $instanciaPlani]));
+        return redirect(route('alumno.index'));
+
+    }  
+
+    //Alumno ve las clases semanales de una asignatura para retroalimentar
+    public function clases(Request $request)
+    {   
+        $request->validate([
+            'asignatura'=>'required',
+            'idInstanciaPlaniAño' =>'required'
+        ]);
+        //dump("llega a planification unidades");
+
+        //Datos get InstanciaPlaniAño
+        $asignatura = $request->get('asignatura');
+        $idInstanciaPlaniAño = $request->get('idInstanciaPlaniAño');
+        //dd($idInstanciaPlaniAño);
+        //$instanciaPlani = InstanciaPlaniAño::where('id', $idInstanciaPlaniAño)
+        //->first();
+
+        //Modelo insplanianio para obtener clases de este curso y asignatura
+        $instanciasPlaniAño = InstanciaUnidad::obtenerClases($idInstanciaPlaniAño);
+        dump($instanciasPlaniAño);
+
+
+        return view('alumno.clases', ['instanciasPlaniAño'=> $instanciasPlaniAño, 'asignatura'=> $asignatura]);
         //return view('alumno.asignar', ['instanciaPlani'=> $instanciaPlani, 'curso'=> $curso, 'asignatura'=> $asignatura, 'alumnos'=> $alumnos, 'instAlumnos'=> $instAlumnos]);
 
         //return view('planifications.unidades');

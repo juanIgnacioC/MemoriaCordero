@@ -35,4 +35,21 @@ class InstanciaEstablecimiento extends Model
 
 	    return $directivo;
     }
+
+    public static function obtenerInstanciasAlumno($establecimiento, $anio)
+    {
+        $establecimientos = InstanciaEstablecimiento::where('idEstablecimiento', $establecimiento['idEstablecimiento'])
+        ->leftJoin('InstanciaPlaniAño', 'InstanciaPlaniAño.idInstanciaEstablecimiento', '=', 'InstanciaEstablecimiento.id')
+        ->leftJoin('RepositorioPlanificacion', 'RepositorioPlanificacion.id', '=', 'InstanciaPlaniAño.idRepositorio')
+        ->leftJoin('Curso', 'Curso.id', '=', 'RepositorioPlanificacion.idCurso')
+        ->leftJoin('Asignatura', 'Asignatura.id', '=', 'RepositorioPlanificacion.idAsignatura')
+        ->where('InstanciaPlaniAño.indice', $establecimiento['indice'])
+        ->where('Curso.id', $establecimiento['curso'])
+        ->where('InstanciaPlaniAño.anio', $anio)
+
+        ->select('InstanciaPlaniAño.id','InstanciaPlaniAño.anio', 'Curso.nombre as nombreCurso', 'Asignatura.nombre as nombreAsignatura', 'InstanciaPlaniAño.indice')
+
+        ->get();
+        return $establecimientos;
+    }
 }
