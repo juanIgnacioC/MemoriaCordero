@@ -235,7 +235,7 @@ class AlumnoController extends Controller
         //Modelo insplanianio para obtener clases de este curso y asignatura
         //modificar modelo (como instunidadObjetivo) para obtener la clase y un arreglo con sus retroalimentaciones
         $instanciasPlaniAnio = InstanciaUnidad::obtenerClases($idInstanciaPlaniAnio, $idAlumno);
-        dump($instanciasPlaniAnio);
+        //dump($instanciasPlaniAnio);
 
 
         return view('alumno.clases', ['instanciasPlaniAnio'=> $instanciasPlaniAnio, 'asignatura'=> $asignatura]);
@@ -298,7 +298,7 @@ class AlumnoController extends Controller
         //return redirect(route('directivo.index'));
     }     
 
-
+    //docente ve las retroalimentaciones de un curso
     public function retroalimentaciones(Request $request)
     {   
         $request->validate([
@@ -321,10 +321,10 @@ class AlumnoController extends Controller
         ///dd($instanciasPlaniAnio);
 
         $dataClases = InstanciaUnidad::dataClases($idInstanciaPlaniAnio, $idDocente);
-        dd($dataClases);
+        //dump($dataClases);
 
 
-        return view('alumno.clases', ['instanciasPlaniAnio'=> $instanciasPlaniAnio, 'asignatura'=> $asignatura]);
+        return view('alumno.retroalimentaciones', ['dataClases'=> $dataClases, 'asignatura'=> $asignatura]);
         //return view('alumno.asignar', ['instanciaPlani'=> $instanciaPlani, 'curso'=> $curso, 'asignatura'=> $asignatura, 'alumnos'=> $alumnos, 'instAlumnos'=> $instAlumnos]);
 
         //return view('planifications.unidades');

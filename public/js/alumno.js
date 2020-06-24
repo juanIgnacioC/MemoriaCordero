@@ -60,6 +60,31 @@ function jsonAls() {
   return "0";
 }
 
+//abrir modal docente ver retroalimentaciones
+function retroalimentaciones(unidad, clase) {
+  console.log("unidad");
+  console.log(unidad);
+
+  var rowUnidad = $("#unidad"+unidad).val();
+  var json = JSON.parse(rowUnidad);
+  console.log(json['clases']);
+
+  console.log("retros");
+  arrayRetroalimentaciones = json['clases'][clase]['retroalimentaciones'];
+  console.log(arrayRetroalimentaciones);
+
+
+  //for retroalimentaciones -> tabla
+  var table = $('#tableModal');
+  table.find("tbody tr").remove();
+  arrayRetroalimentaciones.forEach(function (retro) {
+      table.append("<tr><td>" + retro.name + "</td><td>" + retro.puntuacion + "</td><td>" + retro.comentario + "</td></tr>");
+  });
+
+  $("#myModal1").modal('show');
+  return("0");
+}
+
 
 //abrir modal retroalimentación clase
 function retroalimentar(indice) {

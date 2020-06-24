@@ -116,64 +116,49 @@ class InstanciaUnidad extends Model
 
 	public static function dataClases($idInstanciaPlaniAño, $idDocente)
 	{
-		//dump("obteniendo dataClases");
-		$dataClases = new Collection();
+		$dataClases = new Collection(); //unidad y sus clases
 
 		$instanciasUnidad = InstanciaUnidad::where('idInstanciaPlaniAño', $idInstanciaPlaniAño)
 		->orderBy('NuevoNumero', 'asc')
 	    ->get();
-	    //$dataClases = collect($instanciasUnidadObjetivo);
-	    
-	    //dd($dataClases);
 
-	    dd($instanciasUnidad);
+	    for ($i=0; $i < $instanciasUnidad->count(); $i++) {
+	    	$DataRetroalimentacionesClase = new Collection(); //clase y sus retroalimentaciones
 
-	    for ($i=0; $i < $instanciasUnidad->count() ; $i++) {
 	    	$unidad = $instanciasUnidad[$i];
-	    	//dump("For unidad");
 
-	    	//objetivo
-	    	$instanciaObjetivo = InstanciaObjetivo::where('id', $unidad->idInstanciaObjetivo)
-	    	->first();
-
-	    	//dump($instanciaObjetivo);
-
-	    	//conocimientos previos
-	    	$instanciasConocimientoPrevio = InstanciasConocimientoPrevio::where('idInstanciaUnidadObjetivo', $unidad->id)
+	    	///For- obtener clases de esta unidad
+	    	//clases
+	    	$clases = InstanciaClase::where('idInstanciaUnidad', $unidad->id)
+			->select('InstanciaClase.id', 'InstanciaClase.start', 'InstanciaClase.contenidos', 'InstanciaClase.description', 'InstanciaClase.recursos')
+			->orderBy('start', 'asc')
 	    	->get();
 
-	    	//dump($instanciasConocimientoPrevio);
+	    	//dump($clases);
+	    		///obtener retroalimentaciones para cada clase
+	    	for ($j=0; $j < $clases->count(); $j++) {
+	    		$clase = $clases[$j];
 
-	    	//indicadores
-	    	$indicadores = InstanciaIndicador::where('idInstanciaUnidadObjetivo', $unidad->id)
-	    	->get();
+	    		$retroalimentacionesClase = Retroalimentacion::where('idInstanciaClase', $clase->id)
+	    		->leftJoin('users', 'users.id', '=', 'Retroalimentacion.idAlumno')
+				->where('Retroalimentacion.idDocente', '=', $idDocente)
+				->orderBy('fecha', 'desc')
+				->select('Retroalimentacion.id', 'Retroalimentacion.puntuacion', 'Retroalimentacion.comentario', 'Retroalimentacion.idAlumno', 'users.name' )
+		    	->get();
 
-	    	//dump($indicadores);
-
-	    	//actividades
-	    	$actividades = InstanciaActividad::where('idInstanciaUnidadObjetivo', $unidad->id)
-	    	->first();
-
-	    	//dump($actividades);
-
-	    	//evaluacion
-	    	$evaluacion = InstanciaEvaluacion::where('idInstanciaUnidadObjetivo', $unidad->id)
-	    	->first();
-
-	    	//dump($evaluacion);
-
-	    	//crear modelo de datos de plani unidad
-	    	//dump("pushing");
+		    	//dd($retroalimentacionesClase);
+		    	$dataClase = new DataRetroalimentacionesClase([
+			        'clase' => $clase,
+			        'retroalimentaciones' => $retroalimentacionesClase
+	            ]);
+		    	$DataRetroalimentacionesClase->push($dataClase);
+	    	}
+	    	
+	    	//crear modelo de datos de clases por unidad
 	    	$data = new DataClases([
-	            'id' => $unidad->id,
-		        'nombreObjetivo' => $instanciaObjetivo,
-		        'conocimientos' => $instanciasConocimientoPrevio,
-		        'actividades' => $actividades,
-		        'indicadores' => $indicadores,
-		        'evaluacion' => $evaluacion,
-		        'idInstanciaUnidad' => $idUnidad
+		        'unidad' => $unidad,
+		        'clases' => $DataRetroalimentacionesClase
             ]);
-	    	//dump($data);
 	    	$dataClases->push($data);
 	    }
 	    //dd($dataClases);

@@ -175,6 +175,7 @@
                 <label>
                   <input type="checkbox" name="check1[]" value="Me quedaron muchas dudas" />
                   Me quedaron muchas dudas</label>
+                <label>
                   <input type="checkbox" name="check1[]" value="No se pasaron los contenidos" />
                   No se pasaron los contenidos</label>
               </div>

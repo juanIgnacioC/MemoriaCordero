@@ -140,7 +140,7 @@
 
           </div>
           <div class="modal-footer">
-            <button class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+            <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
             <button class="btn btn-success" onclick="guardarCambios()">Guardar</button>
           </div>
         </div>

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DataClases extends Model
+class DataRetroalimentacionesClase extends Model
 {
     /*protected $id = '';
     protected $nombreObjetivo = '';
@@ -23,7 +23,7 @@ class DataClases extends Model
         'idInstanciaUnidad' => ''
     ];*/
     protected $fillable = [
-        'unidad',
-        'clases'
+        'clase',
+        'retroalimentaciones'
     ];
 }
