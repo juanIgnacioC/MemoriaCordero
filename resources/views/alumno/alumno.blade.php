@@ -45,7 +45,7 @@
                     </td>
                     
 
-                    <td><a href="clases?asignatura=<?=$row['nombreAsignatura']?>&idInstanciaPlaniAño=<?=$row['id']?>" class="btn btn-success">Clases
+                    <td><a href="clases?asignatura=<?=$row['nombreAsignatura']?>&idInstanciaPlaniAnio=<?=$row['id']?>" class="btn btn-success">Clases
                     </a></td>
                   </tr>
                 <?$i++;endforeach;?>

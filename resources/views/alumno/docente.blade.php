@@ -4,7 +4,7 @@
 <div id="content">
 <div id="content-header">
   <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Alumno</a> </div>
-  <h1>Asignar alumnos</h1>
+  <h1>Asignar alumnos y retroalimentaciones</h1>
 </div>
 
   <div class="container-fluid">
@@ -77,7 +77,7 @@
       <div class="span12">
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-            <h5>Planificaciones</h5>
+            <h5>Cursos</h5>
           </div>
           <div class="widget-content nopadding">
             <table class="table table-bordered data-table">
@@ -86,6 +86,7 @@
                   <th>Nombre Curso</th>
                   <th>Nombre Asignatura</th>
                   <th>Año</th>
+                  <th></th>
                   <th></th>
                 </tr>
               </thead>
@@ -107,7 +108,9 @@
                     </td>
                     
 
-                    <td><a href="planificationAlumno?asignatura=<?=$row['nombreAsignatura']?>&idInstanciaPlaniAño=<?=$row['id']?>" class="btn btn-success">Alumnos
+                    <td><a href="planificationAlumno?asignatura=<?=$row['nombreAsignatura']?>&idInstanciaPlaniAño=<?=$row['id']?>" class="btn btn-primary">Alumnos
+                    </a></td>
+                    <td><a href="retroalimentaciones?asignatura=<?=$row['nombreAsignatura']?>&idInstanciaPlaniAnio=<?=$row['id']?>" class="btn btn-success">Retroalimentaciones
                     </a></td>
                   </tr>
                 <?$i++;endforeach;?>

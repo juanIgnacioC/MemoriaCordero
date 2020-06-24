@@ -68,8 +68,9 @@ Route::get('/directivo', 'DirectivoController@index')->name('directivo.index');
 
 
 Route::get('/clases', 'AlumnoController@clases')->name('alumno.clases');
-Route::get('/retroalimentar', 'AlumnoController@solicitar')->name('alumno.retroalimenta');
-Route::post('/ingresaRetroalimentacion', 'AlumnoController@solicitarCorreccion')->name('alumno.ingresaRetroalimentacion');
+Route::post('/retroalimentar', 'AlumnoController@retroalimentar')->name('alumno.retroalimentar');
+
+Route::get('/retroalimentaciones', 'AlumnoController@retroalimentaciones')->name('alumno.retroalimentaciones');
 
 Route::get('/alumno', 'AlumnoController@index')->name('alumno.index');
 Route::get('/planificationAlumno', 'AlumnoController@planificationAlumno')->name('alumno.planificationAlumno');

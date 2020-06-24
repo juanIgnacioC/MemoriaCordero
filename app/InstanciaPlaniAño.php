@@ -101,16 +101,17 @@ class InstanciaPlaniAño extends Model
 
 	}
 
-	//Data para obtener clases de un curso y asignatura
-	public static function obtenerClases($idInstanciaPlaniAño)
-	{	
-		$instancia = InstanciaPlaniAño::where('InstanciaPlaniAño.id', $idInstanciaPlaniAño)
-		->leftJoin('InstanciaUnidad', 'InstanciaUnidad.idInstanciaPlaniAño', '=', 'InstanciaPlaniAño.id')
-		->leftJoin('InstanciaClase', 'InstanciaClase.idInstanciaUnidad', '=', 'InstanciaUnidad.id')
-		->first();
-		dd($instancia);
-		
-		return $instancia;
+	public static function obtenerDocente($id)
+    {
+        $docente = InstanciaPlaniAño::where('InstanciaPlaniAño.id', $id)
+    	->leftJoin('InstanciaEstablecimiento', 'InstanciaEstablecimiento.id', '=', 'InstanciaPlaniAño.idInstanciaEstablecimiento')
+        ->leftJoin('users', 'users.id', '=', 'InstanciaEstablecimiento.idDocente')
+        ->where('users.type','1')
+        ->select('users.id', 'users.name', 'users.email', 'users.type')
+        ->first();
 
-	}
+	    return $docente;
+    }
+
+	
 }

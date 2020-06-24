@@ -175,7 +175,7 @@
                     </td>
                     
 
-                    <td><a href="#" class="btn btn-primary">Editar
+                    <td><a href="#" class="btn btn-warning">Editar
                     </a></td>
                     <td><button id="eliminar<?=$i?>" name="eliminar<?=$i?>" class="btn btn-danger" >Eliminar</button></td>
                   </tr>

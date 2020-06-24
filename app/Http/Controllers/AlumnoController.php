@@ -219,27 +219,117 @@ class AlumnoController extends Controller
     {   
         $request->validate([
             'asignatura'=>'required',
-            'idInstanciaPlaniAño' =>'required'
+            'idInstanciaPlaniAnio' =>'required'
         ]);
         //dump("llega a planification unidades");
 
         //Datos get InstanciaPlaniAño
         $asignatura = $request->get('asignatura');
-        $idInstanciaPlaniAño = $request->get('idInstanciaPlaniAño');
+        $idInstanciaPlaniAnio = $request->get('idInstanciaPlaniAnio');
+        $user = Auth::user();
+        $idAlumno = $user['id'];
         //dd($idInstanciaPlaniAño);
         //$instanciaPlani = InstanciaPlaniAño::where('id', $idInstanciaPlaniAño)
         //->first();
 
         //Modelo insplanianio para obtener clases de este curso y asignatura
-        $instanciasPlaniAño = InstanciaUnidad::obtenerClases($idInstanciaPlaniAño);
-        dump($instanciasPlaniAño);
+        //modificar modelo (como instunidadObjetivo) para obtener la clase y un arreglo con sus retroalimentaciones
+        $instanciasPlaniAnio = InstanciaUnidad::obtenerClases($idInstanciaPlaniAnio, $idAlumno);
+        dump($instanciasPlaniAnio);
 
 
-        return view('alumno.clases', ['instanciasPlaniAño'=> $instanciasPlaniAño, 'asignatura'=> $asignatura]);
+        return view('alumno.clases', ['instanciasPlaniAnio'=> $instanciasPlaniAnio, 'asignatura'=> $asignatura]);
         //return view('alumno.asignar', ['instanciaPlani'=> $instanciaPlani, 'curso'=> $curso, 'asignatura'=> $asignatura, 'alumnos'=> $alumnos, 'instAlumnos'=> $instAlumnos]);
 
         //return view('planifications.unidades');
     }
+
+    //Alumno ingresa retroalimentación
+    public function retroalimentar(Request $request)
+    {
+        $request->validate([
+            'idInstanciaClase'=>'required'
+        ]);
+
+        $idInstanciaClase = $request->get('idInstanciaClase');
+        //dump($idInstanciaClase);
+        $fecha = date('Y-m-d');
+        $puntuacion = $request->get('puntuacion');
+        $comentariosJson = $request->get('ComentariosJson');
+        $idInstanciaPlaniAnio = $request->get('idInstanciaPlaniAnio');
+
+        $user = Auth::user();
+        $idAlumno = $user['id'];
+        $idDocente = InstanciaPlaniAño::obtenerDocente($idInstanciaPlaniAnio);
+        //dd($idDocente['id']);
+
+        $claseRetroalimentada = Retroalimentacion::claseRetroalimentada($idInstanciaClase, $idAlumno);
+
+        if($claseRetroalimentada != null){
+            dump("Clase ya retroalimentada por este alumno");
+        }
+        else{
+            $retroalimentacion = new Retroalimentacion([
+                'idInstanciaClase' => $idInstanciaClase,
+                'puntuacion' => $puntuacion,
+                'fecha' => $fecha,
+                'comentario' => $comentariosJson,
+                'idInstanciaPlaniAnio' => $idInstanciaPlaniAnio,
+                'idAlumno' => $idAlumno,
+                'idDocente' => $idDocente['id']
+            ]);
+            //dd($retroalimentacion);
+            //verificar si este alumno ya retroalimentó esta clase
+            $retroalimentacion->save();
+        }
+
+        $instanciasPlaniAnio = InstanciaUnidad::obtenerClases($idInstanciaPlaniAnio, $idAlumno);
+        //dd($instanciasPlaniAnio);
+        $asignatura = $request->get('asignatura');
+        //dump($instanciasPlaniAnio);
+
+
+        return view('alumno.clases', ['instanciasPlaniAnio'=> $instanciasPlaniAnio, 'asignatura'=> $asignatura]);
+
+        //$instanciaUnidad = InstanciaUnidad::where('id', $idInstanciaUnidad)
+        //->first();
+
+        //return redirect(route('planifications.contents', ['asignatura'=> $asignatura, 'curso'=> $curso, 'id'=> $instanciaUnidad]) );
+        //return redirect(route('directivo.index'));
+    }     
+
+
+    public function retroalimentaciones(Request $request)
+    {   
+        $request->validate([
+            'asignatura'=>'required',
+            'idInstanciaPlaniAnio' =>'required'
+        ]);
+        //dump("llega a planification unidades");
+
+        //Datos get InstanciaPlaniAño
+        $asignatura = $request->get('asignatura');
+        $idInstanciaPlaniAnio = $request->get('idInstanciaPlaniAnio');
+        $user = Auth::user();
+        $idDocente = $user['id'];
+        //dd($idInstanciaPlaniAño);
+        //$instanciaPlani = InstanciaPlaniAño::where('id', $idInstanciaPlaniAño)
+        //->first();
+
+        //Modelo insplanianio para obtener clases de este curso y asignatura
+        ///$instanciasPlaniAnio = InstanciaUnidad::obtenerClasesDocente($idInstanciaPlaniAnio, $idDocente);
+        ///dd($instanciasPlaniAnio);
+
+        $dataClases = InstanciaUnidad::dataClases($idInstanciaPlaniAnio, $idDocente);
+        dd($dataClases);
+
+
+        return view('alumno.clases', ['instanciasPlaniAnio'=> $instanciasPlaniAnio, 'asignatura'=> $asignatura]);
+        //return view('alumno.asignar', ['instanciaPlani'=> $instanciaPlani, 'curso'=> $curso, 'asignatura'=> $asignatura, 'alumnos'=> $alumnos, 'instAlumnos'=> $instAlumnos]);
+
+        //return view('planifications.unidades');
+    }
+
 
     public function solicitar(Request $request)
     {
@@ -279,61 +369,7 @@ class AlumnoController extends Controller
             return view('directivo.solicitar', ['instanciaUnidad'=> $instanciaUnidad, 'curso'=> $curso, 'asignatura'=> $asignatura, 'user'=> $user, 'anio'=> $anio, 'directivo'=> $directivo, 'correccionPrevia'=> $correccion]);
         }
         
-    }
-
-    public function solicitarCorreccion(Request $request)
-    {
-        $request->validate([
-            'idInstanciaUnidad'=>'required'
-        ]);
-
-        $idDocente = $request->get('idDocente');
-        $idInstanciaUnidad = $request->get('idInstanciaUnidad');
-        $asignatura = $request->get('asignatura');
-        $curso = $request->get('curso');
-        $anio = $request->get('anio');
-        $correcciones = $request->get('correcciones');
-        $estado = $request->get('estado');
-        $idUsuario = $request->get('idUser');
-        $idDirectivo = $request->get('idDirectivo');
-        //Se inicia una solicitud de corrección, estado: inicio corrección
-        $flujo = "1";
-
-        //Se finaliza la correccion previa
-        $correccionPrevia = $request->get('correccionPrevia');
-        if($correccionPrevia != null){
-            $correcccionAntigua = CorreccionAlumno::where('id', $correccionPrevia)
-            ->first();
-            //dd($correcccionAntigua);
-
-            $correcccionAntigua->estado = "3";
-            $correcccionAntigua->save();
-            //Se corrige una revisión del directivo, estado: Solicita corrección
-            $flujo = "3";
-        }
-        
-        $correcccion = new CorreccionAlumno([
-            'idDocente' => $idDocente,
-            'idInstanciaUnidad' => $idInstanciaUnidad,
-            'asignatura' => $asignatura,
-            'curso' => $curso,
-            'anio' => $anio,
-            'correcciones' => $correcciones,
-            'estado' => $estado,
-            'idUsuario' => $idUsuario,
-            'idDirectivo' => $idDirectivo,
-            'flujo' => $flujo
-        ]);
-        //dd($correcccion);
-        $correcccion->save();
-
-        $instanciaUnidad = InstanciaUnidad::where('id', $idInstanciaUnidad)
-        ->first();
-
-        //return redirect(route('planifications.contents', ['asignatura'=> $asignatura, 'curso'=> $curso, 'id'=> $instanciaUnidad]) );
-        return redirect(route('directivo.index'));
-    }       
-
+    }  
 
     public function revision(Request $request)
     {

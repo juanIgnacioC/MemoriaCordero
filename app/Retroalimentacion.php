@@ -13,10 +13,21 @@ class Retroalimentacion extends Model
         'puntuacion',
         'comentario',
         'idInstanciaPlaniAnio',
-        'idUsuario'
+        'idAlumno',
+        'idDocente'
     ];
     protected $table = "Retroalimentacion";
     public $timestamps = false;
+
+    public static function claseRetroalimentada($idInstanciaClase, $idAlumno)
+    {   
+        $instancia = Retroalimentacion::where('Retroalimentacion.idInstanciaClase', $idInstanciaClase)
+        ->where('Retroalimentacion.idAlumno', $idAlumno)
+        ->first();
+
+        return $instancia;
+
+    }
 
     public static function obtenerAlumnos($idEstablecimiento, $idCurso, $indice, $anio)
     {
