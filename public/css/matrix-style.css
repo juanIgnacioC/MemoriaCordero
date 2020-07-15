@@ -217,6 +217,15 @@ hr{ border-top-color:#dadada;}
 	margin-left: 20px;
 	position: relative;
 }
+#content-header h2 {
+	color: #555555;
+	font-size: 20px;
+	font-weight: normal;
+	float: none;
+	text-shadow: 0 1px 0 #ffffff;
+	margin-left: 20px;
+	position: relative;
+}
 #content-header .btn-group {
 	float: right;
 	right: 20px;
@@ -224,6 +233,9 @@ hr{ border-top-color:#dadada;}
 }
 #content-header h1, #content-header .btn-group {
 	margin-top: 20px;
+}
+#content-header h2, #content-header .btn-group {
+	margin-top: 10px;
 }
 #content-header .btn-group .btn {
 	padding: 11px 14px 9px;

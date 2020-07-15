@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 
 use App\Establecimiento;
+use App\Curso;
 use App\InstanciaEstablecimiento;
+use App\InstanciaEstablecimientoAlumno;
 
 
 class AdministradorController extends Controller
@@ -109,5 +111,60 @@ class AdministradorController extends Controller
         return redirect(route('admin.users'));
 
     }    
+
+    public function establecimientosAlumno(Request $request)
+    {
+        $request->validate([
+            'idUsuario' =>'required'
+        ]);
+        $idUsuario = $request->get('idUsuario');
+
+        $user = User::where('id', $idUsuario)
+        ->first();
+
+        $establecimientos = Establecimiento::all();
+        $cursos = Curso::all();
+
+        $instEstablecimientos = InstanciaEstablecimientoAlumno::obtenerInstancias($idUsuario);
+
+        $fecha = date('Y-m-d');
+
+        return view('admin.establecimientosAlumno', ['establecimientos'=> $establecimientos, 'cursos'=> $cursos, 'user'=> $user, 'instEstablecimientos'=> $instEstablecimientos,'fecha'=> $fecha]);
+    }
+
+    public function createInstanciaEstablecimientoAlumno(Request $request)
+    {
+        $request->validate([
+            'idAlumno'=>'required',
+            'establecimiento'=>'required',
+            'fecha'=>'required'
+        ]);
+
+        //Datos crear InstanciaPlaniAño
+        $idAlumno = $request->get('idAlumno');
+        $establecimiento = $request->get('establecimiento');
+        $fecha = $request->get('fecha');
+        $curso = $request->get('curso');
+        $indice = $request->get('indice');
+        $type = $request->get('type');
+
+
+        $InstanciaEstablecimientoAlumno = new InstanciaEstablecimientoAlumno([
+            'idAlumno' => $idAlumno,
+            'idEstablecimiento' => $establecimiento,
+            'fecha' => $fecha,
+            'curso' => $curso,
+            'indice' => $indice,
+            'type' => $type,
+        ]);
+        //dd($InstanciaEstablecimientoAlumno);
+        $InstanciaEstablecimientoAlumno->save();
+
+
+        //return view('forms.planifications');
+        //return redirect(route('forms.validation', ['instanciaPlani', $instanciaPlani]));
+        return redirect(route('admin.users'));
+
+    } 
 
 }

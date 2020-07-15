@@ -13,7 +13,7 @@
         <li class="bg_lb"> <a href="{{ route('dashboard.index') }}"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> Mi Tablero </a> </li>
         <li class="bg_lo span3"> <a href="planifications"> <i class="icon-th-list"></i> Planificaciones</a> </li>
         <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i> Establecimientos</a> </li>
-        <li class="bg_lo"> <a href="{{ route('tables.index') }}"> <i class="icon-th"></i> Alumnos</a> </li>
+        <li class="bg_lo"> <a href="{{ route('alumno.index') }}"> <i class="icon-user"></i> Alumnos</a> </li>
         <li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i> Full width</a> </li>
         <li class="bg_lg span3"> <a href="{{ route('charts.index') }}"> <i class="icon-signal"></i> Indicadores</a> </li>
         <li class="bg_lb"> <a href="{{ route('addons.calendar') }}"> <i class="icon-calendar"></i>Calendario</a> </li>
@@ -166,9 +166,9 @@
           </div>
           <div class="widget-content">
             <div class="panel-left">
-              <div id="fullcalendar"></div>
+              <div id="fullcalendarDash"></div>
             </div>
-            <div id="external-events" class="panel-right">
+            <div id="external-events-Dash" class="panel-right">
               <div class="panel-title">
                 <h5>Drag Events to the calander</h5>
               </div>

@@ -91,4 +91,14 @@ class User extends Authenticatable
 
     }
 
+    public static function privilegioAlumnoExclusivo($type)
+    {   
+        if($type == '4'){
+            return true;
+        }
+        
+        return false;
+
+    }
+
 }

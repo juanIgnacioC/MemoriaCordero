@@ -53,6 +53,9 @@ Route::post('/guardarCambios', 'AdministradorController@guardarCambios')->name('
 Route::get('/establecimientos', 'AdministradorController@establecimientos')->name('admin.establecimientos');
 Route::post('/establecimientos/createInstanciaEstablecimiento', 'AdministradorController@createInstanciaEstablecimiento')->name('admin.createInstanciaEstablecimiento');
 
+Route::get('/establecimientosAlumno', 'AdministradorController@establecimientosAlumno')->name('admin.establecimientosAlumno');
+Route::post('/establecimientosAlumno/createInstanciaEstablecimientoAlumno', 'AdministradorController@createInstanciaEstablecimientoAlumno')->name('admin.createInstanciaEstablecimientoAlumno');
+
 Route::get('/solicitar', 'DirectivoController@solicitar')->name('directivo.solicitar');
 Route::post('/solicitarCorreccion', 'DirectivoController@solicitarCorreccion')->name('directivo.solicitarCorreccion');
 
@@ -62,6 +65,16 @@ Route::get('/revisionDirectivo', 'DirectivoController@revisionDirectivo')->name(
 Route::post('/solicitarRevision', 'DirectivoController@solicitarRevision')->name('directivo.solicitarRevision');
 
 Route::get('/directivo', 'DirectivoController@index')->name('directivo.index');
+
+
+Route::get('/clases', 'AlumnoController@clases')->name('alumno.clases');
+Route::post('/retroalimentar', 'AlumnoController@retroalimentar')->name('alumno.retroalimentar');
+
+Route::get('/retroalimentaciones', 'AlumnoController@retroalimentaciones')->name('alumno.retroalimentaciones');
+
+Route::get('/alumno', 'AlumnoController@index')->name('alumno.index');
+Route::get('/planificationAlumno', 'AlumnoController@planificationAlumno')->name('alumno.planificationAlumno');
+Route::post('/planificationAlumno/createAsignacionAlumnoCurso', 'AlumnoController@createAsignacionAlumnoCurso')->name('alumno.createAsignacionAlumnoCurso');
 
 
 
@@ -77,6 +90,7 @@ Route::post('/createClase', 'AddonsController@createClase')->name('addons.create
 Route::post('/updateClase', 'AddonsController@updateClase')->name('addons.updateClase');
 Route::post('/updateClaseTime', 'AddonsController@updateClaseTime')->name('addons.updateClaseTime');
 Route::post('/updateClaseDetail', 'AddonsController@updateClaseDetail')->name('addons.updateClaseDetail');
+Route::post('/deleteClase', 'AddonsController@deleteClase')->name('addons.deleteClase');
 
 Route::get('/addons-invoice', 'AddonsController@invoice')->name('addons.invoice');
 Route::get('/addons-chat', 'AddonsController@chat')->name('addons.chat');
