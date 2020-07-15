@@ -11,12 +11,16 @@
     <input type="hidden" id="token" value="{{ csrf_token() }}" readonly>
 
     <div id="listado">
-      <div class="row-fluid">
-        <div class="span12">
-          <div class="widget-box">
-            <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-              <h5>Clases</h5>
-            </div>
+
+        <?$i=0;foreach($dataClases as $unidad):?>
+        <div class="widget-box collapsible">
+
+          <div class="widget-title"> <a href="#collapse{{$unidad['unidad']['NuevoNumero']}}" data-toggle="collapse"> <span class="icon"><i class="icon-book"></i></span>
+            <h5>Unidad {{$unidad['unidad']['NuevoNumero']}}: {{$unidad['unidad']['NuevoNombre']}}</h5>
+            </a> <div name="agregarHabilidad" id="agregarHabilidad" class="pull-right" style="vertical-align: middle; margin-right: 5px;"> <a class="tip" href="#" title="Agregar">Agregar<i class="icon-plus-sign"></i></a> </div>
+          </div>
+
+          <div class="collapse" id="collapse{{$unidad['unidad']['NuevoNumero']}}">
             <div class="widget-content nopadding">
               <table class="table table-bordered data-table">
                 <thead>
@@ -29,7 +33,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <?$i=0;foreach($dataClases as $unidad):?>
+                  <vdiv class="row-fluid">
+        <div class="span12">
                     <div>
                       <input type="hidden" id="unidad<?=$i?>" value="{{$unidad}}" readonly>
                     </div>
@@ -57,13 +62,15 @@
 
                     </tr>
                     <?$j++;endforeach;?>
-                  <?$i++;endforeach;?>
+
+                  </div>
+                </div>
                 </tbody>
               </table>
             </div>
           </div>
-        </div>
-      </div>
+          </div>
+          <?$i++;endforeach;?>
     </div>
 
       <div id="myModal1" style="display: none;" class="modal" role="dialog">

@@ -250,7 +250,9 @@ class FormsController extends Controller
         ->first();
 
         //dd($instanciaPlani->idRepositorio);
-        $unidades = Unidad::where('idRepositorio', $instanciaPlani->idRepositorio)->get();
+        $unidades = Unidad::where('idRepositorio', $instanciaPlani->idRepositorio)
+        ->orderBy('numero', 'asc')
+        ->get();
 
         //dump($instanciaPlani);
         //dump($unidades);

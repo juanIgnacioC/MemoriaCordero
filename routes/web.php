@@ -90,6 +90,7 @@ Route::post('/createClase', 'AddonsController@createClase')->name('addons.create
 Route::post('/updateClase', 'AddonsController@updateClase')->name('addons.updateClase');
 Route::post('/updateClaseTime', 'AddonsController@updateClaseTime')->name('addons.updateClaseTime');
 Route::post('/updateClaseDetail', 'AddonsController@updateClaseDetail')->name('addons.updateClaseDetail');
+Route::post('/deleteClase', 'AddonsController@deleteClase')->name('addons.deleteClase');
 
 Route::get('/addons-invoice', 'AddonsController@invoice')->name('addons.invoice');
 Route::get('/addons-chat', 'AddonsController@chat')->name('addons.chat');

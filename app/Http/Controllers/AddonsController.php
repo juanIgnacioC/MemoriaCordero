@@ -240,6 +240,20 @@ class AddonsController extends Controller
         $claseAntigua->save();
     }
 
+    public function deleteClase(Request $request)
+    {
+        $request->validate([
+            'idInstanciaClase'=>'required'
+        ]);
+
+        //actualizar Clase
+        $idInstanciaClase = $request->get('idInstanciaClase');
+        $clase = InstanciaClase::where('id', $idInstanciaClase)
+        ->first();
+
+        $clase->delete();
+    }
+
     public function invoice()
     {
     	return view('addons.invoice');

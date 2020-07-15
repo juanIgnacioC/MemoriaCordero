@@ -68,9 +68,10 @@ maruti = {
             eventLimit: true, // allow "more" link when too many events
             selectable: true,
 
+            //googleCalendarApiKey: 'AIzaSyAJmdGvoVv9ZMZq5N_-3yQZmobkeG0Dzus',
             //Leer BD
             //events:
-
+            //events: 'es.cl#holiday@group.v.calendar.google.com',
             events: clasesJson,
 
             //Al soltar un evento desde la lista
@@ -346,6 +347,9 @@ maruti = {
 			  //modal click clase
 			  eventClick: function(calEvent, jsEvent, view) {
 			    console.log(calEvent);
+			    //resetear click listener para guardar solo el ultimo clickeado
+			    $("#myModalEvent button.btn-success").off('click');
+			    $("#myModalEvent button.btn-danger").off('click');
 			    //console.log(jsEvent);
 			    //console.log(view);
 
@@ -358,6 +362,7 @@ maruti = {
 
 			    $("#myModalEvent").modal('show');
 
+			    //Guardar button
 			    $("#myModalEvent button.btn-success").on('click', function() {
 			    	console.log("Guardar datos clase");
 			    	console.log(calEvent.title);
@@ -397,6 +402,41 @@ maruti = {
 	                //Ocultar modal y remover eventHandler
 	                $("#myModalEvent").modal('hide');
 	                $("#myModalEvent button.btn-success").off('click');
+                	return("0");
+            	});
+
+			    //Eliminar button
+            	$("#myModalEvent button.btn-danger").on('click', function() {
+			    	console.log("Eliminar datos clase");
+			    	console.log(calEvent);
+	                //calEvent.title = "holi";
+
+					$('#fullcalendar').fullCalendar('removeEvents', calEvent.id);
+
+
+	                //Delete clase BD
+	                var token = $("#token").val();
+					var idInstanciaClase = calEvent.id;
+
+				    var base_url = "<? echo base_url()?>";
+				    $.post(
+				      "deleteClase",
+				      {
+				      	idInstanciaClase: idInstanciaClase,
+				        _token:token
+				      },function(){
+				        //$("#myModal1").modal('hide');
+				        //$("#listado").hide('slow');
+				        //cambiar cargar datos
+				        /////cargarDatos();
+				        //$("#listado").show('slow');
+				      }
+				    );
+
+	                //Ocultar modal y remover eventHandler
+	                $("#myModalEvent").modal('hide');
+	                $("#myModalEvent button.btn-success").off('click');
+	                $("#myModalEvent button.btn-danger").off('click');
                 	return("0");
             	});
 

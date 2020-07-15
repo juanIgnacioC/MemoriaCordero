@@ -19,6 +19,7 @@ $('#editable-select').editableSelect({
         );
     });*/
 
+//filtrar objetivo general al seleccionar unidad
 $('#NuevoNombre')
     .editableSelect({ filter: false, effects: 'slide' })
     .on('select.editable-select', function (e, li) {

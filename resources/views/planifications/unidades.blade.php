@@ -9,7 +9,7 @@
     
     <hr>
 
-    <a href="form-validation?asignatura={{$asignatura}}&curso={{$curso}}&idInstanciaPlaniAño={{$instanciaPlani->id}}" class="btn btn-primary" class="btn btn-success">
+    <a href="form-validation?asignatura={{$asignatura}}&curso={{$curso}}&idInstanciaPlaniAño={{$instanciaPlani->id}}" class="btn btn-success">
       <span class="glyphicon glyphicon-plus"></span> Agregar Unidad
     </a>
 

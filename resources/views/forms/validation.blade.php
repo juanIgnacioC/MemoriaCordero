@@ -10,7 +10,7 @@
     <div class="row-fluid">
       <div class="span12">
         <div class="widget-box">
-          <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+          <div class="widget-title"> <span class="icon"> <i class="icon-book"></i> </span>
             <h5>Nueva Unidad: {{$curso}} {{$asignatura}} {{$instanciaPlani->anio}} </h5>
           </div>
           <div class="widget-content nopadding">
@@ -47,7 +47,7 @@
                     <option value={{$unidades[$i]->id}}>{{$unidades[$i]->nombre}}</option>
                   @endfor
                 </select>
-                <code id="last-selected"></code>
+                <code id="last-selectedEx(agregar usab. N°?)"></code>
               </div>
             </div>
 
@@ -71,7 +71,7 @@
               </div>
 
               <div class="control-group">
-                <label class="control-label">Fecha termino (dd-mm)</label>
+                <label class="control-label">Fecha término (dd-mm)</label>
                 <div class="controls">
                   <input type="text" name="fechaTermino" data-date="30-03-2020" data-date-format="dd-mm-yyyy" value="30-03-2020" class="datepicker span11">
                   <span class="help-block">Fecha con formato  (dd-mm-yy)</span> </div>

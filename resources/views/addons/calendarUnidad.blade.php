@@ -13,8 +13,8 @@
         <div class="widget-box widget-calendar">
           <div class="widget-title"> <span class="icon"><i class="icon-calendar"></i></span>
             <h5>Calendar</h5>
+            <div class="buttons"> <a id="add-event" href="objectives?asignatura={{$asignatura}}&curso={{$curso}}&id={{$instanciaUnidad->id}}" class="btn btn-inverse btn-mini"><i class="icon-plus icon-white"></i> Agregar Objetivo</a>
 
-            <div class="buttons"> <a id="add-event" data-toggle="modal" href="#modal-add-event" class="btn btn-inverse btn-mini"><i class="icon-plus icon-white"></i> Agregar Objetivo</a>
               <div class="modal hide" id="modal-add-event">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">×</button>
@@ -118,7 +118,7 @@
 
           </div>
           <div class="modal-footer">
-            <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            <button class="btn" data-dismiss="modal">Cancelar</button>
             <button class="btn btn-success" onclick="guardarCambiosObjetivos()">Guardar</button>
           </div>
         </div>
@@ -131,9 +131,8 @@
           <div class="modal-header">
             <h5>Clase</h5>
           </div>
-          <div class="modal-body">
-            
 
+          <div class="modal-body">
           <div class="form-group">
             @csrf
             <label for="contenidosEdit" class="col-lg-2 control-label">Contenidos clase</label>
@@ -174,7 +173,10 @@
 
           </div>
           <div class="modal-footer">
-            <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            <div class="pull-left">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
+            </div>
+            <button class="btn" data-dismiss="modal">Cancelar</button>
             <button class="btn btn-success">Guardar</button>
           </div>
         </div>
