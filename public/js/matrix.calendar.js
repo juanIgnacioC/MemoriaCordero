@@ -1,23 +1,85 @@
 
 $(document).ready(function(){
-	
-	maruti.init();
-	
-	$('#add-event-submit').click(function(){
-		maruti.add_event();
+	var promesa1 =	$.ajax({
+	        url: 'https://www.googleapis.com/calendar/v3/calendars/es.cl%23holiday%40group.v.calendar.google.com/events?key=AIzaSyAJmdGvoVv9ZMZq5N_-3yQZmobkeG0Dzus',
+	        type: 'GET',
+	        datatype: 'json',
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }, success: function (response, callback) {
+	            /*var feriados = [];
+	            console.log("query");
+	            /*console.log($(response['items']));
+	            console.log($(response['items']['0'])  );
+
+
+	            $(response['items']).each(function (i, val) {
+	        	//console.log(i + val['start']['date']);
+	            feriados.push({
+	                id: val['id'],
+	                title: val['summary'],
+	                start: val['start']['date'],
+	                end: val['end']['date']
+	            });
+	        });
+	            console.log("envets");
+	            var json = JSON.stringify(feriados);
+	            $('#feriados').val(json).trigger('change');
+	            console.log(feriados);
+	            return feriados;*/
+	    }
 	});
+
+	console.log("waiting");
+	$.when (promesa1).done(function (response) {
+	            var feriados = [];
+	            console.log("query");
+	            /*console.log($(response['items']));
+	            console.log($(response['items']['0'])  );*/
+
+
+	            $(response['items']).each(function (i, val) {
+	        	//console.log(i + val['start']['date']);
+	            feriados.push({
+	                id: val['id'],
+	                title: val['summary'],
+	                start: val['start']['date'],
+	                allDay: true,
+	                overlap: false
+	            });
+	        });
+	            console.log("envets!!!!!");
+	            var json = JSON.stringify(feriados);
+	            $('#feriados').val(json).trigger('change');
+	            console.log(feriados);
+
+
+
+	            maruti.init(feriados);
 	
-	$('#event-name').keypress(function(e){
-		if(e.which == 13) {	
-			maruti.add_event();
-		}
-	});	
+				$('#add-event-submit').click(function(){
+					maruti.add_event();
+				});
+				
+				$('#event-name').keypress(function(e){
+					if(e.which == 13) {	
+						maruti.add_event();
+					}
+				});
+
+	            return feriados;
+	    })
+	//var fds = await iniciarCalendario();
+	//console.log(fds);
+	console.log("go");
+
+		
 });
 
 maruti = {
 	
 	// === Initialize the fullCalendar and external draggable events === //
-	init: function() {	
+	init: function(feriados) {	
 		// Prepare the dates
 		var date = new Date();
 
@@ -46,7 +108,7 @@ maruti = {
 		console.log("clasesBD");
 		//console.log(clasesBD);
 		console.log(clasesJson);
-		var events = [];
+		//var events = [];
       	/*events.push({
 	        title: $(this).attr('title'),
 	        start: $(this).attr('start') // will be parsed
@@ -72,7 +134,26 @@ maruti = {
             //Leer BD
             //events:
             //events: 'es.cl#holiday@group.v.calendar.google.com',
-            events: clasesJson,
+
+            eventSources: [
+		    {
+	            //Eventos clases BD
+		        events: clasesJson
+		    },
+
+		    {
+		        events: feriados,
+		        color: 'green',
+		        overlap: false,
+		        editable: false,
+		        startEditable: false,
+		        resourceEditable: false,
+		        durationEditable: false,
+		        eventOverlap: false,
+		    }
+
+			],
+            //events: clasesJson,
 
             //Al soltar un evento desde la lista
 			drop: function(date, allDay) { 
@@ -197,8 +278,8 @@ maruti = {
 				//Actualizar BD
 			    console.log("drop drag");
 			    console.log(event);
-			    //console.log(delta);
-			    //console.log(revertFunc);
+			    console.log(delta);
+			    console.log(revertFunc);
 
 				var token = $("#token").val();
 
@@ -347,101 +428,107 @@ maruti = {
 			  //modal click clase
 			  eventClick: function(calEvent, jsEvent, view) {
 			    console.log(calEvent);
-			    //resetear click listener para guardar solo el ultimo clickeado
-			    $("#myModalEvent button.btn-success").off('click');
-			    $("#myModalEvent button.btn-danger").off('click');
-			    //console.log(jsEvent);
-			    //console.log(view);
+			    var color = calEvent['source']['color'];
 
-			    $("#idEdit").val(calEvent.id);
-			    $("#contenidosEdit").val(calEvent.contenidos);
-			    $("#recursosEdit").val(calEvent.recursos);
-			    $("#inicioEdit").val(calEvent.inicio);
-			    $("#desarrolloEdit").val(calEvent.desarrollo);
-			    $("#cierreEdit").val(calEvent.cierre);
+			    //si no corresponde a un feriado (color verde)
+			    if(color != "green"){
 
-			    $("#myModalEvent").modal('show');
+				    //resetear click listener para guardar solo el ultimo clickeado
+				    $("#myModalEvent button.btn-success").off('click');
+				    $("#myModalEvent button.btn-danger").off('click');
+				    //console.log(jsEvent);
+				    //console.log(view);
 
-			    //Guardar button
-			    $("#myModalEvent button.btn-success").on('click', function() {
-			    	console.log("Guardar datos clase");
-			    	console.log(calEvent.title);
-	                //calEvent.title = "holi";
-	                //Actualizar datos evento
-	                calEvent.contenidos = $("#contenidosEdit").val();
-	                calEvent.recursos = $("#recursosEdit").val();
-	                calEvent.inicio = $("#inicioEdit").val();
-	                calEvent.desarrollo = $("#desarrolloEdit").val();
-	                calEvent.cierre = $("#cierreEdit").val();
+				    $("#idEdit").val(calEvent.id);
+				    $("#contenidosEdit").val(calEvent.contenidos);
+				    $("#recursosEdit").val(calEvent.recursos);
+				    $("#inicioEdit").val(calEvent.inicio);
+				    $("#desarrolloEdit").val(calEvent.desarrollo);
+				    $("#cierreEdit").val(calEvent.cierre);
 
-	                $('#fullcalendar').fullCalendar('updateEvent', calEvent);
+				    $("#myModalEvent").modal('show');
 
-	                //Actualizar clase detail BD
-	                var token = $("#token").val();
-					var idInstanciaClase = calEvent.id;
+				    //Guardar button
+				    $("#myModalEvent button.btn-success").on('click', function() {
+				    	console.log("Guardar datos clase");
+				    	console.log(calEvent.title);
+		                //calEvent.title = "holi";
+		                //Actualizar datos evento
+		                calEvent.contenidos = $("#contenidosEdit").val();
+		                calEvent.recursos = $("#recursosEdit").val();
+		                calEvent.inicio = $("#inicioEdit").val();
+		                calEvent.desarrollo = $("#desarrolloEdit").val();
+		                calEvent.cierre = $("#cierreEdit").val();
 
-				    var base_url = "<? echo base_url()?>";
-				    $.post(
-				      "updateClaseDetail",
-				      {
-				      	idInstanciaClase: idInstanciaClase,
-				        contenidos: calEvent.contenidos,
-				        recursos: calEvent.recursos,
-				        inicio: calEvent.inicio,
-				        desarrollo: calEvent.desarrollo,
-				        cierre: calEvent.cierre,
-				        _token:token
-				      },function(){
-				        //$("#myModal1").modal('hide');
-				        //$("#listado").hide('slow');
-				        //cambiar cargar datos
-				        /////cargarDatos();
-				        //$("#listado").show('slow');
-				      }
-				    );
-	                //Ocultar modal y remover eventHandler
-	                $("#myModalEvent").modal('hide');
-	                $("#myModalEvent button.btn-success").off('click');
-                	return("0");
-            	});
+		                $('#fullcalendar').fullCalendar('updateEvent', calEvent);
 
-			    //Eliminar button
-            	$("#myModalEvent button.btn-danger").on('click', function() {
-			    	console.log("Eliminar datos clase");
-			    	console.log(calEvent);
-	                //calEvent.title = "holi";
+		                //Actualizar clase detail BD
+		                var token = $("#token").val();
+						var idInstanciaClase = calEvent.id;
 
-					$('#fullcalendar').fullCalendar('removeEvents', calEvent.id);
+					    var base_url = "<? echo base_url()?>";
+					    $.post(
+					      "updateClaseDetail",
+					      {
+					      	idInstanciaClase: idInstanciaClase,
+					        contenidos: calEvent.contenidos,
+					        recursos: calEvent.recursos,
+					        inicio: calEvent.inicio,
+					        desarrollo: calEvent.desarrollo,
+					        cierre: calEvent.cierre,
+					        _token:token
+					      },function(){
+					        //$("#myModal1").modal('hide');
+					        //$("#listado").hide('slow');
+					        //cambiar cargar datos
+					        /////cargarDatos();
+					        //$("#listado").show('slow');
+					      }
+					    );
+		                //Ocultar modal y remover eventHandler
+		                $("#myModalEvent").modal('hide');
+		                $("#myModalEvent button.btn-success").off('click');
+	                	return("0");
+	            	});
 
+				    //Eliminar button
+	            	$("#myModalEvent button.btn-danger").on('click', function() {
+				    	console.log("Eliminar datos clase");
+				    	console.log(calEvent);
+		                //calEvent.title = "holi";
 
-	                //Delete clase BD
-	                var token = $("#token").val();
-					var idInstanciaClase = calEvent.id;
-
-				    var base_url = "<? echo base_url()?>";
-				    $.post(
-				      "deleteClase",
-				      {
-				      	idInstanciaClase: idInstanciaClase,
-				        _token:token
-				      },function(){
-				        //$("#myModal1").modal('hide');
-				        //$("#listado").hide('slow');
-				        //cambiar cargar datos
-				        /////cargarDatos();
-				        //$("#listado").show('slow');
-				      }
-				    );
-
-	                //Ocultar modal y remover eventHandler
-	                $("#myModalEvent").modal('hide');
-	                $("#myModalEvent button.btn-success").off('click');
-	                $("#myModalEvent button.btn-danger").off('click');
-                	return("0");
-            	});
+						$('#fullcalendar').fullCalendar('removeEvents', calEvent.id);
 
 
-			   }
+		                //Delete clase BD
+		                var token = $("#token").val();
+						var idInstanciaClase = calEvent.id;
+
+					    var base_url = "<? echo base_url()?>";
+					    $.post(
+					      "deleteClase",
+					      {
+					      	idInstanciaClase: idInstanciaClase,
+					        _token:token
+					      },function(){
+					        //$("#myModal1").modal('hide');
+					        //$("#listado").hide('slow');
+					        //cambiar cargar datos
+					        /////cargarDatos();
+					        //$("#listado").show('slow');
+					      }
+					    );
+
+		                //Ocultar modal y remover eventHandler
+		                $("#myModalEvent").modal('hide');
+		                $("#myModalEvent button.btn-success").off('click');
+		                $("#myModalEvent button.btn-danger").off('click');
+	                	return("0");
+	            	});
+
+
+				   }
+			}
 		});
 		this.external_events();		
 	},
