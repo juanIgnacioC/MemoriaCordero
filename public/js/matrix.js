@@ -92,7 +92,7 @@ $(document).ready(function(){
 	
 	// === Search input typeahead === //
 	$('#search input[type=text]').typeahead({
-		source: ['Dashboard','Form elements','Common Elements','Validation','Wizard','Buttons','Icons','Interface elements','Support','Calendar','Gallery','Reports','Charts','Graphs','Widgets'],
+		source: ['Planificaciones', 'Correcciones', 'Alumnos', 'Indicadores', 'Calendario'],
 		items: 4
 	});
 	

@@ -1,16 +1,14 @@
-@extends('layouts.mainDocente')
+@extends('layouts.main')
 
 @section('content')
 <div id="content">
-  <div id="content-header">
-    <div id="breadcrumb"> <a href="{{ route('dashboard.index') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{ route('forms.planifications') }}" class="tip-bottom">Planificaciones</a> <a href="planification?asignatura={{$asignatura}}&curso={{$curso}}&idInstanciaPlaniAño={{$instanciaUnidad->idInstanciaPlaniAño}}" class="current">Planificación</a>  <a href="#" class="current">Unidad</a></div>
-
-    <h1><strong>Unidad {{$instanciaUnidad->NuevoNumero}}</strong>:  {{$instanciaUnidad->NuevoNombre}}. {{$curso}} - {{$asignatura}}
-    </h1>
-    <h2><strong>Objetivo general</strong>: {{$instanciaUnidad->NuevoObjetivoGeneral}}</h2>
-
-  </div>
-
+<div id="content-header">
+  <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{ route('forms.planifications') }}" class="tip-bottom">Planificaciones</a> <a href="planification?asignatura={{$asignatura}}&curso={{$curso}}&idInstanciaPlaniAño={{$instanciaUnidad->idInstanciaPlaniAño}}" class="current">Planificación</a>  <a href="#" class="current">Unidad</a></div>
+  <h1>Unidad {{$instanciaUnidad->NuevoNumero}}:  {{$instanciaUnidad->NuevoNombre}}. {{$curso}} {{$asignatura}}
+  </h1>
+  
+  <h1><strong>Objetivo general</strong>: {{$instanciaUnidad->NuevoObjetivoGeneral}}</h1>
+</div>
     <a href="solicitar?asignatura={{$asignatura}}&curso={{$curso}}&idInstanciaUnidad={{$instanciaUnidad->id}}" class="btn btn-success" class="btn btn-success">
       <span class="glyphicon glyphicon-plus"></span> Solicitar corrección
     </a>
@@ -113,9 +111,6 @@
     <a href="objectives?asignatura={{$asignatura}}&curso={{$curso}}&id={{$instanciaUnidad->id}}" class="btn btn-primary" class="btn btn-success">
       <span class="glyphicon glyphicon-plus"></span> Agregar Objetivo
     </a>
-    <a href="calendarUnidad?asignatura={{$asignatura}}&curso={{$curso}}&id={{$instanciaUnidad->id}}" class="btn btn-success" class="btn btn-success">
-      <span class="glyphicon glyphicon-plus"></span> Planificación clases
-    </a>
     <div id="listado2">
     <div class="row-fluid">
       <div class="span12">
@@ -177,7 +172,7 @@
                     </td>
                     
 
-                    <td><a href="#" class="btn btn-warning">Editar
+                    <td><a href="contents?asignatura={{$asignatura}}&curso={{$curso}}&id=<?=$row['id']?>" class="btn btn-primary">Editar
                     </a></td>
                     <td><button id="eliminar<?=$i?>" name="eliminar<?=$i?>" class="btn btn-danger" >Eliminar</button></td>
                   </tr>

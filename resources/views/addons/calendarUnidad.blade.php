@@ -1,9 +1,9 @@
-@extends('layouts.main')
+@extends('layouts.mainDocente')
 
 @section('content')
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{ route('forms.planifications') }}" class="tip-bottom">Planificaciones</a> <a href="planification?asignatura={{$asignatura}}&curso={{$curso}}&idInstanciaPlaniAño={{$instanciaUnidad->idInstanciaPlaniAño}}" class="current">Planificación</a>  <a href="contents?asignatura={{$asignatura}}&curso={{$curso}}&id={{$instanciaUnidad->id}}" class="current">Unidad</a> <a href="#" class="current">Calendario</a> </div>
+    <div id="breadcrumb"> <a href="{{ route('dashboard.index') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{ route('forms.planifications') }}" class="tip-bottom">Planificaciones</a> <a href="planification?asignatura={{$asignatura}}&curso={{$curso}}&idInstanciaPlaniAño={{$instanciaUnidad->idInstanciaPlaniAño}}" class="current">Planificación</a>  <a href="contents?asignatura={{$asignatura}}&curso={{$curso}}&id={{$instanciaUnidad->id}}" class="current">Unidad</a> <a href="#" class="current">Calendario</a> </div>
     <h1>Calendario {{$curso}} {{$asignatura}}</h1>
   </div>
   <div class="container-fluid">
@@ -57,6 +57,7 @@
 
             </div>
               <input type="hidden" id="token" value="{{csrf_token()}}" readonly>
+              <input type="hidden" id="feriados" name="feriados" value="">
               @isset($clases)
                 <input type="hidden" id="clases" value="{{$clases}}" readonly>
               @endisset
@@ -189,8 +190,9 @@
 <script src="js/jquery.min.js"></script> 
 <script src="js/jquery.ui.custom.js"></script> 
 <script src="js/bootstrap.min.js"></script> 
-<script src="js/fullcalendar2.min.js"></script> 
+<script src="js/fullcalendar.min.js"></script> 
 <script src="js/matrix.js"></script> 
 <script src="js/matrix.calendar.js"></script>
 <script src="js/planificar.js"></script>
+<script src="js/feriados.js"></script>
 @endsection
