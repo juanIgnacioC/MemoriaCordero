@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ens">
 <head>
 <title>Class Plan</title><meta charset="UTF-8" />
 <meta charset="UTF-8" />
