@@ -61,7 +61,7 @@
 </head>
 <body>
 @include('layouts.header')
-@include('layouts.sidebar')
+@include('layouts.sidebarDocente')
 @yield('content')
 @include('layouts.footer')
 </body>

@@ -19,12 +19,19 @@ class DashboardController extends Controller
     {
     	$user = Auth::user();
 
-        if(!$user->privilegioAlumnoExclusivo($user['type']) ) {
-    		return view('dashboard.index');
+        if($user->privilegioDocenteExclusivo($user['type']) ){
+    		return view('dashboard.docente');
     	}
-    	else{
-    		return view('dashboard.alumno');
-    	}
+        elseif($user->privilegioDirectivoExclusivo($user['type']) ){
+            return view('dashboard.directivo');
+        }
+    	elseif ($user->privilegioAlumnoExclusivo($user['type']) ){
+            return view('dashboard.alumno');
+        }
+        elseif ($user->privilegioAdministrador($user['type']) ){
+            return view('dashboard.index');
+        }
+
     	return view('errors.privilegios');
     }
 }
