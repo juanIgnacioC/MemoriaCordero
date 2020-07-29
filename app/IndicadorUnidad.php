@@ -110,8 +110,10 @@ class IndicadorUnidad extends Model
 		}
 
 		//dump($usados);
-
-		$puntuacion = $usados / $total * 5;
+		if($total != 0)
+			$puntuacion = $usados / $total * 5;
+		else
+			$puntuacion = 0;
 		return($puntuacion);
 		//dd($puntuacion);
 
