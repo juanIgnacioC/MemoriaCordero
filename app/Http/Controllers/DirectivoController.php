@@ -26,7 +26,8 @@ class DirectivoController extends Controller
     public function index()
     {
         $user = Auth::user();
-
+        $directivo = "";
+        
         if($user->privilegioDocenteExclusivo($user['type']) ) {
             $correcciones = Correccion::docente($user['id']);
             //dd($correcciones);
@@ -48,14 +49,16 @@ class DirectivoController extends Controller
 
             $correccionesRealizadas = Correccion::docenteRealizadas($user['id']);
 
-            $obj = json_decode($correccionesRealizadas);
-            //dd($obj[0]->idInstanciaUnidad);
-            $correcciones2 = $obj[0];
+            if(!$correccionesRealizadas->isEmpty()){
+                $obj = json_decode($correccionesRealizadas);
+                //dd($obj[0]->idInstanciaUnidad);
+                $correcciones2 = $obj[0];
 
-            $idDirectivo = $correcciones2->idDirectivo;
-            //dd($directivo);
-            $directivo = User::where('id', $idDirectivo)
-            ->first();
+                $idDirectivo = $correcciones2->idDirectivo;
+                //dd($directivo);
+                $directivo = User::where('id', $idDirectivo)
+                ->first();
+            }
 
             return view('directivo.docente', ['correcciones'=> $correcciones, 'correccionesRealizadas'=> $correccionesRealizadas, 'directivo'=> $directivo]);
             
