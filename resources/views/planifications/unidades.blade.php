@@ -26,11 +26,11 @@
             <table class="table table-bordered data-table">
               <thead>
                 <tr>
-                  <th>Numero</th>
+                  <th>Número</th>
                   <th>Nombre</th>
                   <th>Periodo</th>
                   <th>Fecha Inicio</th>
-                  <th>Fecha Termino</th>
+                  <th>Fecha Término</th>
                   <th></th>
                   <th></th>
                 </tr>

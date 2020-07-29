@@ -31,6 +31,9 @@ use App\InstanciaIndicador;
 use App\InstanciaActividad;
 use App\InstanciaEvaluacion;
 
+use App\IndicadorUnidad;
+use App\IndicadorClase;
+
 class PlanificationsController extends Controller
 {
     public function __construct()
@@ -100,9 +103,16 @@ class PlanificationsController extends Controller
 
         //instancias dataPlaniUnidad
         $dataPlaniUnidad = InstanciaUnidadObjetivo::dataPlaniUnidad($instanciaUnidad->id);
-        #dump($dataPlaniUnidad);
+        //dump($dataPlaniUnidad);
 
-        return view('planifications.contents', ['curso'=> $curso, 'asignatura'=> $asignatura, 'instanciaUnidad'=> $instanciaUnidad, 'habilidades'=> $habilidades, 'actitudes'=> $actitudes, 'dataPlaniUnidad'=> $dataPlaniUnidad]);
+
+        //calcular indicador prioridades (dataPlaniUnidad)
+        //$indicadorPrioridad = IndicadorUnidad::indicadorUnidadTipo($instanciaUnidad->id, 'prioridad');
+
+        //Cambiar a 0 para optimizar
+        $indicadorPrioridad = IndicadorUnidad::moderarIndicadorUnidad($instanciaUnidad->id, $instanciaUnidad->idUnidadFK, 'prioridad', $dataPlaniUnidad, 1);
+
+        return view('planifications.contents', ['curso'=> $curso, 'asignatura'=> $asignatura, 'instanciaUnidad'=> $instanciaUnidad, 'habilidades'=> $habilidades, 'actitudes'=> $actitudes, 'dataPlaniUnidad'=> $dataPlaniUnidad, 'indicadorPrioridad' => $indicadorPrioridad]);
         //return view('planifications.contents', ['curso'=> $curso, 'asignatura'=> $asignatura, 'instanciaUnidad'=> $instanciaUnidad, 'habilidades'=> $habilidades]);
 
 		//return view('planifications.unidades');
@@ -296,7 +306,7 @@ class PlanificationsController extends Controller
         $idUnidad = $instanciaUnidad->idUnidadFK;
 
         $objetivos = UnidadObjetivo::obtenerObjetivos($idUnidad, $idRepositorio);
-        #dump($objetivos);
+        //dump($objetivos);
 
         $subEjes = SubEje::obtenerSubEjes($objetivos);
 

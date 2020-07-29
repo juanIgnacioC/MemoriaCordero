@@ -35,7 +35,14 @@
               <div class="controls">
                 <select id="nombreObjetivo" name="nombreObjetivo">
                   @for ($i = 0; $i < count($objetivos); $i++)
-                    <option value='<?=$i?>'>{{$objetivos[$i]->nombre}}</option>
+                    @if($objetivos[$i]->prioridad == "1")
+                        <option style="background: #5cb85c; color: #fff;" value='<?=$i?>'>{{$objetivos[$i]->nombre}}</option>
+                    @elseif($objetivos[$i]->prioridad == "2")
+                      <option style="background: #d1d119; color: #fff;" value='<?=$i?>'>{{$objetivos[$i]->nombre}}</option>
+                    @else
+                      <option value='<?=$i?>'>{{$objetivos[$i]->nombre}}</option>
+                    @endif
+
                   @endfor
                 </select>
                 @for ($i = 0; $i < count($objetivos); $i++)

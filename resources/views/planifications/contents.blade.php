@@ -14,6 +14,24 @@
     <a href="solicitar?asignatura={{$asignatura}}&curso={{$curso}}&idInstanciaUnidad={{$instanciaUnidad->id}}" class="btn btn-success" class="btn btn-success">
       <span class="glyphicon glyphicon-plus"></span> Solicitar corrección
     </a>
+
+    Prioridad: 
+    @php $rating = $indicadorPrioridad; @endphp  
+    @foreach(range(1,5) as $i)
+      <span class="fa-stack" style="width:1em">
+        @if($rating >0)
+          @if($rating >0.5)
+            <i class="icon-star"></i>
+          @else
+            <i class="icon-star-half"></i>
+          @endif
+        @else
+          <i class="icon-star-empty"></i>
+        @endif
+        @php $rating--; @endphp
+      </span>
+    @endforeach
+    ({{$indicadorPrioridad}})
     
     <hr>
 
@@ -121,7 +139,7 @@
       <div class="span12">
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-            <h5>Objetivos</h5>
+            <h5>Objetivos.     <i class="icon-star"></i> = Objetivos priorizados (nivel 1) | <i class="icon-star-empty"></i> = Objetivos semi priorizados (nivel 2).</h5>
           </div>
           <div class="widget-content nopadding">
             <table class="table table-bordered data-table">
@@ -143,7 +161,14 @@
 
                     <td><input type="hidden" id="id<?=$i?>" value="<?=$row['id']?>" readonly>
                       <input type="hidden" id="nombreObjetivo<?=$i?>" value="<?=$row['nombreObjetivo']->NuevoNombre?>" readonly>
-                      <p><?=$row['nombreObjetivo']->NuevoNombre?></p>
+                      <p>
+                        @if($row['nombreObjetivo']->prioridad == 1)
+                          <i class="icon-star"></i>
+                        @elseif($row['nombreObjetivo']->prioridad == 2)
+                          <i class="icon-star-empty"></i>
+                        @endif
+                        <?=$row['nombreObjetivo']->NuevoNombre?>
+                      </p>
                     </td>
 
                     <td>                    
