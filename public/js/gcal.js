@@ -29,8 +29,8 @@ var applyAll = FC.applyAll;
 var GcalEventSource = EventSource.extend({
 
 	// TODO: eventually remove "googleCalendar" prefix (API-breaking)
-	googleCalendarApiKey: null,
-	googleCalendarId: null,
+	googleCalendarApiKey: 'AIzaSyAJmdGvoVv9ZMZq5N_-3yQZmobkeG0Dzus',
+	googleCalendarId: 'es.cl#holiday@group.v.calendar.google.com',
 	googleCalendarError: null, // optional function
 	ajaxSettings: null,
 

@@ -14,4 +14,16 @@ class InstanciaObjetivo extends Model
     ];
     protected $table = "InstanciaObjetivo";
     public $timestamps = false;
+
+    public static function obtenerObjetivo($idInstanciaObjetivo)
+	{
+
+		$instanciaObjetivo = InstanciaObjetivo::where('InstanciaObjetivo.id', $idInstanciaObjetivo)
+	    	->leftJoin('Objetivo', 'Objetivo.idObj', '=', 'InstanciaObjetivo.idObj')
+	    	->select('InstanciaObjetivo.id', 'InstanciaObjetivo.NuevoNombre', 'InstanciaObjetivo.idSubEje', 'InstanciaObjetivo.idObj', 'Objetivo.prioridad')
+	    	->first();
+
+	    return $instanciaObjetivo;
+	}
+
 }

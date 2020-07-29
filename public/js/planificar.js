@@ -124,6 +124,8 @@ $('#nombreObjetivo')
         
         //console.log("vallsls");
         //console.log(li.val());
+        //console.log(e);
+        //console.log(li);
         
         var id = $('#id'+li.val() ).val();
         var idObj = $('#idObj'+li.val() ).val();

@@ -33,8 +33,11 @@ class InstanciaUnidadObjetivo extends Model
 	    	//dump("For unidadObjetivo");
 
 	    	//objetivo
-	    	$instanciaObjetivo = InstanciaObjetivo::where('id', $unidadObjetivo->idInstanciaObjetivo)
-	    	->first();
+	    	/*$instanciaObjetivo = InstanciaObjetivo::where('id', $unidadObjetivo->idInstanciaObjetivo)
+	    	->first();*/
+
+	    	//Obtener objetivo con prioridad
+	    	$instanciaObjetivo = InstanciaObjetivo::obtenerObjetivo($unidadObjetivo->idInstanciaObjetivo);
 
 	    	//dump($instanciaObjetivo);
 
