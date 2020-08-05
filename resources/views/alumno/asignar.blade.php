@@ -1,9 +1,9 @@
-@extends('layouts.main')
+@extends('layouts.mainDocente')
 
 @section('content')
 <div id="content">
 <div id="content-header">
-  <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{ route('alumno.index') }}" class="tip-bottom">Alumno</a> <a href="#" class="current">Enlazar curso</a> </div>
+  <div id="breadcrumb"> <a href="{{ route('dashboard.index') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{ route('alumno.index') }}" class="tip-bottom">Alumno</a> <a href="#" class="current">Enlazar curso</a> </div>
 
   <h1>Asignar alumnos al curso: {{$instanciaPlani->nombreCurso}} {{$instanciaPlani->indice}} - {{$asignatura}} </h1>
 </div>
