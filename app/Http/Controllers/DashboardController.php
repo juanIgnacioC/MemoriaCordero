@@ -14,6 +14,8 @@ use App\InstanciaPlaniAño;
 use App\InstanciaUnidad;
 use App\IndicadorUnidad;
 
+use App\Correccion;
+
 
 class DashboardController extends Controller
 {
@@ -25,13 +27,12 @@ class DashboardController extends Controller
     public function index()
     {
     	$user = Auth::user();
-        $userId =  $user['id'];
 
         if($user->privilegioDocenteExclusivo($user['type']) ){
             /////Indicadores dashboard////
             $indicadorPlanificaciones = new Collection();
 
-            $establecimientos = InstanciaEstablecimiento::obtenerInstancias($userId);
+            $establecimientos = InstanciaEstablecimiento::obtenerInstancias($user['id']);
             $anios = InstanciaPlaniAño::obtenerAnios($establecimientos->get(0));
             
 
@@ -77,11 +78,47 @@ class DashboardController extends Controller
             $avgPlanificaciones = $indicadorPlaniAnio->avg();
             $avgPlanificaciones = $avgPlanificaciones*20; //Igualdad a porcentaje
             $avgPlanificaciones = round($avgPlanificaciones, 2); //round to 2decimal
+            
+            $totalPlani = count($indicadorPlaniAnio); //N° de planificaciones
 
 
+            ////Indicador correcciones utp/////
+            $correcciones = Correccion::docente($user['id']);
+            $directivo = "";
+            //dd($correcciones);
+            if(!$correcciones->isEmpty()){
+                $obj = json_decode($correcciones);
+                //dd($obj[0]->idInstanciaUnidad);
+                $correcciones2 = $obj[0];
+
+                $idDirectivo = $correcciones2->idDirectivo;
+                //dd($directivo);
+                $directivo = User::where('id', $idDirectivo)
+                ->first();
+                //dd($directivo);
+
+                //$correccionesRealizadas = Correccion::docenteRealizadas($user['id']);
+            }
+            //Cruce entre terminadas y espera corrección
+            $totalCorrecciones = count($correcciones);
+            $correccionesListas = $totalCorrecciones;
+
+            foreach ($correcciones as $correccion) {
+                if($correccion['flujo'] != "4"){
+                    $correccionesListas = $correccionesListas - 1;
+                }
+            }
+
+            //dump($correccionesListas);
+            //porcentaje correcciones listas
+            if($totalCorrecciones != 0)
+                $avgCorrecciones = $correccionesListas / $totalCorrecciones * 100;
+            else
+                $avgCorrecciones = 0;
+            //dump($avgCorrecciones);
 
 
-    		return view('dashboard.docente', ['avgPlanificaciones'=> $avgPlanificaciones]);
+    		return view('dashboard.docente', ['avgPlanificaciones'=> $avgPlanificaciones, 'totalPlani'=> $totalPlani, 'avgCorrecciones'=> $avgCorrecciones,'correcciones'=> $correcciones, 'totalCorrecciones'=> $totalCorrecciones, 'directivo'=> $directivo]);
     	}
         elseif($user->privilegioDirectivoExclusivo($user['type']) ){
             return view('dashboard.directivo');
