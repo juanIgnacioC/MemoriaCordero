@@ -44,11 +44,65 @@ class IndicadorUnidad extends Model
 
 	    		//Cruce y cálculo
 	    		//dd($prioritariosUsados->unique());
+	    		//0: puntuacion. 1: objs prioritarios no usados.
 	    		$puntuacion = IndicadorUnidad::calculoIndicadorPrioridad($prioritariosUsados->unique(), $prioritariosTotal);
 	    		//dump($puntuacion);
+	    		//dump($puntuacion[1]);
+
+	    		//Actualización bd
+	    		$indicadorUnidad->puntuacion = $puntuacion[0];
+	    		$indicadorUnidad->save();
+	    		return $puntuacion;
+    		}
+
+    		else if($tipoIndicador == 'habilidad'){
+
+    			//Ver si hay habilidades
+	    		if(count($data) > 0){
+	    			//dump("mayor a cero");
+	    			$puntuacion = 5;
+	    		}
+	    		else{
+	    			//dump("cero");
+	    			$puntuacion = 0;
+	    		}
 
 	    		//Actualización bd
 	    		$indicadorUnidad->puntuacion = $puntuacion;
+	    		$indicadorUnidad->save();
+	    		return $puntuacion;
+    		}
+
+    		else if($tipoIndicador == 'actitud'){
+
+    			//Ver si hay actitudes
+	    		if(count($data) > 0){
+	    			//dump("mayor a cero");
+	    			$puntuacion = 5;
+	    		}
+	    		else{
+	    			//dump("cero");
+	    			$puntuacion = 0;
+	    		}
+
+	    		//Actualización bd
+	    		$indicadorUnidad->puntuacion = $puntuacion;
+	    		$indicadorUnidad->save();
+	    		return $puntuacion;
+    		}
+
+    		else if($tipoIndicador == 'clases'){
+
+    			//dump($data);
+
+	    		//Cruce y cálculo
+	    		//0: puntuacion. 1: clases no terminadas.
+	    		$puntuacion = IndicadorUnidad::calculoIndicadorClases($data);
+	    		//dump($puntuacion);
+	    		dump($puntuacion[1]);
+
+	    		//Actualización bd
+	    		$indicadorUnidad->puntuacion = $puntuacion[0];
 	    		$indicadorUnidad->save();
 	    		return $puntuacion;
     		}
@@ -77,7 +131,7 @@ class IndicadorUnidad extends Model
 		//No hay tabla indicador correspondiente
 		else{
 			$indicadorUnidad = new IndicadorUnidad([
-            'tipoIndicador' => 'prioridad',
+            'tipoIndicador' => $tipoIndicador,
             'idInstanciaUnidad' => $idInstanciaUnidad,
             ]);
 
@@ -92,18 +146,25 @@ class IndicadorUnidad extends Model
 	//cruce: objs priorizados únicos <-> prioritariosTotal
 	public static function calculoIndicadorPrioridad($prioritariosUsados, $prioritariosTotal)
 	{
+		$dataPrioridad = new Collection();
 		//dump($prioritariosUsados);
 		//dump($prioritariosTotal);
 		$total = count($prioritariosTotal);
 		$usados = 0;
 		$flag = 0;
 		//dump($total);
-
+		$prioritariosNoUsados = $prioritariosTotal;
+		//dump($prioritariosNoUsados);
 		foreach ($prioritariosUsados as $usado) {
 			foreach ($prioritariosTotal as $obj) {
 				if($usado == $obj->idObj && $flag == 0){
 					$usados = $usados + 1;
 					$flag = 1;
+
+					$prioritariosNoUsados = $prioritariosNoUsados->filter(function($item) use ($obj){
+					    return $item->idObj != $obj->idObj;
+					});
+					//dump($prioritariosNoUsados);
 				}
 			}
 			$flag = 0;
@@ -114,7 +175,51 @@ class IndicadorUnidad extends Model
 			$puntuacion = $usados / $total * 5;
 		else
 			$puntuacion = 0;
-		return($puntuacion);
+
+		$dataPrioridad->push($puntuacion);
+		$dataPrioridad->push($prioritariosNoUsados);
+		return($dataPrioridad);
+		//dd($puntuacion);
+
+		/*$cruce = $total - $usados;
+		if($cruce <= 0)
+			$cruce = 0;*/
+
+	}
+
+	//calculo indicador clases unidad
+	public static function calculoIndicadorClases($clases)
+	{
+		$dataClases = new Collection();
+		//dump($prioritariosUsados);
+		//dump($prioritariosTotal);
+		$total = count($clases);
+		$usados = 0;
+		//dump($total);
+		$clasesNoTerminadas = $clases;
+
+		foreach ($clases as $clase) {
+			if($clase->contenidos != null && $clase->contenidos != ""){
+				$usados = $usados + 1;
+				//dump($prioritariosNoUsados);
+			}
+		}
+
+		$clasesNoTerminadas = $clasesNoTerminadas->filter(function($item){
+		    return ($item->contenidos == null || $item->contenidos == "");
+		});
+
+		//dump($usados);
+		if($total != 0)
+			$puntuacion = $usados / $total * 5;
+		else
+			$puntuacion = 0;
+
+		$dataClases->push($puntuacion);
+		$dataClases->push($clasesNoTerminadas);
+		//dd($dataClases);
+
+		return($dataClases);
 		//dd($puntuacion);
 
 		/*$cruce = $total - $usados;

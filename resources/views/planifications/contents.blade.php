@@ -15,8 +15,9 @@
       <span class="glyphicon glyphicon-plus"></span> Solicitar corrección
     </a>
 
-    Prioridad: 
-    @php $rating = $indicadorPrioridad; @endphp  
+    <a href="#" title="Indicador objetivos prioritarios" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Indicador que corresponde al uso mínimo de objetivos priorizados por el MINEDUC" onclick="modalPrioridad()">Prioridad:</a>
+
+    @php $rating = $indicadorPrioridad[0]; @endphp  
     @foreach(range(1,5) as $i)
       <span class="fa-stack" style="width:1em">
         @if($rating >0)
@@ -31,7 +32,43 @@
         @php $rating--; @endphp
       </span>
     @endforeach
-    ({{$indicadorPrioridad}})
+    ({{$indicadorPrioridad[0]}})
+
+    <a href="#" title="Indicador habilidades" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Indicador que corresponde al uso de habilidades del MINEDUC">Habilidades:</a>
+    @php $rating = $indicadorHabilidad; @endphp  
+    @foreach(range(1,5) as $i)
+      <span class="fa-stack" style="width:1em">
+        @if($rating >0)
+          @if($rating >0.5)
+            <i class="icon-star"></i>
+          @else
+            <i class="icon-star-half"></i>
+          @endif
+        @else
+          <i class="icon-star-empty"></i>
+        @endif
+        @php $rating--; @endphp
+      </span>
+    @endforeach
+    ({{$indicadorHabilidad}})
+
+    <a href="#" title="Indicador actitudes" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Indicador que corresponde al uso de actitudes del MINEDUC">Actitudes:</a> 
+    @php $rating = $indicadorActitud; @endphp  
+    @foreach(range(1,5) as $i)
+      <span class="fa-stack" style="width:1em">
+        @if($rating >0)
+          @if($rating >0.5)
+            <i class="icon-star"></i>
+          @else
+            <i class="icon-star-half"></i>
+          @endif
+        @else
+          <i class="icon-star-empty"></i>
+        @endif
+        @php $rating--; @endphp
+      </span>
+    @endforeach
+    ({{$indicadorActitud}})
     
     <hr>
 
@@ -216,6 +253,47 @@
     </div>
     </div>
   </div>
+
+
+  <div id="myModal1" style="display: none;" class="modal" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5>Objetivos prioritarios sin usar</h5>
+          </div>
+          <div class="modal-body">
+            <table class="table table-bordered data-table">
+              <thead>
+                <tr>
+                  <th>Objetivo Aprendizaje (OA)</th>
+                  <th>Nombre</th>
+                </tr>
+              </thead>
+              <tbody>
+                @isset($indicadorPrioridad)
+                <?$i=0;foreach($indicadorPrioridad[1] as $row):?>
+                  <tr class="trhideclass<?=$i?>">
+
+
+                    <td><input type="hidden" id="indicadorPrioridad<?=$i?>" value="<?=$row->id?>" readonly>
+                      <p><?=$row->idObj?></p>
+                    </td>
+
+                    <td>
+                      <p><?=$row->nombre?></p>
+                    </td>
+
+                  </tr>
+                  <?$i++;endforeach;?>
+                @endisset
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
 </div>
 
 <script src="js/jquery.min.js"></script> 
