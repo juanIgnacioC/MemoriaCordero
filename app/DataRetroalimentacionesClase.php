@@ -24,6 +24,7 @@ class DataRetroalimentacionesClase extends Model
     ];*/
     protected $fillable = [
         'clase',
-        'retroalimentaciones'
+        'retroalimentaciones',
+        'avgPuntuacion'
     ];
 }

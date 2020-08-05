@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.mainDocente')
 
 @section('content')
 <div id="content">
@@ -17,7 +17,7 @@
 
           <div class="widget-title"> <a href="#collapse{{$unidad['unidad']['NuevoNumero']}}" data-toggle="collapse"> <span class="icon"><i class="icon-book"></i></span>
             <h5>Unidad {{$unidad['unidad']['NuevoNumero']}}: {{$unidad['unidad']['NuevoNombre']}}</h5>
-            </a> <div name="agregarHabilidad" id="agregarHabilidad" class="pull-right" style="vertical-align: middle; margin-right: 5px;"> <a class="tip" href="#" title="Agregar">Agregar<i class="icon-plus-sign"></i></a> </div>
+            </a>
           </div>
 
           <div class="collapse" id="collapse{{$unidad['unidad']['NuevoNumero']}}">
@@ -28,7 +28,7 @@
                     <th>Fecha</th>
                     <th>Contenidos</th>
                     <th>Objetivo</th>
-                    <th>Puntuación (por defecto)</th>
+                    <th>Puntuación promedio</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -55,7 +55,7 @@
                       </td>
 
                       <td>
-                        <p>5.0</p>
+                        <p><?=$row['avgPuntuacion']?></p>
                       </td>
                       
                       <td><button id="retroalimentar<?=$j?>" name="retroalimentar<?=$j?>" onclick="retroalimentaciones(<?=$i?>, <?=$j?>)" class="btn btn-info" >Retroalimentaciones</button></td>
