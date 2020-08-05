@@ -146,10 +146,14 @@ class InstanciaUnidad extends Model
 				->select('Retroalimentacion.id', 'Retroalimentacion.puntuacion', 'Retroalimentacion.comentario', 'Retroalimentacion.idAlumno', 'users.name' )
 		    	->get();
 
-		    	//dd($retroalimentacionesClase);
+		    	//dump($retroalimentacionesClase);
+		    	$avgPuntuacion = $retroalimentacionesClase->avg('puntuacion');
+		    	//dd($avgPuntuacion);
+
 		    	$dataClase = new DataRetroalimentacionesClase([
 			        'clase' => $clase,
-			        'retroalimentaciones' => $retroalimentacionesClase
+			        'retroalimentaciones' => $retroalimentacionesClase,
+			        'avgPuntuacion' => $avgPuntuacion
 	            ]);
 		    	$DataRetroalimentacionesClase->push($dataClase);
 	    	}

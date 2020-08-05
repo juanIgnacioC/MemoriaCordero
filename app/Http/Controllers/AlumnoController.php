@@ -95,19 +95,6 @@ class AlumnoController extends Controller
             $instanciasPlaniAño = InstanciaEstablecimiento::obtenerInstanciasAlumno($establecimientosAlumno->get(0), $anio);
             ///dump($instanciasPlaniAño);
 
-            //$anios = InstanciaPlaniAño::obtenerAnios($establecimientos->get(0));
-            //dd($anios);
-
-            //obtener instancias solo de los establecimientos del docente
-            //$instanciasPlaniAño = InstanciaPlaniAño::obtenerPlanificacionesEstablecimiento($establecimientos);
-            //dd($fecha);
-            
-            /*$instanciasPlaniAño = InstanciaEst::obtenerPlanificacionesAlumno($establecimientos->get(0), $anio);
-            dd($instanciasPlaniAño);*/
-            /*dump($instanciasPlaniAño);
-            dump($establecimientos);
-            dump($anios);*/
-
             return view('alumno.alumno', ['instanciasPlaniAño'=> $instanciasPlaniAño]);
         }
 
