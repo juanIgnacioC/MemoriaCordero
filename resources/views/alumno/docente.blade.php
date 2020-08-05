@@ -3,7 +3,7 @@
 @section('content')
 <div id="content">
 <div id="content-header">
-  <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Alumno</a> </div>
+  <div id="breadcrumb"> <a href="{{ route('dashboard.index') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Alumno</a> </div>
   <h1>Asignar alumnos y retroalimentaciones</h1>
 </div>
 
