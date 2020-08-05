@@ -99,7 +99,7 @@ class IndicadorUnidad extends Model
 	    		//0: puntuacion. 1: clases no terminadas.
 	    		$puntuacion = IndicadorUnidad::calculoIndicadorClases($data);
 	    		//dump($puntuacion);
-	    		dump($puntuacion[1]);
+	    		//dump($puntuacion[1]);
 
 	    		//Actualización bd
 	    		$indicadorUnidad->puntuacion = $puntuacion[0];

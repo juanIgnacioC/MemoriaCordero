@@ -74,9 +74,9 @@
           </div>
           <div class="widget-content">
             <ul class="unstyled">
-              <li> <span class="icon24 icomoon-icon-arrow-up-2 red"><a title="" href="#"></span> 81% Planificaciones <span class="pull-right strong">567</span>
+              <li> <span class="icon24 icomoon-icon-arrow-up-2 red"><a title="" href="#"></span> {{$avgPlanificaciones}}% Planificaciones <span class="pull-right strong">567</span>
                 <div class="progress progress-danger progress-striped ">
-                  <div style="width: 81%;" class="bar"></div>
+                  <div style="width: {{$avgPlanificaciones}}%;" class="bar"></div>
                 </div>
               </li>
 
