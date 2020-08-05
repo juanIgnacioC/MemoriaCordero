@@ -6,8 +6,28 @@
     <div id="breadcrumb"> <a href="{{ route('dashboard.index') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{ route('forms.planifications') }}" class="tip-bottom">Planificaciones</a> <a href="planification?asignatura={{$asignatura}}&curso={{$curso}}&idInstanciaPlaniAño={{$instanciaUnidad->idInstanciaPlaniAño}}" class="current">Planificación</a>  <a href="contents?asignatura={{$asignatura}}&curso={{$curso}}&id={{$instanciaUnidad->id}}" class="current">Unidad</a> <a href="#" class="current">Calendario</a> </div>
     <h1>Calendario {{$curso}} {{$asignatura}}</h1>
   </div>
+
   <div class="container-fluid">
     <hr>
+  <a href="#" title="Indicador planificación de clases" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Indicador que corresponde a la planificación mínima de clases. Cada una de estas debe tener un contenido asociado" onclick="modalClases()">Clases:</a>
+
+  @php $rating = $indicadorClases[0]; @endphp  
+  @foreach(range(1,5) as $i)
+    <span class="fa-stack" style="width:1em">
+      @if($rating >0)
+        @if($rating >0.5)
+          <i class="icon-star"></i>
+        @else
+          <i class="icon-star-half"></i>
+        @endif
+      @else
+        <i class="icon-star-empty"></i>
+      @endif
+      @php $rating--; @endphp
+    </span>
+  @endforeach
+  ({{$indicadorClases[0]}})
+
     <div class="row-fluid">
       <div class="span12">
         <div class="widget-box widget-calendar">
@@ -184,6 +204,52 @@
       </div>
       
     </div>
+
+    <div id="myModalClases" style="display: none;" class="modal" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5>Clases sin contenidos</h5>
+          </div>
+          <div class="modal-body">
+            <table class="table table-bordered data-table">
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Objetivo Aprendizaje (OA)</th>
+                  <th>Nombre</th>
+                </tr>
+              </thead>
+              <tbody>
+                @isset($indicadorClases)
+                <?$i=0;foreach($indicadorClases[1] as $row):?>
+                  <tr class="trhideclass<?=$i?>">
+
+                    <td>
+                      <p><?=$row->start?></p>
+                    </td>
+
+                    <td><input type="hidden" id="indicadorClases<?=$i?>" value="<?=$row->id?>" readonly>
+                      <p><?=$row->title?></p>
+                    </td>
+
+                    <td>
+                      <p><?=$row->description?></p>
+                    </td>
+
+                  </tr>
+                  <?$i++;endforeach;?>
+                @endisset
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+  </div>
+
   </div>
 </div>
 

@@ -12,7 +12,7 @@
       <ul class="quick-actions">
         <!--<li class="bg_lb"> <a href="{{ route('dashboard.index') }}"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> Mi Tablero </a> </li>-->
         <li class="bg_lo span3"> <a href="planifications"> <i class="icon-th-list"></i> Planificaciones</a> </li>
-        <li class="bg_lg span3"> <a href="{{ route('directivo.index') }}"> <i class="icon-pencil"></i> Correcciones</a> </li>
+        <li class="bg_lg span3"> <a href="{{ route('directivo.index') }}"> <i class="icon-pencil"></i> <span class="label label-important">{{$totalCorrecciones}}</span> Correcciones UTP</a> </li>
         <!--<li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i> Establecimientos</a> </li>-->
         <li class="bg_ls span3"> <a href="{{ route('alumno.index') }}"> <i class="icon-group"></i> Alumnos</a> </li>
         <!--<li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i> Full width</a> </li>-->
@@ -33,19 +33,25 @@
 
         <div class="widget-box">
           <div class="widget-title bg_ly" data-toggle="collapse" href="#collapseG2"><span class="icon"><i class="icon-chevron-down"></i></span>
-            <h5>Últimas correcciones</h5>
+            <h5>Últimas correcciones UTP</h5>
           </div>
           <div class="widget-content nopadding collapse in" id="collapseG2">
             <ul class="recent-posts">
+              @isset($correcciones)
+              <?$i=0;foreach($correcciones as $row):?>
               <li>
                 <div class="user-thumb"> <img width="40" height="40" alt="User" src="img/demo/av1.jpg"> </div>
-                <div class="article-post"> <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
-                  <p><a href="#">This is a much longer one that will go on for a few lines.It has multiple paragraphs and is full of waffle to pad out the comment.</a> </p>
+                <div class="article-post"> <span class="user-info"> De: {{$directivo->name}} / fecha: {{$row->creted_at}} / {{$row->asignatura}} - {{$row->curso}} - Unidad {{$row->NuevoNumero}} </span>
+                  <p><a href="#">{{$row->correcciones}}</a> </p>
                 </div>
               </li>
-              <li>
-                <button class="btn btn-warning btn-mini">Ver todas</button>
-              </li>
+
+                <?$i++;endforeach;?>
+              @endisset
+
+
+              <li > <a class="btn btn-warning btn-mini" href="{{ route('directivo.index') }}"> Ver todas</a> </li>
+
             </ul>
           </div>
         </div>
@@ -58,7 +64,7 @@
             <div class="todo">
               <ul>
                 <li class="clearfix">
-                  <div class="txt"> Luanch This theme on Themeforest <span class="by label">Nirav</span> <span class="date badge badge-important">Today</span> </div>
+                  <div class="txt"> Usted aún no posee retroalimentaciones <span class="by label">Alumno</span> <span class="date badge badge-important">Hoy</span> </div>
                   <div class="pull-right"> <a class="tip" href="#" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
                 </li>
               </ul>
@@ -74,15 +80,15 @@
           </div>
           <div class="widget-content">
             <ul class="unstyled">
-              <li> <span class="icon24 icomoon-icon-arrow-up-2 red"><a title="" href="#"></span> 81% Planificaciones <span class="pull-right strong">567</span>
+              <li> <span class="icon24 icomoon-icon-arrow-up-2 red"><a title="" href="#"></span> {{$avgPlanificaciones}}% Planificaciones <span class="pull-right strong">{{$totalPlani}}</span>
                 <div class="progress progress-danger progress-striped ">
-                  <div style="width: 81%;" class="bar"></div>
+                  <div style="width: {{$avgPlanificaciones}}%;" class="bar"></div>
                 </div>
               </li>
 
-              <li> <span class="icon24 icomoon-icon-arrow-up-2 green"> <a title="" href="#2"></span> 72% Correcciones <span class="pull-right strong">507</span>
+              <li> <span class="icon24 icomoon-icon-arrow-up-2 green"> <a title="" href="#2"></span> {{$avgCorrecciones}}% Correcciones <span class="pull-right strong">{{$totalCorrecciones}}</span>
                 <div class="progress progress-success progress-striped ">
-                  <div style="width: 72%;" class="bar"></div>
+                  <div style="width: {{$avgCorrecciones}}%;" class="bar"></div>
                 </div>
               </li>
               <li> <span class="icon24 icomoon-icon-arrow-down-2 blue"> <a title="" href="#3"></span> 53% Retroalimentaciones <span class="pull-right strong">457</span>
@@ -90,11 +96,12 @@
                   <div style="width: 53%;" class="bar"></div>
                 </div>
               </li>
-              <li> <span class="icon24 icomoon-icon-arrow-up-2 green"> <a title="" href="#4"></span> 3% Online Users <span class="pull-right strong">8</span>
+              
+              <!--<li> <span class="icon24 icomoon-icon-arrow-up-2 green"> <a title="" href="#4"></span> 3% Online Users <span class="pull-right strong">8</span>
                 <div class="progress progress-warning progress-striped ">
                   <div style="width: 3%;" class="bar"></div>
                 </div>
-              </li>
+              </li>-->
             </ul>
           </div>
         </div>

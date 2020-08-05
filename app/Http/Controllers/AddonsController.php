@@ -13,6 +13,8 @@ use App\InstanciaUnidadObjetivo;
 
 use App\InstanciaClase;
 
+use App\IndicadorUnidad;
+
 class AddonsController extends Controller
 {
     public function __construct()
@@ -69,7 +71,9 @@ class AddonsController extends Controller
         ->get();
         //dd($clases);
 
-        return view('addons.calendarUnidad', ['curso'=> $curso, 'asignatura'=> $asignatura, 'instanciaUnidad'=> $instanciaUnidad, 'habilidades'=> $habilidades, 'actitudes'=> $actitudes, 'dataPlaniUnidad'=> $dataPlaniUnidad, 'clases'=> $clases]);
+        $indicadorClases = IndicadorUnidad::moderarIndicadorUnidad($instanciaUnidad->id, $instanciaUnidad->idUnidadFK, 'clases', $clases, 1);
+
+        return view('addons.calendarUnidad', ['curso'=> $curso, 'asignatura'=> $asignatura, 'instanciaUnidad'=> $instanciaUnidad, 'habilidades'=> $habilidades, 'actitudes'=> $actitudes, 'dataPlaniUnidad'=> $dataPlaniUnidad, 'clases'=> $clases, 'indicadorClases'=> $indicadorClases]);
     }
 
     public function createClase(Request $request)

@@ -106,13 +106,18 @@ class PlanificationsController extends Controller
         //dump($dataPlaniUnidad);
 
 
+        ////Indicadores////
         //calcular indicador prioridades (dataPlaniUnidad)
         //$indicadorPrioridad = IndicadorUnidad::indicadorUnidadTipo($instanciaUnidad->id, 'prioridad');
 
         //Cambiar a 0 para optimizar
         $indicadorPrioridad = IndicadorUnidad::moderarIndicadorUnidad($instanciaUnidad->id, $instanciaUnidad->idUnidadFK, 'prioridad', $dataPlaniUnidad, 1);
 
-        return view('planifications.contents', ['curso'=> $curso, 'asignatura'=> $asignatura, 'instanciaUnidad'=> $instanciaUnidad, 'habilidades'=> $habilidades, 'actitudes'=> $actitudes, 'dataPlaniUnidad'=> $dataPlaniUnidad, 'indicadorPrioridad' => $indicadorPrioridad]);
+        $indicadorHabilidad = IndicadorUnidad::moderarIndicadorUnidad($instanciaUnidad->id, $instanciaUnidad->idUnidadFK, 'habilidad', $habilidades, 1);
+
+        $indicadorActitud = IndicadorUnidad::moderarIndicadorUnidad($instanciaUnidad->id, $instanciaUnidad->idUnidadFK, 'actitud', $actitudes, 1);
+
+        return view('planifications.contents', ['curso'=> $curso, 'asignatura'=> $asignatura, 'instanciaUnidad'=> $instanciaUnidad, 'habilidades'=> $habilidades, 'actitudes'=> $actitudes, 'dataPlaniUnidad'=> $dataPlaniUnidad, 'indicadorPrioridad' => $indicadorPrioridad, 'indicadorHabilidad' => $indicadorHabilidad, 'indicadorActitud' => $indicadorActitud]);
         //return view('planifications.contents', ['curso'=> $curso, 'asignatura'=> $asignatura, 'instanciaUnidad'=> $instanciaUnidad, 'habilidades'=> $habilidades]);
 
 		//return view('planifications.unidades');
