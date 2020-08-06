@@ -161,8 +161,10 @@ class InstanciaUnidad extends Model
 	    	//crear modelo de datos de clases por unidad
 	    	$data = new DataClases([
 		        'unidad' => $unidad,
-		        'clases' => $DataRetroalimentacionesClase
+		        'clases' => $DataRetroalimentacionesClase,
+		        'avgRetroUnidad' => $DataRetroalimentacionesClase->avg('avgPuntuacion')
             ]);
+            //dd($data);
 	    	$dataClases->push($data);
 	    }
 	    //dd($dataClases);
