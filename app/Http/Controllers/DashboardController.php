@@ -15,6 +15,7 @@ use App\InstanciaUnidad;
 use App\IndicadorUnidad;
 
 use App\Correccion;
+use App\Retroalimentacion;
 
 
 class DashboardController extends Controller
@@ -81,18 +82,12 @@ class DashboardController extends Controller
 
                 $indicadorPlaniAnioClases->push($dataClases->avg('avgRetroUnidad') );
 
-                /*if(count($dataClases) > 0){
-                    foreach ($dataClases as $data) {
-                        $clasess = $data['clase'];
-                        foreach ( $clasess as $clase) {
-                            $claseR = $clase->where('yearweek(start, 1) = yearweek(now(), 1)' )
-                            ->where('now() > start');
-                        }
-                    }
+                if(count($dataClases) > 0){
+                    $clasesR = Retroalimentacion::retroalimentacionesRecientes($planiAnio->id, $user['id']);
                 }
 
-                if(!$claseR->isEmpty())
-                    $clasesRecientes->push($claseR);*/
+                if(!$clasesR->isEmpty())
+                    $clasesRecientes->push($claseR);
             }
             //dd($clasesRecientes);  //cambiar por metodo retros fecha
             //Cálculo final para el dashboard

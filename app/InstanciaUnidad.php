@@ -170,4 +170,6 @@ class InstanciaUnidad extends Model
 	    //dd($dataClases);
 	    return $dataClases;
 	}
+
+	
 }
