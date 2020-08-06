@@ -24,6 +24,7 @@ class DataClases extends Model
     ];*/
     protected $fillable = [
         'unidad',
-        'clases'
+        'clases',
+        'avgRetroUnidad'
     ];
 }

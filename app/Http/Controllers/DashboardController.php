@@ -52,9 +52,11 @@ class DashboardController extends Controller
                     
                     //dump($indicadoresUnidad);
                     $unidad->push($indicadoresUnidad);
+
                 }
 
                 //Promedio unidades
+                //dd($unidad);
                 $avgUnidades = $unidad->avg();
                 if($avgUnidades == null) //no existen indics
                     $avgUnidades = 0;
@@ -69,15 +71,17 @@ class DashboardController extends Controller
 
                 //Promedio planificacion anio
                 //$indicadorPlaniAnio->push($plani);
+                $dataClases = InstanciaUnidad::dataClases($planiAnio->id, $user['id']);
+                dump($dataClases);
                 $indicadorPlaniAnio->push($avgUnidades); //Ingreso directo->avg
             }
             //Cálculo final para el dashboard
-            ////dump($indicadorPlaniAnio);
+            dump($indicadorPlaniAnio);
             ////dd($avgPlanificaciones);
 
             $avgPlanificaciones = $indicadorPlaniAnio->avg();
             $avgPlanificaciones = $avgPlanificaciones*20; //Igualdad a porcentaje
-            $avgPlanificaciones = round($avgPlanificaciones, 2); //round to 2decimal
+            $avgPlanificaciones = round($avgPlanificaciones); //round to decimal
             
             $totalPlani = count($indicadorPlaniAnio); //N° de planificaciones
 
@@ -116,6 +120,9 @@ class DashboardController extends Controller
             else
                 $avgCorrecciones = 0;
             //dump($avgCorrecciones);
+
+
+            //Indicador Retroalimentaciones
 
 
     		return view('dashboard.docente', ['avgPlanificaciones'=> $avgPlanificaciones, 'totalPlani'=> $totalPlani, 'avgCorrecciones'=> $avgCorrecciones,'correcciones'=> $correcciones, 'totalCorrecciones'=> $totalCorrecciones, 'directivo'=> $directivo]);
