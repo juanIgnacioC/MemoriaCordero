@@ -87,7 +87,7 @@ class DashboardController extends Controller
                 }
 
                 if(!$clasesR->isEmpty())
-                    $clasesRecientes->push($claseR);
+                    $clasesRecientes->push($clasesR);
             }
             //dd($clasesRecientes);  //cambiar por metodo retros fecha
             //Cálculo final para el dashboard
