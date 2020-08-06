@@ -89,7 +89,7 @@ class DashboardController extends Controller
                 if(!$clasesR->isEmpty())
                     $clasesRecientes->push($clasesR);
             }
-            //dd($clasesRecientes);  //cambiar por metodo retros fecha
+            dd($clasesRecientes);  //cambiar por metodo retros fecha
             //Cálculo final para el dashboard
             ///dump($indicadorPlaniAnio); //AVG plani
             ///dump($indicadorPlaniAnioClases); //AVG retros
