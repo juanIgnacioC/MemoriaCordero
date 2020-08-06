@@ -67,8 +67,8 @@
                 @isset($clasesRecientesDoc)
                 <?$i=0;foreach($clasesRecientesDoc as $row):?>
                   <li class="clearfix">
-                    <div class="txt"> {{$row->comentario}} <span class="by label">Alumno</span> <span class="date badge badge-important">Clase: {{$row->start}}</span> </div>
-                    <div class="pull-right"> <a class="tip" href="retroalimentaciones?asignatura={{$asignatura}}&idInstanciaPlaniAnio={{$row->idInstanciaPlaniAnio}}" title="Ver más"><i class="icon-external-link"></i> </div>
+                    <div class="txt"> {{$row->comentario}} <span class="by label">{{$row->nombreAsignatura}} {{$row->nombreCurso}}</span> <span class="date badge badge-important">Clase: {{$row->start}}</span> </div>
+                    <div class="pull-right"> <a class="tip" href="retroalimentaciones?asignatura={{$row->nombreAsignatura}}&idInstanciaPlaniAnio={{$row->idInstanciaPlaniAnio}}" title="Ver más"><i class="icon-external-link"></i> </div>
                   </li>
                 <?$i++;endforeach;?>
                 @endisset
