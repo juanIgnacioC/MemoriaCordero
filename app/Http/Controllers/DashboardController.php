@@ -92,8 +92,9 @@ class DashboardController extends Controller
             //Retroalimentaciones recientes por docente
             $clasesRecientesDoc = Retroalimentacion::retroalimentacionesRecientesDocente($user['id']);
 
-            dd
-            dd($clasesRecientes);  //cambiar por metodo retros fecha
+            dd($clasesRecientesDoc);
+            //dd($clasesRecientes);  //cambiar por metodo retros fecha
+            
             //Cálculo final para el dashboard
             ///dump($indicadorPlaniAnio); //AVG plani
             ///dump($indicadorPlaniAnioClases); //AVG retros
