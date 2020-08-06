@@ -81,12 +81,20 @@ class DashboardController extends Controller
 
                 $indicadorPlaniAnioClases->push($dataClases->avg('avgRetroUnidad') );
 
-                dump($dataClases['clases']->whereRaw('yearweek(start, 1) = yearweek(now(), 1)' )
-                    ->whereRaw('now() > start');
-                    }); 
-                )
-                //$clasesRecientes->push
+                /*if(count($dataClases) > 0){
+                    foreach ($dataClases as $data) {
+                        $clasess = $data['clase'];
+                        foreach ( $clasess as $clase) {
+                            $claseR = $clase->where('yearweek(start, 1) = yearweek(now(), 1)' )
+                            ->where('now() > start');
+                        }
+                    }
+                }
+
+                if(!$claseR->isEmpty())
+                    $clasesRecientes->push($claseR);*/
             }
+            dd($clasesRecientes);  //cambiar por metodo retros fecha
             //Cálculo final para el dashboard
             ///dump($indicadorPlaniAnio); //AVG plani
             ///dump($indicadorPlaniAnioClases); //AVG retros
