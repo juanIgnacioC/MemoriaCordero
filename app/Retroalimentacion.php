@@ -37,8 +37,8 @@ class Retroalimentacion extends Model
         ->leftJoin('InstanciaPlaniAño', 'InstanciaPlaniAño.id', '=', 'Retroalimentacion.idInstanciaPlaniAnio')
 
         ->leftJoin('RepositorioPlanificacion', 'RepositorioPlanificacion.id', '=', 'InstanciaPlaniAño.idRepositorio')
-        ->leftJoin('Asignatura', 'Asignatura.id', '=', 'RepositorioPlanificacion.id')
-        ->leftJoin('Curso', 'Curso.id', '=', 'RepositorioPlanificacion.id')
+        ->leftJoin('Asignatura', 'Asignatura.id', '=', 'RepositorioPlanificacion.idAsignatura')
+        ->leftJoin('Curso', 'Curso.id', '=', 'RepositorioPlanificacion.idCurso')
 
         ->select('InstanciaClase.id', 'InstanciaClase.start', 'Retroalimentacion.comentario', 'Retroalimentacion.fecha', 'Retroalimentacion.idInstanciaPlaniAnio', 'Asignatura.nombre as nombreAsignatura', 'Curso.nombre as nombreCurso')
 
