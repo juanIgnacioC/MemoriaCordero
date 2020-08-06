@@ -86,14 +86,14 @@
                 </div>
               </li>
 
-              <li> <span class="icon24 icomoon-icon-arrow-up-2 green"> <a title="" href="#2"></span> {{$avgCorrecciones}}% Correcciones <span class="pull-right strong">{{$totalCorrecciones}}</span>
+              <li> <span class="icon24 icomoon-icon-arrow-up-2 green"> <a title="" href="#2"></span> {{$avgCorrecciones}}% Correcciones UTP <span class="pull-right strong">{{$totalCorrecciones}}</span>
                 <div class="progress progress-success progress-striped ">
                   <div style="width: {{$avgCorrecciones}}%;" class="bar"></div>
                 </div>
               </li>
-              <li> <span class="icon24 icomoon-icon-arrow-down-2 blue"> <a title="" href="#3"></span> 53% Retroalimentaciones <span class="pull-right strong">457</span>
+              <li> <span class="icon24 icomoon-icon-arrow-down-2 blue"> <a title="" href="#3"></span> {{$avgRetroUnidad}}% Retroalimentaciones alumnos <span class="pull-right strong"></span>
                 <div class="progress progress-striped ">
-                  <div style="width: 53%;" class="bar"></div>
+                  <div style="width: {{$avgRetroUnidad}}%;" class="bar"></div>
                 </div>
               </li>
               

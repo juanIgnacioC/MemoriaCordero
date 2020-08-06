@@ -39,6 +39,9 @@ class DashboardController extends Controller
             $instanciasPlaniAño = InstanciaPlaniAño::obtenerPlanificacionesEstablecimientoAnio($establecimientos->get(0), $anios->get(0));
 
             $indicadorPlaniAnio = new Collection();
+            $indicadorPlaniAnioClases = new Collection();
+            $clasesRecientes = new Collection();
+
             foreach ($instanciasPlaniAño as $planiAnio) {
 
                 $instanciaUnidades = InstanciaUnidad::where('idInstanciaPlaniAño', $planiAnio->id)
@@ -73,10 +76,28 @@ class DashboardController extends Controller
                 //$indicadorPlaniAnio->push($plani);
                 $dataClases = InstanciaUnidad::dataClases($planiAnio->id, $user['id']);
                 dump($dataClases);
+                //$collection->put('price', 100);
                 $indicadorPlaniAnio->push($avgUnidades); //Ingreso directo->avg
+
+                $indicadorPlaniAnioClases->push($dataClases->avg('avgRetroUnidad') );
+
+                /*if(count($dataClases) > 0){
+                    foreach ($dataClases as $data) {
+                        $clasess = $data['clase'];
+                        foreach ( $clasess as $clase) {
+                            $claseR = $clase->where('yearweek(start, 1) = yearweek(now(), 1)' )
+                            ->where('now() > start');
+                        }
+                    }
+                }
+
+                if(!$claseR->isEmpty())
+                    $clasesRecientes->push($claseR);*/
             }
+            dd($clasesRecientes);  //cambiar por metodo retros fecha
             //Cálculo final para el dashboard
-            dump($indicadorPlaniAnio);
+            ///dump($indicadorPlaniAnio); //AVG plani
+            ///dump($indicadorPlaniAnioClases); //AVG retros
             ////dd($avgPlanificaciones);
 
             $avgPlanificaciones = $indicadorPlaniAnio->avg();
@@ -123,9 +144,12 @@ class DashboardController extends Controller
 
 
             //Indicador Retroalimentaciones
+            $avgRetroUnidad = $indicadorPlaniAnioClases->avg();
+            $avgRetroUnidad = $avgRetroUnidad*20; //Igualdad a porcentaje
+            $avgRetroUnidad = round($avgRetroUnidad); //round to decimal
+            //dump($avgRetroUnidad);
 
-
-    		return view('dashboard.docente', ['avgPlanificaciones'=> $avgPlanificaciones, 'totalPlani'=> $totalPlani, 'avgCorrecciones'=> $avgCorrecciones,'correcciones'=> $correcciones, 'totalCorrecciones'=> $totalCorrecciones, 'directivo'=> $directivo]);
+    		return view('dashboard.docente', ['avgPlanificaciones'=> $avgPlanificaciones, 'totalPlani'=> $totalPlani, 'avgCorrecciones'=> $avgCorrecciones,'correcciones'=> $correcciones, 'totalCorrecciones'=> $totalCorrecciones, 'directivo'=> $directivo, 'avgRetroUnidad'=> $avgRetroUnidad]);
     	}
         elseif($user->privilegioDirectivoExclusivo($user['type']) ){
             return view('dashboard.directivo');
