@@ -130,7 +130,11 @@ class DashboardController extends Controller
 
 
             //Indicador Retroalimentaciones
+            $avgRetroUnidad = $indicadorPlaniAnioClases->avg();
+            $avgRetroUnidad = $avgRetroUnidad*20; //Igualdad a porcentaje
+            $avgRetroUnidad = round($avgRetroUnidad); //round to decimal
 
+            dd($avgRetroUnidad);
 
     		return view('dashboard.docente', ['avgPlanificaciones'=> $avgPlanificaciones, 'totalPlani'=> $totalPlani, 'avgCorrecciones'=> $avgCorrecciones,'correcciones'=> $correcciones, 'totalCorrecciones'=> $totalCorrecciones, 'directivo'=> $directivo]);
     	}
