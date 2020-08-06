@@ -75,7 +75,7 @@ class DashboardController extends Controller
                 //Promedio planificacion anio
                 //$indicadorPlaniAnio->push($plani);
                 $dataClases = InstanciaUnidad::dataClases($planiAnio->id, $user['id']);
-                dump($dataClases);
+                //////////dump($dataClases);
                 //$collection->put('price', 100);
                 $indicadorPlaniAnio->push($avgUnidades); //Ingreso directo->avg
 
@@ -94,7 +94,7 @@ class DashboardController extends Controller
                 if(!$claseR->isEmpty())
                     $clasesRecientes->push($claseR);*/
             }
-            dd($clasesRecientes);  //cambiar por metodo retros fecha
+            //dd($clasesRecientes);  //cambiar por metodo retros fecha
             //Cálculo final para el dashboard
             ///dump($indicadorPlaniAnio); //AVG plani
             ///dump($indicadorPlaniAnioClases); //AVG retros
