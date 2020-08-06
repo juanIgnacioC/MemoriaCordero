@@ -76,20 +76,26 @@ class DashboardController extends Controller
                 //Promedio planificacion anio
                 //$indicadorPlaniAnio->push($plani);
                 $dataClases = InstanciaUnidad::dataClases($planiAnio->id, $user['id']);
-                dump($dataClases);
+                //////////dump($dataClases);
                 //$collection->put('price', 100);
                 $indicadorPlaniAnio->push($avgUnidades); //Ingreso directo->avg
 
                 $indicadorPlaniAnioClases->push($dataClases->avg('avgRetroUnidad') );
 
-                if(count($dataClases) > 0){
+                /*if(count($dataClases) > 0){
                     $clasesR = Retroalimentacion::retroalimentacionesRecientes($planiAnio->id, $user['id']);
                 }
 
                 if(!$clasesR->isEmpty())
-                    $clasesRecientes->push($claseR);
+                    $clasesRecientes->push($clasesR);*/ // clases recientes por planiAño
             }
-            dd($clasesRecientes);  //cambiar por metodo retros fecha
+            //Retroalimentaciones recientes por docente
+            $clasesRecientesDoc = Retroalimentacion::retroalimentacionesRecientesDocente($user['id']);
+
+            //dump($clasesRecientesDoc);
+
+            //dd($clasesRecientes);  //cambiar por metodo retros fecha
+
             //Cálculo final para el dashboard
             ///dump($indicadorPlaniAnio); //AVG plani
             ///dump($indicadorPlaniAnioClases); //AVG retros
@@ -144,7 +150,7 @@ class DashboardController extends Controller
             $avgRetroUnidad = round($avgRetroUnidad); //round to decimal
             //dump($avgRetroUnidad);
 
-    		return view('dashboard.docente', ['avgPlanificaciones'=> $avgPlanificaciones, 'totalPlani'=> $totalPlani, 'avgCorrecciones'=> $avgCorrecciones,'correcciones'=> $correcciones, 'totalCorrecciones'=> $totalCorrecciones, 'directivo'=> $directivo, 'avgRetroUnidad'=> $avgRetroUnidad]);
+    		return view('dashboard.docente', ['avgPlanificaciones'=> $avgPlanificaciones, 'totalPlani'=> $totalPlani, 'avgCorrecciones'=> $avgCorrecciones,'correcciones'=> $correcciones, 'totalCorrecciones'=> $totalCorrecciones, 'directivo'=> $directivo, 'avgRetroUnidad'=> $avgRetroUnidad, 'clasesRecientesDoc'=> $clasesRecientesDoc]);
     	}
         elseif($user->privilegioDirectivoExclusivo($user['type']) ){
             return view('dashboard.directivo');

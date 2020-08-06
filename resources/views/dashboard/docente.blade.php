@@ -58,15 +58,23 @@
 
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"><i class="icon-ok"></i></span>
-            <h5>Retroalimentaciones</h5>
+            <h5>Retroalimentaciones recientes</h5>
           </div>
           <div class="widget-content">
             <div class="todo">
               <ul>
-                <li class="clearfix">
-                  <div class="txt"> Usted aún no posee retroalimentaciones <span class="by label">Alumno</span> <span class="date badge badge-important">Hoy</span> </div>
-                  <div class="pull-right"> <a class="tip" href="#" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
-                </li>
+
+                @isset($clasesRecientesDoc)
+                <?$i=0;foreach($clasesRecientesDoc as $row):?>
+                  <li class="clearfix">
+                    <div class="txt"> {{$row->comentario}} <span class="by label">{{$row->nombreAsignatura}} {{$row->nombreCurso}}</span> <span class="date badge badge-important">Clase: {{$row->start}}</span> </div>
+                    <div class="pull-right"> <a class="tip" href="retroalimentaciones?asignatura={{$row->nombreAsignatura}}&idInstanciaPlaniAnio={{$row->idInstanciaPlaniAnio}}" title="Ver más"> </div>
+                  </li>
+                <?$i++;endforeach;?>
+                @endisset
+
+                <li > <a class="btn btn-warning btn-mini" href="{{ route('alumno.index') }}"> Ver todas</a> </li>
+
               </ul>
             </div>
           </div>

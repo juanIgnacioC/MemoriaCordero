@@ -29,6 +29,27 @@ class Retroalimentacion extends Model
 
     }
 
+    //Retros recientes por docente para dashboard. limit 10
+    public static function retroalimentacionesRecientesDocente($idDocente)
+    {   
+        $retroalimentaciones = Retroalimentacion::where('Retroalimentacion.idDocente', $idDocente)
+        ->leftJoin('InstanciaClase', 'InstanciaClase.id', '=', 'Retroalimentacion.idInstanciaClase')
+        ->leftJoin('InstanciaPlaniAño', 'InstanciaPlaniAño.id', '=', 'Retroalimentacion.idInstanciaPlaniAnio')
+
+        ->leftJoin('RepositorioPlanificacion', 'RepositorioPlanificacion.id', '=', 'InstanciaPlaniAño.idRepositorio')
+        ->leftJoin('Asignatura', 'Asignatura.id', '=', 'RepositorioPlanificacion.idAsignatura')
+        ->leftJoin('Curso', 'Curso.id', '=', 'RepositorioPlanificacion.idCurso')
+
+        ->select('InstanciaClase.id', 'InstanciaClase.start', 'Retroalimentacion.comentario', 'Retroalimentacion.fecha', 'Retroalimentacion.idInstanciaPlaniAnio', 'Asignatura.nombre as nombreAsignatura', 'Curso.nombre as nombreCurso')
+
+        ->orderBy('Retroalimentacion.fecha', 'desc')
+        ->limit(10)
+        ->get();
+
+        return $retroalimentaciones;
+
+    }
+
     public static function retroalimentacionesRecientes($idInstanciaPlaniAnio, $idDocente)
     {   
         $retroalimentaciones = Retroalimentacion::where('Retroalimentacion.idInstanciaPlaniAnio', $idInstanciaPlaniAnio)
