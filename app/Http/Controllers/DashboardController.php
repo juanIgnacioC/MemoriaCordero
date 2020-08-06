@@ -73,17 +73,15 @@ class DashboardController extends Controller
                 //Promedio planificacion anio
                 //$indicadorPlaniAnio->push($plani);
                 $dataClases = InstanciaUnidad::dataClases($planiAnio->id, $user['id']);
-                dump($dataClases);
+                //dump($dataClases);
                 //$collection->put('price', 100);
                 $indicadorPlaniAnio->push($avgUnidades); //Ingreso directo->avg
-                dump("avg");
-                dump($dataClases->avg('avgRetroUnidad') );
 
                 $indicadorPlaniAnioClases->push($dataClases->avg('avgRetroUnidad') );
             }
             //Cálculo final para el dashboard
-            dump($indicadorPlaniAnio);
-            dump($indicadorPlaniAnioClases);
+            ///dump($indicadorPlaniAnio); //AVG plani
+            ///dump($indicadorPlaniAnioClases); //AVG retros
             ////dd($avgPlanificaciones);
 
             $avgPlanificaciones = $indicadorPlaniAnio->avg();
@@ -130,7 +128,6 @@ class DashboardController extends Controller
 
 
             //Indicador Retroalimentaciones
-            dd(count($indicadorPlaniAnioClases) );
             $avgRetroUnidad = $indicadorPlaniAnioClases->avg();
             $avgRetroUnidad = $avgRetroUnidad*20; //Igualdad a porcentaje
             $avgRetroUnidad = round($avgRetroUnidad); //round to decimal
