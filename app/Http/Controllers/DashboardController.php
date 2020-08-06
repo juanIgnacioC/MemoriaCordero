@@ -130,13 +130,13 @@ class DashboardController extends Controller
 
 
             //Indicador Retroalimentaciones
+            dd(count($indicadorPlaniAnioClases) );
             $avgRetroUnidad = $indicadorPlaniAnioClases->avg();
             $avgRetroUnidad = $avgRetroUnidad*20; //Igualdad a porcentaje
             $avgRetroUnidad = round($avgRetroUnidad); //round to decimal
+            //dump($avgRetroUnidad);
 
-            dd($avgRetroUnidad);
-
-    		return view('dashboard.docente', ['avgPlanificaciones'=> $avgPlanificaciones, 'totalPlani'=> $totalPlani, 'avgCorrecciones'=> $avgCorrecciones,'correcciones'=> $correcciones, 'totalCorrecciones'=> $totalCorrecciones, 'directivo'=> $directivo]);
+    		return view('dashboard.docente', ['avgPlanificaciones'=> $avgPlanificaciones, 'totalPlani'=> $totalPlani, 'avgCorrecciones'=> $avgCorrecciones,'correcciones'=> $correcciones, 'totalCorrecciones'=> $totalCorrecciones, 'directivo'=> $directivo, 'avgRetroUnidad'=> $avgRetroUnidad]);
     	}
         elseif($user->privilegioDirectivoExclusivo($user['type']) ){
             return view('dashboard.directivo');
