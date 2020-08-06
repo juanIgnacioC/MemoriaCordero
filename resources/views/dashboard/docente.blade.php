@@ -86,7 +86,7 @@
                 </div>
               </li>
 
-              <li> <span class="icon24 icomoon-icon-arrow-up-2 green"> <a title="" href="#2"></span> {{$avgCorrecciones}}% Correcciones <span class="pull-right strong">{{$totalCorrecciones}}</span>
+              <li> <span class="icon24 icomoon-icon-arrow-up-2 green"> <a title="" href="#2"></span> {{$avgCorrecciones}}% Correcciones UTP <span class="pull-right strong">{{$totalCorrecciones}}</span>
                 <div class="progress progress-success progress-striped ">
                   <div style="width: {{$avgCorrecciones}}%;" class="bar"></div>
                 </div>

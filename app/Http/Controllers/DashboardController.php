@@ -40,6 +40,8 @@ class DashboardController extends Controller
 
             $indicadorPlaniAnio = new Collection();
             $indicadorPlaniAnioClases = new Collection();
+            $clasesRecientes = new Collection();
+
             foreach ($instanciasPlaniAño as $planiAnio) {
 
                 $instanciaUnidades = InstanciaUnidad::where('idInstanciaPlaniAño', $planiAnio->id)
@@ -73,11 +75,14 @@ class DashboardController extends Controller
                 //Promedio planificacion anio
                 //$indicadorPlaniAnio->push($plani);
                 $dataClases = InstanciaUnidad::dataClases($planiAnio->id, $user['id']);
-                //dump($dataClases);
+                dump($dataClases);
                 //$collection->put('price', 100);
                 $indicadorPlaniAnio->push($avgUnidades); //Ingreso directo->avg
 
                 $indicadorPlaniAnioClases->push($dataClases->avg('avgRetroUnidad') );
+
+                //dd($dataClases['clases']->filter())
+                //$clasesRecientes->push
             }
             //Cálculo final para el dashboard
             ///dump($indicadorPlaniAnio); //AVG plani
