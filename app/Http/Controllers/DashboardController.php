@@ -73,7 +73,9 @@ class DashboardController extends Controller
                 //$indicadorPlaniAnio->push($plani);
                 $dataClases = InstanciaUnidad::dataClases($planiAnio->id, $user['id']);
                 dump($dataClases);
-                $indicadorPlaniAnio->push($avgUnidades); //Ingreso directo->avg
+                $indicadorPlaniAnio->put('avgUnidades', $avgUnidades);
+                $indicadorPlaniAnio->put('avgRetroUnidad', $dataClases->avg('avgRetroUnidad'));
+                //$indicadorPlaniAnio->push($avgUnidades); //Ingreso directo->avg
             }
             //Cálculo final para el dashboard
             dump($indicadorPlaniAnio);
