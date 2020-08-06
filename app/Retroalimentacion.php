@@ -29,6 +29,17 @@ class Retroalimentacion extends Model
 
     }
 
+    public static function retroalimentacionesRecientesDocente($idDocente)
+    {   
+        $retroalimentaciones = Retroalimentacion::where('Retroalimentacion.idDocente', $idDocente)
+        ->leftJoin('InstanciaClase', 'InstanciaClase.id', '=', 'Retroalimentacion.idInstanciaClase')
+        ->orderBy('Retroalimentacion.fecha', 'desc')
+        ->get();
+
+        return $retroalimentaciones;
+
+    }
+
     public static function retroalimentacionesRecientes($idInstanciaPlaniAnio, $idDocente)
     {   
         $retroalimentaciones = Retroalimentacion::where('Retroalimentacion.idInstanciaPlaniAnio', $idInstanciaPlaniAnio)

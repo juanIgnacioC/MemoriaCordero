@@ -82,13 +82,17 @@ class DashboardController extends Controller
 
                 $indicadorPlaniAnioClases->push($dataClases->avg('avgRetroUnidad') );
 
-                if(count($dataClases) > 0){
+                /*if(count($dataClases) > 0){
                     $clasesR = Retroalimentacion::retroalimentacionesRecientes($planiAnio->id, $user['id']);
                 }
 
                 if(!$clasesR->isEmpty())
-                    $clasesRecientes->push($clasesR);
+                    $clasesRecientes->push($clasesR);*/ // clases recientes por planiAño
             }
+            //Retroalimentaciones recientes por docente
+            $clasesRecientesDoc = Retroalimentacion::retroalimentacionesRecientesDocente($user['id']);
+
+            dd
             dd($clasesRecientes);  //cambiar por metodo retros fecha
             //Cálculo final para el dashboard
             ///dump($indicadorPlaniAnio); //AVG plani
