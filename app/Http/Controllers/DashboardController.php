@@ -92,9 +92,10 @@ class DashboardController extends Controller
             //Retroalimentaciones recientes por docente
             $clasesRecientesDoc = Retroalimentacion::retroalimentacionesRecientesDocente($user['id']);
 
-            dd($clasesRecientesDoc);
-            //dd($clasesRecientes);  //cambiar por metodo retros fecha
+            //dd($clasesRecientesDoc);
             
+            //dd($clasesRecientes);  //cambiar por metodo retros fecha
+
             //Cálculo final para el dashboard
             ///dump($indicadorPlaniAnio); //AVG plani
             ///dump($indicadorPlaniAnioClases); //AVG retros
@@ -149,7 +150,7 @@ class DashboardController extends Controller
             $avgRetroUnidad = round($avgRetroUnidad); //round to decimal
             //dump($avgRetroUnidad);
 
-    		return view('dashboard.docente', ['avgPlanificaciones'=> $avgPlanificaciones, 'totalPlani'=> $totalPlani, 'avgCorrecciones'=> $avgCorrecciones,'correcciones'=> $correcciones, 'totalCorrecciones'=> $totalCorrecciones, 'directivo'=> $directivo, 'avgRetroUnidad'=> $avgRetroUnidad]);
+    		return view('dashboard.docente', ['avgPlanificaciones'=> $avgPlanificaciones, 'totalPlani'=> $totalPlani, 'avgCorrecciones'=> $avgCorrecciones,'correcciones'=> $correcciones, 'totalCorrecciones'=> $totalCorrecciones, 'directivo'=> $directivo, 'avgRetroUnidad'=> $avgRetroUnidad, 'clasesRecientesDoc'=> $clasesRecientesDoc]);
     	}
         elseif($user->privilegioDirectivoExclusivo($user['type']) ){
             return view('dashboard.directivo');

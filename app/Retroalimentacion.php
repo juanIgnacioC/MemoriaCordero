@@ -29,11 +29,13 @@ class Retroalimentacion extends Model
 
     }
 
+    //Retros recientes por docente para dashboard. limit 10
     public static function retroalimentacionesRecientesDocente($idDocente)
     {   
         $retroalimentaciones = Retroalimentacion::where('Retroalimentacion.idDocente', $idDocente)
         ->leftJoin('InstanciaClase', 'InstanciaClase.id', '=', 'Retroalimentacion.idInstanciaClase')
         ->orderBy('Retroalimentacion.fecha', 'desc')
+        ->limit(10)
         ->get();
 
         return $retroalimentaciones;
