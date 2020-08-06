@@ -92,8 +92,8 @@ class DashboardController extends Controller
             //Retroalimentaciones recientes por docente
             $clasesRecientesDoc = Retroalimentacion::retroalimentacionesRecientesDocente($user['id']);
 
-            //dd($clasesRecientesDoc);
-            
+            dump($clasesRecientesDoc);
+
             //dd($clasesRecientes);  //cambiar por metodo retros fecha
 
             //Cálculo final para el dashboard
