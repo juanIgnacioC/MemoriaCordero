@@ -81,6 +81,7 @@
 <html lang="en">
     
 <head>
+    <meta name="apptrana" content="45395e62d4de416ebbf5274d565955bb">
         <title>Class Plan</title><meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="css/bootstrap.min.css" />
