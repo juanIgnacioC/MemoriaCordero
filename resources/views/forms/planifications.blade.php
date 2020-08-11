@@ -113,7 +113,8 @@
 
                     <td><a href="planification?asignatura=<?=$row['nombreAsignatura']?>&curso=<?=$row['nombreCurso']?>&idInstanciaPlaniAño=<?=$row['id']?>" class="btn btn-primary">Planificar
                     </a></td>
-                    <td><button id="eliminar<?=$i?>" name="eliminar<?=$i?>" class="btn btn-danger" >Eliminar</button></td>
+
+                    <td><button id="eliminar<?=$i?>" name="eliminar<?=$i?>" onclick="eliminarClase('{{Crypt::encrypt($row['id'])}} ')" class="btn btn-danger" >Eliminar</button></td>
                   </tr>
                 <?$i++;endforeach;?>
               </tbody>
@@ -123,6 +124,30 @@
       </div>
     </div>
     </div>
+
+    <div id="myModal1" style="display: none;" class="modal" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5>¿Está seguro de que desea eliminar este registro?</h5>
+          </div>
+          <div class="modal-body">
+            
+          <input type="hidden" id="previous" value="">
+
+          <input type="hidden" id="idClase">
+
+
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal">Cancelar</button>
+            <button class="btn btn-danger" onclick="eliminarInstanciaPlaniAnio()">Eliminar</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
   </div>
 </div>
 
@@ -135,6 +160,7 @@
 <script src="js/matrix.js"></script> 
 <script src="js/matrix.tables.js"></script>
 <script src="js/planificar.js"></script>
+<script src="js/control.js"></script>
 @endsection
 
 <script type="text/javascript">

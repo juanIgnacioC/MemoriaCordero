@@ -28,6 +28,7 @@ Route::post('/form-common/createPlaniAnio', 'FormsController@createPlaniAnio')->
 
 Route::get('/planifications', 'FormsController@planifications')->name('forms.planifications');
 Route::get('/planificationsFilter', 'FormsController@planificationsFilter')->name('forms.planificationsFilter');
+Route::post('/eliminarInstanciaPlaniAnio', 'FormsController@eliminarInstanciaPlaniAnio')->name('forms.eliminarInstanciaPlaniAnio');
 
 //Route::get('/form-common-createInstanciaPlaniAño', 'FormsController@createInstanciaPlaniAño')->name('forms.createInstanciaPlaniAño');
 //Route::get('/form-planification', 'PlanificationController@index')->name('forms.index');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 use App\Asignatura;
 use App\Curso;
@@ -124,6 +125,29 @@ class FormsController extends Controller
         ]);
 
         $instanciaPlani->save();
+
+
+        //return view('forms.planifications');
+        //return redirect(route('forms.validation', ['instanciaPlani', $instanciaPlani]));
+        return redirect(route('forms.planifications'));
+    }
+
+    public function eliminarInstanciaPlaniAnio(Request $request)
+    {
+        $request->validate([
+            'idInstanciaPlaniAnio'=>'required'
+        ]);
+
+        //Datos eliminar InstanciaPlaniAño
+        $idInstanciaPlaniAnio = $request->get('idInstanciaPlaniAnio');
+        //dump($idInstanciaPlaniAnio);
+        $idInstanciaPlaniAnio = Crypt::decrypt($idInstanciaPlaniAnio);
+        //dump($idInstanciaPlaniAnio);
+
+        $instanciaPlani = InstanciaPlaniAño::where('id', $idInstanciaPlaniAnio)
+        ->first();
+        dump($instanciaPlani);
+        $instanciaPlani->delete();
 
 
         //return view('forms.planifications');
