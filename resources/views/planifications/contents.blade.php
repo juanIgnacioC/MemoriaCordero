@@ -305,4 +305,5 @@
 <script src="js/matrix.js"></script> 
 <script src="js/matrix.tables.js"></script>
 <script src="js/planificar.js"></script>
+<script src="js/indicadores.js"></script>
 @endsection
