@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 use App\InstanciaPlaniAño;
 use App\InstanciaUnidad;
@@ -53,6 +54,7 @@ class PlanificationsController extends Controller
         //Datos get InstanciaPlaniAño
         $curso = $request->get('curso');
         $asignatura = $request->get('asignatura');
+
         $idInstanciaPlaniAño = $request->get('idInstanciaPlaniAño');
 
         $instanciaPlani = InstanciaPlaniAño::where('id', $idInstanciaPlaniAño)

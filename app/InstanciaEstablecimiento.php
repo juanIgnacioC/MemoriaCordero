@@ -20,7 +20,7 @@ class InstanciaEstablecimiento extends Model
 	{
 		$establecimientos = InstanciaEstablecimiento::where('idDocente', $userId)
 	    ->leftJoin('Establecimiento', 'Establecimiento.id', '=', 'InstanciaEstablecimiento.idEstablecimiento')
-	    ->select('InstanciaEstablecimiento.id','Establecimiento.nombre', 'Establecimiento.isSemestral')
+	    ->select('InstanciaEstablecimiento.id','Establecimiento.nombre', 'Establecimiento.isSemestral', 'InstanciaEstablecimiento.idEstablecimiento')
 	    ->get();
 	    return $establecimientos;
 	}
@@ -34,6 +34,18 @@ class InstanciaEstablecimiento extends Model
         ->first();
 
 	    return $directivo;
+    }
+
+    public static function obtenerDocentes($id)
+    {
+        //dump($id);
+        $docentes = InstanciaEstablecimiento::where('InstanciaEstablecimiento.idEstablecimiento', $id['idEstablecimiento'])
+        ->leftJoin('users', 'users.id', '=', 'InstanciaEstablecimiento.idDocente')
+        ->where('users.type','1')
+        ->select('users.id', 'users.name', 'users.email')
+        ->get();
+
+        return $docentes;
     }
 
     public static function obtenerInstanciasAlumno($establecimiento, $anio)

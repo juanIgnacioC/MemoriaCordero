@@ -38,6 +38,7 @@ class DashboardController extends Controller
             
 
             $instanciasPlaniAño = InstanciaPlaniAño::obtenerPlanificacionesEstablecimientoAnio($establecimientos->get(0), $anios->get(0));
+            
 
             $indicadorPlaniAnio = new Collection();
             $indicadorPlaniAnioClases = new Collection();

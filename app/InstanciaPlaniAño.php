@@ -113,5 +113,26 @@ class InstanciaPlaniAño extends Model
 	    return $docente;
     }
 
-	
+    //Reporte get couont o get dataClase count vista -- mejor reutrilizar..
+    public static function obtenerPlanificacionesEstablecimientoAnioReporte($establecimiento, $anio)
+	{	
+		$instancia = InstanciaPlaniAño::where('idInstanciaEstablecimiento', $establecimiento['id'])
+		->where('anio', $anio['anio'])
+		->leftJoin('RepositorioPlanificacion', 'RepositorioPlanificacion.id', '=', 'InstanciaPlaniAño.idRepositorio')
+		->leftJoin('Curso', 'Curso.id', '=', 'RepositorioPlanificacion.idCurso')
+		->leftJoin('Asignatura', 'Asignatura.id', '=', 'RepositorioPlanificacion.idAsignatura')
+
+		->leftJoin('Retroalimentacion', 'Retroalimentacion.idInstanciaPlaniAnio', '=', 'InstanciaPlaniAño.id')
+
+		->select('InstanciaPlaniAño.id','InstanciaPlaniAño.anio', 'Curso.nombre as nombreCurso', 'Asignatura.nombre as nombreAsignatura', 'Count(Retroalimentacion.id)' )
+
+        ->groupBy('Retroalimentacion.id')
+        ->get();
+
+		dd($instancia);
+		
+		return $instancia;
+
+	}
+
 }
