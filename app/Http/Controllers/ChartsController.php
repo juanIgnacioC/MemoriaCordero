@@ -51,6 +51,9 @@ class ChartsController extends Controller
             $indicadorPlaniAnioClases = new Collection();
             $clasesRecientes = new Collection();
 
+            $planificacionesFinalizadas = 0;
+            $planificacionesPendientes = 0;
+
             foreach ($instanciasPlaniAño as $planiAnio) {
 
                 $instanciaUnidades = InstanciaUnidad::where('idInstanciaPlaniAño', $planiAnio->id)
@@ -91,6 +94,12 @@ class ChartsController extends Controller
                 //$collection->put('price', 100);
                 $indicadorPlaniAnio->push(round($avgUnidades, 1) ); //Ingreso directo->avg
 
+                //////Conteo planificaciones finalizadas
+                if(round($avgUnidades, 1) >= 4)
+                    $planificacionesFinalizadas = $planificacionesFinalizadas + 1;
+                else
+                    $planificacionesPendientes = $planificacionesPendientes + 1;
+
                 $indicadorPlaniAnioClases->push(round($avgClases, 1) );
 
                 /*if(count($dataClases) > 0){
@@ -103,6 +112,8 @@ class ChartsController extends Controller
             //dump($indicadorPlaniAnio);
             //dump($indicadorPlaniAnioClases);
 
+            dump($planificacionesFinalizadas);
+            dump($planificacionesPendientes);
 
 
 
@@ -137,7 +148,7 @@ class ChartsController extends Controller
             
 
 
-            return view('charts.docente', ['instanciasPlaniAño'=> $instanciasPlaniAño, 'establecimientos'=> $establecimientos, 'anios'=> $anios, 'correccionesRecibidas'=> $correccionesRecibidas, 'correccionesPendientes'=> $correccionesPendientes, 'correccionesRecibidasTotal'=> $correccionesRecibidasTotal, 'retroalimentacionesRecibidas'=> $retroalimentacionesRecibidas, 'conteoDocentes'=> $conteoDocentes, 'indicadorPlaniAnio'=> $indicadorPlaniAnio, 'indicadorPlaniAnioClases'=> $indicadorPlaniAnioClases]);
+            return view('charts.docente', ['instanciasPlaniAño'=> $instanciasPlaniAño, 'establecimientos'=> $establecimientos, 'anios'=> $anios, 'correccionesRecibidas'=> $correccionesRecibidas, 'correccionesPendientes'=> $correccionesPendientes, 'correccionesRecibidasTotal'=> $correccionesRecibidasTotal, 'retroalimentacionesRecibidas'=> $retroalimentacionesRecibidas, 'conteoDocentes'=> $conteoDocentes, 'indicadorPlaniAnio'=> $indicadorPlaniAnio, 'indicadorPlaniAnioClases'=> $indicadorPlaniAnioClases, 'planificacionesFinalizadas'=> $planificacionesFinalizadas, 'planificacionesPendientes'=> $planificacionesPendientes]);
 
         }
         elseif($user->privilegioDirectivoExclusivo($user['type']) ){

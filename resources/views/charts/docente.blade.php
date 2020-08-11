@@ -71,9 +71,9 @@
     <div class="quick-actions_homepage">
       <ul class="quick-actions">
         
-        <li class="bg_lg span3"> <a href="planifications"> <i class="icon-th-list"></i> Planificación(es) finalizada(s)</a> </li>
+        <li class="bg_lg span3"> <a href="planifications"> <i class="icon-th-list"></i> {{$planificacionesFinalizadas}} Planificación(es) finalizada(s)</a> </li>
 
-        <li class="bg_ly span3"> <a href="planifications"> <i class="icon-th-list"></i> Planificación(es) pendiente(s)</a> </li>
+        <li class="bg_ly span3"> <a href="planifications"> <i class="icon-th-list"></i> {{$planificacionesPendientes}} Planificación(es) pendiente(s)</a> </li>
         
         <li class="bg_lb span3"> <a href="planifications"> <i class="icon-th-list"></i> {{count($instanciasPlaniAño)}} Planificación(es) (total)</a> </li>
 
@@ -97,7 +97,7 @@
       <div class="span12">
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"> <i class="icon-signal"></i> </span>
-            <h5>Reportes</h5>
+            <h5>Indicadores</h5>
           </div>
 
           <div class="widget-content">
