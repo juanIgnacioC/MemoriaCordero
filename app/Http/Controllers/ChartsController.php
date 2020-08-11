@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Collection;
 use App\User;
 
 use App\Asignatura;
@@ -14,6 +15,8 @@ use App\InstanciaUnidad;
 use App\Establecimiento;
 use App\InstanciaEstablecimiento;
 use App\RepositorioPlanificacion;
+
+use App\IndicadorUnidad;
 
 use App\Correccion;
 use App\Retroalimentacion;
@@ -41,6 +44,69 @@ class ChartsController extends Controller
 
             //obtener instancias solo del establecimiento y año seleccionado
             $instanciasPlaniAño = InstanciaPlaniAño::obtenerPlanificacionesEstablecimientoAnio($establecimientos->get(0), $anios->get(0));
+
+            /* Reportes */
+
+            $indicadorPlaniAnio = new Collection();
+            $indicadorPlaniAnioClases = new Collection();
+            $clasesRecientes = new Collection();
+
+            foreach ($instanciasPlaniAño as $planiAnio) {
+
+                $instanciaUnidades = InstanciaUnidad::where('idInstanciaPlaniAño', $planiAnio->id)
+                ->get();
+
+                $unidad = new Collection();
+                foreach ($instanciaUnidades as $instanciaUnidad) {
+
+                    $indicadoresUnidad = IndicadorUnidad::where('idInstanciaUnidad', $instanciaUnidad->id)
+                    ->avg('IndicadorUnidad.puntuacion');
+                    
+                    //dump($indicadoresUnidad);
+                    $unidad->push($indicadoresUnidad);
+
+                }
+
+                //Promedio unidades
+                //dd($unidad);
+                $avgUnidades = $unidad->avg();
+                if($avgUnidades == null) //no existen indics
+                    $avgUnidades = 0;
+                //dd($avgUnidades);
+
+                //Promedio planificacion año con id. 0:id, 1:avg
+                // ej: Matemáticas 4to: 5
+                
+                /*$plani = new Collection();
+                $plani->push($planiAnio->id);
+                $plani->push($avgUnidades);*/
+
+                //Promedio planificacion anio
+                //$indicadorPlaniAnio->push($plani);
+                $dataClases = InstanciaUnidad::dataClases($planiAnio->id, $user['id']);
+                $avgClases = $dataClases->avg('avgRetroUnidad');
+                if($avgClases == null) //no existen indics
+                    $avgClases = 0;
+                //////////dump($dataClases);
+                //$collection->put('price', 100);
+                $indicadorPlaniAnio->push(round($avgUnidades, 1) ); //Ingreso directo->avg
+
+                $indicadorPlaniAnioClases->push(round($avgClases, 1) );
+
+                /*if(count($dataClases) > 0){
+                    $clasesR = Retroalimentacion::retroalimentacionesRecientes($planiAnio->id, $user['id']);
+                }
+
+                if(!$clasesR->isEmpty())
+                    $clasesRecientes->push($clasesR);*/ // clases recientes por planiAño
+            }
+            //dump($indicadorPlaniAnio);
+            //dump($indicadorPlaniAnioClases);
+
+
+
+
+            /* Indicadores */
 
             //////Conteo correcciones recibidas
             $correccionesRecibidas = Correccion::docenteCorreccionesRecibidas($user['id'], $establecimientos->get(0), $anios->get(0));
@@ -71,7 +137,7 @@ class ChartsController extends Controller
             
 
 
-            return view('charts.docente', ['instanciasPlaniAño'=> $instanciasPlaniAño, 'establecimientos'=> $establecimientos, 'anios'=> $anios, 'correccionesRecibidas'=> $correccionesRecibidas, 'correccionesPendientes'=> $correccionesPendientes, 'correccionesRecibidasTotal'=> $correccionesRecibidasTotal, 'retroalimentacionesRecibidas'=> $retroalimentacionesRecibidas, 'conteoDocentes'=> $conteoDocentes]);
+            return view('charts.docente', ['instanciasPlaniAño'=> $instanciasPlaniAño, 'establecimientos'=> $establecimientos, 'anios'=> $anios, 'correccionesRecibidas'=> $correccionesRecibidas, 'correccionesPendientes'=> $correccionesPendientes, 'correccionesRecibidasTotal'=> $correccionesRecibidasTotal, 'retroalimentacionesRecibidas'=> $retroalimentacionesRecibidas, 'conteoDocentes'=> $conteoDocentes, 'indicadorPlaniAnio'=> $indicadorPlaniAnio, 'indicadorPlaniAnioClases'=> $indicadorPlaniAnioClases]);
 
         }
         elseif($user->privilegioDirectivoExclusivo($user['type']) ){

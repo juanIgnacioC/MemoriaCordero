@@ -75,7 +75,7 @@
 
         <li class="bg_ly span3"> <a href="planifications"> <i class="icon-th-list"></i> Planificación(es) pendiente(s)</a> </li>
         
-        <li class="bg_lr span3"> <a href="planifications"> <i class="icon-th-list"></i> Planificación(es) restante(s)</a> </li>
+        <li class="bg_lb span3"> <a href="planifications"> <i class="icon-th-list"></i> {{count($instanciasPlaniAño)}} Planificación(es) (total)</a> </li>
 
 
         <li class="bg_lg span3"> <a href="{{ route('directivo.index') }}"> <i class="icon-pencil"></i> {{count($correccionesRecibidas)}} Corrección(es) recientes(s) UTP</a> </li>
@@ -107,8 +107,9 @@
                 <tr>
                   <th>Nombre Curso</th>
                   <th>Nombre Asignatura</th>
-                  <th>N° Correcciones</th>
-                  <th>N° Retroalimentaciones</th>
+                  <th>Indicador Planificación</th>
+                  <th>Indicador Retroalimentación</th>
+                  <th></th>
                   <th></th>
                 </tr>
               </thead>
@@ -127,15 +128,52 @@
                     </td>
 
                     <td><input type="hidden" id="anio<?=$i?>" value="<?=$row['anio']?>" readonly>
-                      <p><?=$row['anio']?></p>
+                      <p>                        
+                        @php $rating = $indicadorPlaniAnio[$i]; @endphp  
+                        @foreach(range(1,5) as $j)
+                          <span class="fa-stack" style="width:1em">
+                            @if($rating >0)
+                              @if($rating >0.5)
+                                <i class="icon-star"></i>
+                              @else
+                                <i class="icon-star-half"></i>
+                              @endif
+                            @else
+                              <i class="icon-star-empty"></i>
+                            @endif
+                            @php $rating--; @endphp
+                          </span>
+                        @endforeach
+                        (<?=$indicadorPlaniAnio[$i]?>)    
+                      </p>
                     </td>
                     
 
                     <td><input type="hidden" id="anio<?=$i?>" value="<?=$row['anio']?>" readonly>
-                      <p><?=$row['anio']?></p>
+                      <p>
+                        @php $rating = $indicadorPlaniAnioClases[$i]; @endphp  
+                        @foreach(range(1,5) as $j)
+                          <span class="fa-stack" style="width:1em">
+                            @if($rating >0)
+                              @if($rating >0.5)
+                                <i class="icon-star"></i>
+                              @else
+                                <i class="icon-star-half"></i>
+                              @endif
+                            @else
+                              <i class="icon-star-empty"></i>
+                            @endif
+                            @php $rating--; @endphp
+                          </span>
+                        @endforeach
+                        (<?=$indicadorPlaniAnioClases[$i]?>)    
+                      </p>
                     </td>
                     
                     <td><a href="planification?asignatura=<?=$row['nombreAsignatura']?>&curso=<?=$row['nombreCurso']?>&idInstanciaPlaniAño=<?=$row['id']?>" class="btn btn-primary">Planificar
+                    </a></td>
+
+                    <td><a href="retroalimentaciones?asignatura=<?=$row['nombreAsignatura']?>&idInstanciaPlaniAnio=<?=$row['id']?>" class="btn btn-success">Retroalimentaciones
                     </a></td>
                   </tr>
                 <?$i++;endforeach;?>
