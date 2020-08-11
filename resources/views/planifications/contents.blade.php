@@ -117,7 +117,7 @@
             </div>
           </div>
         </div>
-
+<!--
         <div class="widget-title"> <a href="#collapseThree" data-toggle="collapse"> <span class="icon"><i class="icon-book"></i></span>
           <h5>Objetivos de aprendizaje transversales (OAT) </h5>
           </a> <div name="agregarOAT" id="agregarOAT" class="pull-right" style="vertical-align: middle; margin-right: 5px;"> <a class="tip" href="attitudes?asignatura={{$asignatura}}&curso={{$curso}}&id={{$instanciaUnidad->id}}" title="Agregar">Agregar<i class="icon-plus-sign"></i></a> </div>
@@ -159,7 +159,7 @@
             </div>
           </div>
         </div>
-
+-->
 
       </div>
     </div>
