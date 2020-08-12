@@ -98,6 +98,7 @@ class IndicadorUnidad extends Model
 	    		//Cruce y cálculo
 	    		//0: puntuacion. 1: clases no terminadas.
 	    		$puntuacion = IndicadorUnidad::calculoIndicadorClases($data);
+	    		$puntuacion[0] = round($puntuacion[0], 1);
 	    		//dump($puntuacion);
 	    		//dump($puntuacion[1]);
 
@@ -176,7 +177,7 @@ class IndicadorUnidad extends Model
 		else
 			$puntuacion = 0;
 
-		$dataPrioridad->push($puntuacion);
+		$dataPrioridad->push(round($puntuacion, 1) );
 		$dataPrioridad->push($prioritariosNoUsados);
 		return($dataPrioridad);
 		//dd($puntuacion);

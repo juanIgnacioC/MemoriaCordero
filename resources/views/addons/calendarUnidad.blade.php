@@ -260,5 +260,6 @@
 <script src="js/matrix.js"></script> 
 <script src="js/matrix.calendar.js"></script>
 <script src="js/planificar.js"></script>
+<script src="js/indicadores.js"></script>
 <script src="js/feriados.js"></script>
 @endsection
