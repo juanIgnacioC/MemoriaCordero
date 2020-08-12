@@ -112,8 +112,8 @@ class ChartsController extends Controller
             //dump($indicadorPlaniAnio);
             //dump($indicadorPlaniAnioClases);
 
-            dump($planificacionesFinalizadas);
-            dump($planificacionesPendientes);
+            //dump($planificacionesFinalizadas);
+            //dump($planificacionesPendientes);
 
 
 
