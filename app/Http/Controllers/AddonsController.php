@@ -72,7 +72,7 @@ class AddonsController extends Controller
         //dd($clases);
 
         $indicadorClases = IndicadorUnidad::moderarIndicadorUnidad($instanciaUnidad->id, $instanciaUnidad->idUnidadFK, 'clases', $clases, 1);
-        dump($indicadorClases);
+        //dump($indicadorClases);
 
         return view('addons.calendarUnidad', ['curso'=> $curso, 'asignatura'=> $asignatura, 'instanciaUnidad'=> $instanciaUnidad, 'habilidades'=> $habilidades, 'actitudes'=> $actitudes, 'dataPlaniUnidad'=> $dataPlaniUnidad, 'clases'=> $clases, 'indicadorClases'=> $indicadorClases]);
     }
