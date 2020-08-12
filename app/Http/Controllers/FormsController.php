@@ -278,11 +278,14 @@ class FormsController extends Controller
         ->orderBy('numero', 'asc')
         ->get();
 
+        $isSemestral = InstanciaPlaniAño::obtenerTipoEstablecimiento($idInstanciaPlaniAño);
+        //dump($isSemestral['isSemestral']);
+
         //dump($instanciaPlani);
         //dump($unidades);
 
 
-        return view('forms.validation', ['instanciaPlani'=> $instanciaPlani, 'curso'=> $curso, 'asignatura'=> $asignatura, 'unidades'=> $unidades]);
+        return view('forms.validation', ['instanciaPlani'=> $instanciaPlani, 'isSemestral'=> $isSemestral['isSemestral'], 'curso'=> $curso, 'asignatura'=> $asignatura, 'unidades'=> $unidades]);
         //return view('forms.validation');
         //return redirect(route('forms.validation', ['instanciaPlani', $instanciaPlani]));
     }
