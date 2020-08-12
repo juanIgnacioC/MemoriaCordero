@@ -126,15 +126,6 @@
                     </div>
                 </div>
 
-                <div class="control-group">
-                    <div class="controls">
-                        <div class="" align="right">
-                            <label for="register">
-                            <a href="{{ route('register') }}" class="btn btn-primary stretched-link">Registro</a>
-                        </div>
-                    </div>
-                </div>
-
                 <!--<div class="control-group">
                     <div class="controls">
                         <div class="" align="right">
@@ -146,12 +137,19 @@
                 </div>-->
 
                 <div class="form-actions">
-                    <span class="pull-left"><a href="#" class="flip-link btn btn-info" id="to-recover">Lost password?</a></span>
+                    
                    
+                    <span class="pull-left">
+                        <a href="{{ route('register') }}" class="btn btn-primary stretched-link" >Registro</a></span>
 
-                    <span class="pull-right"><button type="submit" class="btn btn-success" /> Login</button></span>
+                    <span class="pull-center"><a href="#" class="flip-link btn btn-info" id="to-recover">¿Olvidaste tu contraseña?</a></span>
+
+                    <span class="pull-right">
+                        <button type="submit" class="btn btn-success" /> Iniciar sesión</button>
+                    </span>
                 </div>
             </form>
+
             <form id="recoverform" action="#" class="form-vertical">
                 <p class="normal_text">Enter your e-mail address below and we will send you instructions how to recover a password.</p>
                 
