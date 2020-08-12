@@ -137,16 +137,14 @@
                 </div>-->
 
                 <div class="form-actions">
-                    
+                    <span class="pull-right">
+                        <button type="submit" class="btn btn-success" /> Iniciar sesión</button>
+                    </span>
                    
                     <span class="pull-left">
                         <a href="{{ route('register') }}" class="btn btn-primary stretched-link" >Registro</a></span>
 
                     <span class="pull-center"><a href="#" class="flip-link btn btn-info" id="to-recover">¿Olvidaste tu contraseña?</a></span>
-
-                    <span class="pull-right">
-                        <button type="submit" class="btn btn-success" /> Iniciar sesión</button>
-                    </span>
                 </div>
             </form>
 
