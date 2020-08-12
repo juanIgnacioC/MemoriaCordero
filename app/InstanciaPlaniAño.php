@@ -101,6 +101,19 @@ class InstanciaPlaniAño extends Model
 
 	}
 
+	//Obtener tipo de planificación establecimiento (Semestral o trimestral)
+	public static function obtenerTipoEstablecimiento($idInstanciaPlaniAño)
+	{	
+		$instancia = InstanciaPlaniAño::where('InstanciaPlaniAño.id', $idInstanciaPlaniAño)
+		->leftJoin('InstanciaEstablecimiento', 'InstanciaEstablecimiento.id', '=', 'InstanciaPlaniAño.idInstanciaEstablecimiento')
+		->leftJoin('Establecimiento', 'Establecimiento.id', '=', 'InstanciaEstablecimiento.idEstablecimiento')
+		->select('Establecimiento.isSemestral')
+		->first();
+		
+		return $instancia;
+
+	}
+
 	public static function obtenerDocente($id)
     {
         $docente = InstanciaPlaniAño::where('InstanciaPlaniAño.id', $id)

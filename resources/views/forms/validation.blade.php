@@ -26,11 +26,23 @@
               <input type="hidden" id="curso" name="curso" value="&nbsp;{{$curso}}">
 
               <div class="control-group">
-                <label class="control-label">Periodo</label>
-                <div class="controls">
-                  <input type="text" name="Periodo" id="Periodo">
-                </div>
+              <label class="control-label">Periodo {{$isSemestral}}</label>
+              <div class="controls">
+                <select id="Periodo" name="Periodo">
+                  @isset($isSemestral)
+                    @if($isSemestral == "Semestre")
+                      <option value='1'>Semestre 1</option>
+                      <option value='2'>Semestre 2</option>
+
+                    @elseif(($isSemestral == "Trimestre"))
+                      <option value='1'>Trimestre 1</option>
+                      <option value='2'>Trimestre 2</option>
+                      <option value='3'>Trimestre 3</option>
+                    @endif
+                  @endisset
+                </select>
               </div>
+            </div>
 
               <div class="control-group">
               <label class="control-label">Número Unidad</label>

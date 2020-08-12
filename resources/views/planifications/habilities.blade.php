@@ -39,7 +39,7 @@
             </div>
           </div>
 
-            <button type="button" id="newAbility" class='btn btn-primary'>Nueva opción</button>
+            <button type="button" id="newAbility" class='btn btn-primary'>Nueva habilidad</button>
 
             <div class="form-actions">
               <input type="submit" value="Ingresar" onclick="jsonH()" class="btn btn-success">
