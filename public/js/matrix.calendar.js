@@ -253,6 +253,7 @@ maruti = {
 			      	var idInstanciaNuevaClase = url['id'];
 
 			      	copiedEventObject.id = idInstanciaNuevaClase;
+			      	copiedEventObject._id = idInstanciaNuevaClase;
 
 			        //$("#myModal1").modal('hide');
 			        //$("#listado").hide('slow');
@@ -508,6 +509,7 @@ maruti = {
 	            	$("#myModalEvent button.btn-danger").on('click', function() {
 				    	console.log("Eliminar datos clase");
 				    	console.log(calEvent);
+				    	console.log(calEvent.id);
 		                //calEvent.title = "holi";
 
 						$('#fullcalendar').fullCalendar('removeEvents', calEvent.id);
