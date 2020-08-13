@@ -15,7 +15,7 @@
       <span class="glyphicon glyphicon-plus"></span> Solicitar corrección
     </a>
 
-    <a href="#" title="Indicador objetivos prioritarios" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Indicador que corresponde al uso mínimo de objetivos priorizados por el MINEDUC" onclick="modalPrioridad()">Prioridad:</a>
+    <a href="#" title="Indicador objetivos prioritarios" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Indicador que corresponde al uso mínimo de objetivos priorizados por el MINEDUC. (Click para ver detalle)" onclick="modalPrioridad()">Objetivos:</a>
 
     @php $rating = $indicadorPrioridad[0]; @endphp  
     @foreach(range(1,5) as $i)
