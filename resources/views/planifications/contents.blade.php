@@ -106,7 +106,7 @@
 
         <div class="widget-title"> <a href="#collapseTwo" data-toggle="collapse"> <span class="icon"><i class="icon-book"></i></span>
           <h5>Actitudes</h5>
-          </a> <div name="agregarActitud" id="agregarActitud" class="pull-right" style="vertical-align: middle; margin-right: 5px;"> <a class="tip" href="attitudes?asignatura={{$asignatura}}&curso={{$curso}}&id={{$instanciaUnidad->id}}" title="Agregar">Agregar<i class="icon-plus-sign"></i></a> </div>
+          </a> <div name="agregarActitud" id="agregarActitud" class="pull-right" style="vertical-align: middle; margin-right: 5px;"> <a class="tip" href="attitudes?asignatura={{$asignatura}}&curso={{$curso}}&id={{Crypt::encrypt($instanciaUnidad->id )}}" title="Agregar">Agregar<i class="icon-plus-sign"></i></a> </div>
         </div>
         <div class="collapse" id="collapseTwo">
           <div class="widget-content">
