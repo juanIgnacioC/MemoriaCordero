@@ -48,6 +48,7 @@ Route::post('/abilities/createObjectives', 'PlanificationsController@createObjec
 
 Route::get('/attitudes', 'PlanificationsController@attitudes')->name('planifications.attitudes');
 Route::post('/attitudes/createAttitudes', 'PlanificationsController@createAttitudes')->name('planifications.createAttitudes');
+Route::post('/attitudes/eliminarInstanciaUnidadActitud', 'PlanificationsController@eliminarInstanciaUnidadActitud')->name('planifications.eliminarInstanciaUnidadActitud');
 
 Route::get('/users', 'AdministradorController@users')->name('admin.users');
 Route::post('/guardarCambios', 'AdministradorController@guardarCambios')->name('admin.guardarCambios');
