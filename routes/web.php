@@ -41,6 +41,7 @@ Route::get('/planification', 'PlanificationsController@index')->name('planificat
 Route::get('/contents', 'PlanificationsController@contents')->name('planifications.contents');
 Route::get('/abilities', 'PlanificationsController@abilities')->name('planifications.abilities');
 Route::post('/abilities/createAbilities', 'PlanificationsController@createAbilities')->name('planifications.createAbilities');
+Route::post('/abilities/eliminarInstanciaUnidadHabilidad', 'PlanificationsController@eliminarInstanciaUnidadHabilidad')->name('planifications.eliminarInstanciaUnidadHabilidad');
 
 Route::get('/objectives', 'PlanificationsController@objectives')->name('planifications.objectives');
 Route::post('/abilities/createObjectives', 'PlanificationsController@createObjectives')->name('planifications.createObjectives');

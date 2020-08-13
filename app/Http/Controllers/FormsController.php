@@ -149,9 +149,6 @@ class FormsController extends Controller
         dump($instanciaPlani);
         $instanciaPlani->delete();
 
-
-        //return view('forms.planifications');
-        //return redirect(route('forms.validation', ['instanciaPlani', $instanciaPlani]));
         return redirect(route('forms.planifications'));
     }
 
@@ -184,7 +181,9 @@ class FormsController extends Controller
 
         $NuevoNumero = $request->get('NuevoNumero');
         $idInstanciaPlaniAño = $request->get('idInstanciaPlaniAño');
-        
+        //$idInstanciaPlaniAño = Crypt::decrypt($idInstanciaPlaniAño);
+
+
         $objetivoGeneral = $request->get('objetivoGeneral');
         //dump($objetivoGeneral);
 
@@ -206,6 +205,8 @@ class FormsController extends Controller
         //retornar a vista vista unidades
         $curso = $request->get('curso');
         $asignatura = $request->get('asignatura');
+        $idInstanciaPlaniAño = Crypt::encrypt($idInstanciaPlaniAño);
+
         //dump($curso);
         //dump($asignatura);
 
@@ -269,6 +270,7 @@ class FormsController extends Controller
         $curso = $request->get('curso');
         $asignatura = $request->get('asignatura');
         $idInstanciaPlaniAño = $request->get('idInstanciaPlaniAño');
+        $idInstanciaPlaniAño = Crypt::decrypt($idInstanciaPlaniAño);
 
         $instanciaPlani = InstanciaPlaniAño::where('id', $idInstanciaPlaniAño)
         ->first();
