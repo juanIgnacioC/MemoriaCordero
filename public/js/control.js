@@ -24,6 +24,8 @@ function eliminarInstanciaPlaniAnio() {
     );
   }
 
+
+
   function eliminarHabilidad(id){
   $("#myModalEliminarHabilidad").modal('show');
   $("#idUnidadHabilidad").val(id);
@@ -54,6 +56,39 @@ function eliminarInstanciaPlaniAnio() {
       }
     );
   }
+
+
+  function eliminarActitud(id){
+  $("#myModalEliminarActitud").modal('show');
+  $("#idUnidadActitud").val(id);
+  return("0");
+}
+
+  function eliminarInstanciaUnidadActitud() {
+    var token = $("#token").val();
+
+    var id = $("#idUnidadActitud").val();
+    var asignatura = $("#asignatura").val();
+    var curso = $("#curso").val();
+
+    var idInstanciaUnidad = $("#idInstanciaUnidad").val();
+
+    var base_url = "<? echo base_url()?>";
+    $.post(
+      "attitudes/eliminarInstanciaUnidadActitud",
+      {
+        idInstanciaUnidadActitud: id,
+        _token:token
+      },function(){
+        $("#myModalEliminarActitud").modal('hide');
+        $("#listado").hide('slow');
+        //cambiar cargar datos
+        cargarContents(asignatura, curso, idInstanciaUnidad);
+        $("#listado").show('slow');
+      }
+    );
+  }
+
 
 
   function cargarPlanificaciones(){

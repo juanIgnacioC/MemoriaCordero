@@ -358,6 +358,32 @@ class PlanificationsController extends Controller
         return redirect(route('planifications.contents', ['asignatura'=> $asignatura, 'curso'=> $curso, 'id'=> $instanciaUnidad]) );
     }
 
+    public function eliminarInstanciaUnidadActitud(Request $request)
+    {
+        $request->validate([
+            'idInstanciaUnidadActitud'=>'required'
+        ]);
+
+        //Datos eliminar InstanciaPlaniAño
+        $idInstanciaUnidadActitud = $request->get('idInstanciaUnidadActitud');
+        //dump($idInstanciaPlaniAnio);
+        $idInstanciaUnidadActitud = Crypt::decrypt($idInstanciaUnidadActitud);
+        //dump($idInstanciaPlaniAnio);
+
+        $instanciaUnidadActitud = InstanciaUnidadActitud::where('id', $idInstanciaUnidadActitud)
+        ->first();
+        dump($instanciaUnidadActitud);
+
+        $instanciaUnidad = InstanciaUnidad::where('id', $instanciaUnidadActitud->idInstanciaUnidad)
+        ->first();
+        dump($instanciaUnidad);
+
+        //Eliminar instanciaUnidadHabilidad
+        $instanciaUnidadActitud->delete();
+
+        
+    }
+
 
     public function objectives(Request $request)
     {   

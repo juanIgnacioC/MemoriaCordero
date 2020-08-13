@@ -115,7 +115,9 @@
                 @for ($i = 0; $i < count($actitudes); $i++)
                   <li class="clearfix">
                     <div class="txt" id="actitud{{$i}}"> {{$actitudes[$i]->NuevoNombre}} <span class="by label">{{$actitudes[$i]->idObj}}</span> <span class="date badge badge-info">Actitud</span> </div>
-                    <div class="pull-right"> <a class="tip" href="" title="Editar"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Eliminar"><i class="icon-remove"></i></a> </div>
+                    <div class="pull-right"> <a class="tip" href="" title="Editar"><i class="icon-pencil"></i></a> 
+                      <a class="tip" onclick="eliminarActitud('{{Crypt::encrypt($actitudes[$i]->id ) }} ')" title="Eliminar"><i class="icon-remove"></i></a>
+                   </div>
                   </li>
                 @endfor
               </ul>
@@ -186,6 +188,29 @@
           <div class="modal-footer">
             <button class="btn" data-dismiss="modal">Cancelar</button>
             <button class="btn btn-danger" onclick="eliminarInstanciaUnidadHabilidad()">Eliminar</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="myModalEliminarActitud" style="display: none;" class="modal" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5>¿Está seguro de que desea eliminar esta actitud?</h5>
+          </div>
+          <div class="modal-body">
+            
+          <input type="hidden" id="previous" value="">
+
+          <input type="hidden" id="idUnidadActitud">
+
+
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal">Cancelar</button>
+            <button class="btn btn-danger" onclick="eliminarInstanciaUnidadActitud()">Eliminar</button>
           </div>
         </div>
       </div>
