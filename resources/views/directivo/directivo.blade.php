@@ -64,8 +64,8 @@
                     </td>
                     
 
-                    <td><a href="contents?asignatura=<?=$row['asignatura']?>&curso=<?=$row['curso']?>&id=<?=$row['idInstanciaUnidad']?>" target="_blank" class="btn btn-primary">Visualizar
-                    </a></td>
+                    <td><a href="contents?asignatura=<?=$row['asignatura']?>&curso=<?=$row['curso']?>&id={{Crypt::encrypt($row['idInstanciaUnidad'] )}}" target="_blank" class="btn btn-primary">Visualizar
+                      </a></td>
                     <td><a href="revision?correcciones={{$correcciones[$i]}}" class="btn btn-success">Corregir
                     </a></td>
                   </tr>
