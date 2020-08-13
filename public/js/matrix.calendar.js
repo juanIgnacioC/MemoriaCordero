@@ -254,6 +254,8 @@ maruti = {
 
 			      	copiedEventObject.id = idInstanciaNuevaClase;
 			      	copiedEventObject._id = idInstanciaNuevaClase;
+			      	$('#fullcalendar').fullCalendar('updateEvent', copiedEventObject);
+			      	$('#fullcalendar').fullCalendar('renderEvent', copiedEventObject, true);
 
 			        //$("#myModal1").modal('hide');
 			        //$("#listado").hide('slow');
@@ -265,6 +267,7 @@ maruti = {
 					
 				// render the event on the calendar
 				// the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+				$('#fullcalendar').fullCalendar('updateEvent', copiedEventObject);
 				$('#fullcalendar').fullCalendar('renderEvent', copiedEventObject, true);
 					
 				// is the "remove after drop" checkbox checked?
