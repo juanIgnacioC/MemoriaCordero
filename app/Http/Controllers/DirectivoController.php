@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use App\User;
 
 use App\Establecimiento;
@@ -95,6 +96,8 @@ class DirectivoController extends Controller
         if($user->privilegioDocente($user['type']) ) {
 
             $idInstanciaUnidad = $request->get('idInstanciaUnidad');
+            $idInstanciaUnidad = Crypt::decrypt($idInstanciaUnidad);
+
             $curso = $request->get('curso');
             $asignatura = $request->get('asignatura');
 
@@ -115,6 +118,7 @@ class DirectivoController extends Controller
             $directivo = InstanciaEstablecimiento::obtenerDirectivo($instanciasEstablecimiento->idEstablecimiento);
 
             $correccion = $request->get('correccion');
+            $correccion = Crypt::decrypt($correccion);
             //dd($correccion);
 
             //Si se solicita una corrección desde una revisión se agrega $correccion
@@ -200,6 +204,7 @@ class DirectivoController extends Controller
 
             $instanciaUnidad = InstanciaUnidad::where('id', $idInstanciaUnidad)
             ->first();
+            $instanciaUnidad = Crypt::encrypt($instanciaUnidad->id );
 
             //dd($instanciaUnidad->id);
 
@@ -227,6 +232,7 @@ class DirectivoController extends Controller
         if($user->privilegioDirectivoExclusivo($user['type']) ) {
 
             $idInstanciaUnidad = $request->get('instanciaUnidad');
+            $idInstanciaUnidad = Crypt::decrypt($idInstanciaUnidad);
 
             $instanciaUnidad = InstanciaUnidad::where('id', $idInstanciaUnidad)
             ->first();

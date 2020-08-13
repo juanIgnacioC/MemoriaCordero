@@ -372,6 +372,7 @@ class PlanificationsController extends Controller
         $curso = $request->get('curso');
         $asignatura = $request->get('asignatura');
         $id = $request->get('id');
+        $id = Crypt::decrypt($id);
 
         $instanciaUnidad = InstanciaUnidad::where('id', $id)
         ->first();
@@ -502,8 +503,10 @@ class PlanificationsController extends Controller
         //retornar a vista vista unidad
         $curso = $request->get('curso');
         $asignatura = $request->get('asignatura');
+        $instanciaUnidad = Crypt::encrypt($instanciaUnidad->id);
         //dump($curso);
         //dump($asignatura);
+
 
         return redirect(route('planifications.contents', ['asignatura'=> $asignatura, 'curso'=> $curso, 'id'=> $instanciaUnidad]) );
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 use App\InstanciaUnidad;
 use App\InstanciaUnidadHabilidad;
@@ -50,6 +51,7 @@ class AddonsController extends Controller
         $curso = $request->get('curso');
         $asignatura = $request->get('asignatura');
         $id = $request->get('id');
+        $id = Crypt::decrypt($id);
 
         $instanciaUnidad = InstanciaUnidad::where('id', $id)
         ->first();

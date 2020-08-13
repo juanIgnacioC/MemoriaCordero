@@ -3,7 +3,7 @@
 @section('content')
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="{{ route('dashboard.index') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{ route('forms.planifications') }}" class="tip-bottom">Planificaciones</a> <a href="planification?asignatura={{$asignatura}}&curso={{$curso}}&idInstanciaPlaniAño={{$instanciaUnidad->idInstanciaPlaniAño}}" class="current">Planificación</a>  <a href="contents?asignatura={{$asignatura}}&curso={{$curso}}&id={{$instanciaUnidad->id}}" class="current">Unidad</a> <a href="#" class="current">Calendario</a> </div>
+    <div id="breadcrumb"> <a href="{{ route('dashboard.index') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{ route('forms.planifications') }}" class="tip-bottom">Planificaciones</a> <a href="planification?asignatura={{$asignatura}}&curso={{$curso}}&idInstanciaPlaniAño={{Crypt::encrypt($instanciaUnidad->idInstanciaPlaniAño )}}" class="current">Planificación</a>  <a href="contents?asignatura={{$asignatura}}&curso={{$curso}}&id={{Crypt::encrypt($instanciaUnidad->id )}}" class="current">Unidad</a> <a href="#" class="current">Calendario</a>  </div>
     <h1>Calendario {{$curso}} {{$asignatura}}</h1>
   </div>
 
@@ -33,7 +33,7 @@
         <div class="widget-box widget-calendar">
           <div class="widget-title"> <span class="icon"><i class="icon-calendar"></i></span>
             <h5>Calendar</h5>
-            <div class="buttons"> <a id="add-event" href="objectives?asignatura={{$asignatura}}&curso={{$curso}}&id={{$instanciaUnidad->id}}" class="btn btn-inverse btn-mini"><i class="icon-plus icon-white"></i> Agregar Objetivo</a>
+            <div class="buttons"> <a id="add-event" href="objectives?asignatura={{$asignatura}}&curso={{$curso}}&id={{Crypt::encrypt($instanciaUnidad->id )}}" class="btn btn-inverse btn-mini"><i class="icon-plus icon-white"></i> Agregar Objetivo</a>
 
               <div class="modal hide" id="modal-add-event">
                 <div class="modal-header">
