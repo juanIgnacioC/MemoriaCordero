@@ -178,7 +178,7 @@
                         <span class="done">Finalizada</span>
 
                       @elseif($row['estado'] == "2")
-                        <a href="solicitar?asignatura=<?=$row['asignatura']?>&curso=<?=$row['curso']?>&idInstanciaUnidad=<?=$row['idInstanciaUnidad']?>&correccion=<?=$row['id']?>" class="btn btn-success" class="btn btn-success">
+                        <a href="solicitar?asignatura=<?=$row['asignatura']?>&curso=<?=$row['curso']?>&idInstanciaUnidad={{Crypt::encrypt($row['idInstanciaUnidad'])}}&correccion=<?=$row['id']?>" class="btn btn-success" class="btn btn-success">
                         <span class="glyphicon glyphicon-plus"></span> Solicitar corrección
                         </a>
 

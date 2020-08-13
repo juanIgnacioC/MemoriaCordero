@@ -170,7 +170,7 @@
                       </p>
                     </td>
                     
-                    <td><a href="planification?asignatura=<?=$row['nombreAsignatura']?>&curso=<?=$row['nombreCurso']?>&idInstanciaPlaniAño=<?=$row['id']?>" class="btn btn-primary">Planificar
+                    <td><a href="planification?asignatura=<?=$row['nombreAsignatura']?>&curso=<?=$row['nombreCurso']?>&idInstanciaPlaniAño={{Crypt::encrypt($row['id'] )}}" class="btn btn-primary">Planificar
                     </a></td>
 
                     <td><a href="retroalimentaciones?asignatura=<?=$row['nombreAsignatura']?>&idInstanciaPlaniAnio=<?=$row['id']?>" class="btn btn-success">Retroalimentaciones
