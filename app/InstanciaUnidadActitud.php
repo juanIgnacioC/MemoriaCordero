@@ -18,6 +18,8 @@ class InstanciaUnidadActitud extends Model
     public static function obtener($idUnidad)
 	{
 		$actitudes = InstanciaUnidadActitud::where('idInstanciaUnidad', $idUnidad)
+        ->leftJoin('Actitud', 'Actitud.id', '=', 'InstanciaUnidadActitud.idActitudFK')
+        ->select('InstanciaUnidadActitud.id','InstanciaUnidadActitud.NuevoNombre', 'InstanciaUnidadActitud.idInstanciaUnidad', 'InstanciaUnidadActitud.idActitudFK', 'Actitud.idObj')
 	    ->get();
 
 	    return $actitudes;

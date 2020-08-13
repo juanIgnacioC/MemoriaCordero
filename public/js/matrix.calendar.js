@@ -293,8 +293,8 @@ maruti = {
 		    //Se arrastra evento y se suelta
 			eventDrop: function(event, delta, revertFunc) {
 				//Actualizar BD
-			    console.log("drop drag");
-			    console.log(event);
+			    ///console.log("drop drag");
+			    ///console.log(event);
 			    //console.log(delta);
 			    //console.log(revertFunc);
 
@@ -331,7 +331,7 @@ maruti = {
 					var s = end.getSeconds();	
 
 					var dateEnd = String(`${y}-${m}-${d} ${h}:${min}:${s}`);
-					console.log(dateEnd);
+					//console.log(dateEnd);
 					
 					end = dateEnd;
 				}
@@ -379,8 +379,8 @@ maruti = {
 			  //Clase se cambia su tamaño
 			  eventResize: function(event, delta, revertFunc) {
 			  	//Update Clase BD
-			  	console.log("event resize");
-			  	console.log(event);
+			  	///console.log("event resize");
+			  	///console.log(event);
 			    //console.log(delta);
 			    //console.log(revertFunc);
 
@@ -417,7 +417,7 @@ maruti = {
 					var s = end.getSeconds();	
 
 					var dateEnd = String(`${y}-${m}-${d} ${h}:${min}:${s}`);
-					console.log(dateEnd);
+					//console.log(dateEnd);
 					
 					end = dateEnd;
 				}

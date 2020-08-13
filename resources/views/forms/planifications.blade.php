@@ -129,7 +129,7 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5>¿Está seguro de que desea eliminar este registro?</h5>
+            <h5>¿Está seguro de que desea eliminar esta planificación?</h5>
           </div>
           <div class="modal-body">
             
