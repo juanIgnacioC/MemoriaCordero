@@ -80,7 +80,7 @@
                         <span class="glyphicon glyphicon-plus"></span> Confirmar
                         </a>
                       @else
-                        <a href="solicitar?asignatura=<?=$row['asignatura']?>&curso=<?=$row['curso']?>&idInstanciaUnidad={{Crypt::encrypt($row['idInstanciaUnidad'])}}&correccion={{Crypt::encrypt($row['id'])}}" class="btn btn-success" class="btn btn-success">
+                        <a href="solicitar?asignatura=<?=$row['asignatura']?>&curso=<?=$row['curso']?>&idInstanciaUnidad={{Crypt::encrypt($row['idInstanciaUnidad'])}}&correccion=<?=$row['id']?>" class="btn btn-success" class="btn btn-success">
                         <span class="glyphicon glyphicon-plus"></span> Solicitar corrección
                         </a>
                       @endif
@@ -171,7 +171,7 @@
 
                     <td class="taskStatus">
                       @if($row['flujo'] == "4" && $row['estado'] == "2")
-                        <a href="solicitar?asignatura=<?=$row['asignatura']?>&curso=<?=$row['curso']?>&idInstanciaUnidad=<?=$row['idInstanciaUnidad']?>&correccion=<?=$row['id']?>" class="btn btn-success" class="btn btn-success">
+                        <a href="#" class="btn btn-success" class="btn btn-success">
                         <span class="glyphicon glyphicon-plus"></span> Confirmar
                         </a>
                       @elseif($row['estado'] == "3")
