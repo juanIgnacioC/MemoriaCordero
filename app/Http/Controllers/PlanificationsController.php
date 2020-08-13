@@ -98,7 +98,7 @@ class PlanificationsController extends Controller
 
         //instancias habilidades y actitudes
         $habilidades = InstanciaUnidadHabilidad::obtener($instanciaUnidad->id);
-        //dump($habilidades);
+        dump($habilidades);
 
         $actitudes = InstanciaUnidadActitud::obtener($instanciaUnidad->id);
         //dump($actitudes);

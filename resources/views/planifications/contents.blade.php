@@ -89,7 +89,7 @@
               <ul>
                 @for ($i = 0; $i < count($habilidades); $i++)
                   <li class="clearfix">
-                    <div class="txt" id="habilidad{{$i}}"> {{$habilidades[$i]->NuevoNombre}} <span class="by label">Admin</span> <span class="date badge badge-info">Habilidad</span> </div>
+                    <div class="txt" id="habilidad{{$i}}"> {{$habilidades[$i]->NuevoNombre}} <span class="by label">{{$habilidades[$i]->idObj}}</span> <span class="date badge badge-info">Habilidad</span> </div>
                     <div class="pull-right"> <a class="tip" href="" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
                   </li>
                 @endfor
@@ -109,7 +109,7 @@
               <ul>
                 @for ($i = 0; $i < count($actitudes); $i++)
                   <li class="clearfix">
-                    <div class="txt" id="actitud{{$i}}"> {{$actitudes[$i]->NuevoNombre}} <span class="by label">Admin</span> <span class="date badge badge-info">Actitud</span> </div>
+                    <div class="txt" id="actitud{{$i}}"> {{$actitudes[$i]->NuevoNombre}} <span class="by label">{{$actitudes[$i]->idObj}}</span> <span class="date badge badge-info">Actitud</span> </div>
                     <div class="pull-right"> <a class="tip" href="" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
                   </li>
                 @endfor
