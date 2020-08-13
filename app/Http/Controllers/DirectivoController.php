@@ -118,7 +118,6 @@ class DirectivoController extends Controller
             $directivo = InstanciaEstablecimiento::obtenerDirectivo($instanciasEstablecimiento->idEstablecimiento);
 
             $correccion = $request->get('correccion');
-            $correccion = Crypt::decrypt($correccion);
             //dd($correccion);
 
             //Si se solicita una corrección desde una revisión se agrega $correccion
