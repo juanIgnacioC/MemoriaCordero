@@ -230,7 +230,7 @@ maruti = {
 				var idInstanciaUnidadObjetivo = json['evaluacion']['idInstanciaUnidadObjetivo'];
 
 				copiedEventObject.idInstanciaUnidad = idInstanciaUnidad;
-				copiedEventObject.idInstanciaUnidadObjetivo = aidInstanciaUnidadObjetivollDay;
+				copiedEventObject.idInstanciaUnidadObjetivo = idInstanciaUnidadObjetivo;
 
 
 

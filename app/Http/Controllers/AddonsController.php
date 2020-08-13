@@ -116,8 +116,9 @@ class AddonsController extends Controller
             'idInstanciaUnidadObjetivo' => $idInstanciaUnidadObjetivo
             ]);
         //dd($InstanciaClase);
-        dump($InstanciaClase);
+        //dump($InstanciaClase);
         $InstanciaClase->save();
+        dump($InstanciaClase);
 
         //retornar a vista vista calendar
         /*$curso = $request->get('curso');
