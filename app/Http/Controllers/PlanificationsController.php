@@ -56,6 +56,7 @@ class PlanificationsController extends Controller
         $asignatura = $request->get('asignatura');
 
         $idInstanciaPlaniAño = $request->get('idInstanciaPlaniAño');
+        $idInstanciaPlaniAño = Crypt::decrypt($idInstanciaPlaniAño);
 
         $instanciaPlani = InstanciaPlaniAño::where('id', $idInstanciaPlaniAño)
         ->first();
@@ -89,6 +90,8 @@ class PlanificationsController extends Controller
         $curso = $request->get('curso');
         $asignatura = $request->get('asignatura');
         $id = $request->get('id');
+        $id = Crypt::decrypt($id);
+        //dd($id);
 
         $instanciaUnidad = InstanciaUnidad::where('id', $id)
         ->first();
@@ -98,7 +101,7 @@ class PlanificationsController extends Controller
 
         //instancias habilidades y actitudes
         $habilidades = InstanciaUnidadHabilidad::obtener($instanciaUnidad->id);
-        dump($habilidades);
+        //dump($habilidades);
 
         $actitudes = InstanciaUnidadActitud::obtener($instanciaUnidad->id);
         //dump($actitudes);
@@ -138,6 +141,8 @@ class PlanificationsController extends Controller
         $curso = $request->get('curso');
         $asignatura = $request->get('asignatura');
         $id = $request->get('id');
+        $id = Crypt::decrypt($id);
+
 
         $instanciaUnidad = InstanciaUnidad::where('id', $id)
         ->first();
@@ -195,6 +200,75 @@ class PlanificationsController extends Controller
             $InstanciaUnidadHabilidad->save();
 
         }
+
+        //retornar a vista vista unidad
+        $curso = $request->get('curso');
+        $asignatura = $request->get('asignatura');
+        //dd($instanciaUnidad);
+        $instanciaUnidad = Crypt::encrypt($instanciaUnidad->id);
+        //dump($curso);
+        //dump($asignatura);
+
+
+        return redirect(route('planifications.contents', ['asignatura'=> $asignatura, 'curso'=> $curso, 'id'=> $instanciaUnidad]) );
+    }
+
+    public function eliminarInstanciaUnidadHabilidad(Request $request)
+    {
+        $request->validate([
+            'idInstanciaUnidadHabilidad'=>'required'
+        ]);
+
+        //Datos eliminar InstanciaPlaniAño
+        $idInstanciaUnidadHabilidad = $request->get('idInstanciaUnidadHabilidad');
+        //dump($idInstanciaPlaniAnio);
+        $idInstanciaUnidadHabilidad = Crypt::decrypt($idInstanciaUnidadHabilidad);
+        //dump($idInstanciaPlaniAnio);
+
+        $instanciaUnidadHabilidad = InstanciaUnidadHabilidad::where('id', $idInstanciaUnidadHabilidad)
+        ->first();
+        dump($instanciaUnidadHabilidad);
+
+        $instanciaUnidad = InstanciaUnidad::where('id', $instanciaUnidadHabilidad->idInstanciaUnidad)
+        ->first();
+        dump($instanciaUnidad);
+
+        //Eliminar instanciaUnidadHabilidad
+        $instanciaUnidadHabilidad->delete();
+
+        
+    }
+
+    public function guardarCambiosHabilidad(Request $request)
+    {
+        $request->validate([
+        ]);
+
+        //Datos editar Habilidad
+        $id = $request->get('id');
+        $name = $request->get('name');
+        $email = $request->get('email');
+        $type = $request->get('type');
+
+
+        //dump($idInstanciaPlaniAnio);
+        //Decrypts 
+        $idInstanciaPlaniAnio = Crypt::decrypt($idInstanciaPlaniAnio);
+        //dump($idInstanciaPlaniAnio);
+
+        $user = User::where('id', $id)
+        ->first();
+
+        $user->name = $name;
+        $user->email = $email;
+        $user->type = $type;
+
+        $user->save();
+
+
+        //Contents redirect
+        $instanciaUnidad = InstanciaUnidad::where('id', $idInstanciaUnidad)
+        ->first();
 
         //retornar a vista vista unidad
         $curso = $request->get('curso');

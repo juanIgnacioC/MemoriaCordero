@@ -3,13 +3,13 @@
 @section('content')
 <div id="content">
 <div id="content-header">
-  <div id="breadcrumb"> <a href="{{ route('dashboard.index') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{ route('forms.planifications') }}" class="tip-bottom">Planificaciones</a> <a href="planification?asignatura={{$asignatura}}&curso={{$curso}}&idInstanciaPlaniAño={{$instanciaPlani->id}}" class="current">Planificación</a> </div>
+  <div id="breadcrumb"> <a href="{{ route('dashboard.index') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{ route('forms.planifications') }}" class="tip-bottom">Planificaciones</a> <a href="#" class="current">Planificación</a> </div>
   <h1>Unidades {{$curso}} {{$asignatura}} {{$instanciaPlani->anio}}</h1>
 </div>
     
     <hr>
 
-    <a href="form-validation?asignatura={{$asignatura}}&curso={{$curso}}&idInstanciaPlaniAño={{$instanciaPlani->id}}" class="btn btn-success">
+    <a href="form-validation?asignatura={{$asignatura}}&curso={{$curso}}&idInstanciaPlaniAño={{Crypt::encrypt($instanciaPlani->id ) }}" class="btn btn-success">
       <span class="glyphicon glyphicon-plus"></span> Agregar Unidad
     </a>
 
@@ -61,7 +61,7 @@
                     </td>
                     
 
-                    <td><a href="contents?asignatura={{$asignatura}}&curso={{$curso}}&id=<?=$row['id']?>" class="btn btn-primary">Planificar
+                    <td><a href="contents?asignatura={{$asignatura}}&curso={{$curso}}&id={{Crypt::encrypt($row['id'])}}" class="btn btn-primary">Planificar
                     </a></td>
                     <td><button id="eliminar<?=$i?>" name="eliminar<?=$i?>" class="btn btn-danger" >Eliminar</button></td>
                   </tr>

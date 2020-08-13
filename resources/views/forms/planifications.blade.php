@@ -111,7 +111,7 @@
                     </td>
                     
 
-                    <td><a href="planification?asignatura=<?=$row['nombreAsignatura']?>&curso=<?=$row['nombreCurso']?>&idInstanciaPlaniAño=<?=$row['id']?>" class="btn btn-primary">Planificar
+                    <td><a href="planification?asignatura=<?=$row['nombreAsignatura']?>&curso=<?=$row['nombreCurso']?>&idInstanciaPlaniAño={{Crypt::encrypt($row['id'])}}" class="btn btn-primary">Planificar
                     </a></td>
 
                     <td><button id="eliminar<?=$i?>" name="eliminar<?=$i?>" onclick="eliminarClase('{{Crypt::encrypt($row['id'])}} ')" class="btn btn-danger" >Eliminar</button></td>

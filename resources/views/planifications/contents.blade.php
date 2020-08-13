@@ -3,7 +3,7 @@
 @section('content')
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="{{ route('dashboard.index') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{ route('forms.planifications') }}" class="tip-bottom">Planificaciones</a> <a href="planification?asignatura={{$asignatura}}&curso={{$curso}}&idInstanciaPlaniAño={{$instanciaUnidad->idInstanciaPlaniAño}}" class="current">Planificación</a>  <a href="#" class="current">Unidad</a></div>
+    <div id="breadcrumb"> <a href="{{ route('dashboard.index') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{ route('forms.planifications') }}" class="tip-bottom">Planificaciones</a> <a href="planification?asignatura={{$asignatura}}&curso={{$curso}}&idInstanciaPlaniAño={{Crypt::encrypt($instanciaUnidad->idInstanciaPlaniAño )}}" class="current">Planificación</a>  <a href="#" class="current">Unidad</a></div>
 
     <h1><strong>Unidad {{$instanciaUnidad->NuevoNumero}}</strong>:  {{$instanciaUnidad->NuevoNombre}}. {{$curso}} - {{$asignatura}}
     </h1>
@@ -73,6 +73,9 @@
     <hr>
 
     <input type="hidden" id="token" value="{{ csrf_token() }}" readonly>
+    <input type="hidden" id="asignatura" value="{{ $asignatura }}" readonly>
+    <input type="hidden" id="curso" value="{{ $curso }}" readonly>
+    <input type="hidden" id="idInstanciaUnidad" value="{{Crypt::encrypt($instanciaUnidad->id )}}" readonly>
 
     <div id="listado">
 
@@ -80,7 +83,7 @@
 
         <div class="widget-title"> <a href="#collapseOne" data-toggle="collapse"> <span class="icon"><i class="icon-book"></i></span>
           <h5>Habilidades</h5>
-          </a> <div name="agregarHabilidad" id="agregarHabilidad" class="pull-right" style="vertical-align: middle; margin-right: 5px;"> <a class="tip" href="abilities?asignatura={{$asignatura}}&curso={{$curso}}&id={{$instanciaUnidad->id}}" title="Agregar">Agregar<i class="icon-plus-sign"></i></a> </div>
+          </a> <div name="agregarHabilidad" id="agregarHabilidad" class="pull-right" style="vertical-align: middle; margin-right: 5px;"> <a class="tip" href="abilities?asignatura={{$asignatura}}&curso={{$curso}}&id={{Crypt::encrypt($instanciaUnidad->id )}}" title="Agregar">Agregar<i class="icon-plus-sign"></i></a> </div>
         </div>
 
         <div class="collapse" id="collapseOne">
@@ -90,7 +93,9 @@
                 @for ($i = 0; $i < count($habilidades); $i++)
                   <li class="clearfix">
                     <div class="txt" id="habilidad{{$i}}"> {{$habilidades[$i]->NuevoNombre}} <span class="by label">{{$habilidades[$i]->idObj}}</span> <span class="date badge badge-info">Habilidad</span> </div>
-                    <div class="pull-right"> <a class="tip" href="" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
+                    <div class="pull-right"> <a class="tip" href="" title="Editar"><i class="icon-pencil"></i></a>
+                    <a class="tip" onclick="eliminarHabilidad('{{Crypt::encrypt($habilidades[$i]->id ) }} ')" title="Eliminar"><i class="icon-remove"></i></a> 
+                    </div>
                   </li>
                 @endfor
 
@@ -110,7 +115,7 @@
                 @for ($i = 0; $i < count($actitudes); $i++)
                   <li class="clearfix">
                     <div class="txt" id="actitud{{$i}}"> {{$actitudes[$i]->NuevoNombre}} <span class="by label">{{$actitudes[$i]->idObj}}</span> <span class="date badge badge-info">Actitud</span> </div>
-                    <div class="pull-right"> <a class="tip" href="" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
+                    <div class="pull-right"> <a class="tip" href="" title="Editar"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Eliminar"><i class="icon-remove"></i></a> </div>
                   </li>
                 @endfor
               </ul>
@@ -162,6 +167,29 @@
 -->
 
       </div>
+    </div>
+
+    <div id="myModalEliminarHabilidad" style="display: none;" class="modal" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5>¿Está seguro de que desea eliminar esta habilidad?</h5>
+          </div>
+          <div class="modal-body">
+            
+          <input type="hidden" id="previous" value="">
+
+          <input type="hidden" id="idUnidadHabilidad">
+
+
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal">Cancelar</button>
+            <button class="btn btn-danger" onclick="eliminarInstanciaUnidadHabilidad()">Eliminar</button>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <hr>
@@ -305,5 +333,7 @@
 <script src="js/matrix.js"></script> 
 <script src="js/matrix.tables.js"></script>
 <script src="js/planificar.js"></script>
+
 <script src="js/indicadores.js"></script>
+<script src="js/control.js"></script>
 @endsection
