@@ -169,8 +169,8 @@ maruti = {
 				copiedEventObject.allDay = allDay;
 
 
-				console.log("copiedEvent");
-				console.log(copiedEventObject);
+				//console.log("copiedEvent");
+				//console.log(copiedEventObject);
 
 				//Guardar BD Ajax
 				json = copiedEventObject['json'];
@@ -230,7 +230,7 @@ maruti = {
 				var idInstanciaUnidadObjetivo = json['evaluacion']['idInstanciaUnidadObjetivo'];
 
 				copiedEventObject.idInstanciaUnidad = idInstanciaUnidad;
-				copiedEventObject.idInstanciaUnidadObjetivo = aidInstanciaUnidadObjetivollDay;
+				copiedEventObject.idInstanciaUnidadObjetivo = idInstanciaUnidadObjetivo;
 
 
 
@@ -246,7 +246,14 @@ maruti = {
 			        idInstanciaUnidad: idInstanciaUnidad,
 			        idInstanciaUnidadObjetivo: idInstanciaUnidadObjetivo,
 			        _token:token
-			      },function(){
+			      },function(url, data){
+
+			      	//Actualizar id interfaz calendar con id clase BD
+			      	//console.log(url);
+			      	var idInstanciaNuevaClase = url['id'];
+
+			      	copiedEventObject.id = idInstanciaNuevaClase;
+
 			        //$("#myModal1").modal('hide');
 			        //$("#listado").hide('slow');
 			        //cambiar cargar datos
@@ -284,8 +291,8 @@ maruti = {
 				//Actualizar BD
 			    console.log("drop drag");
 			    console.log(event);
-			    console.log(delta);
-			    console.log(revertFunc);
+			    //console.log(delta);
+			    //console.log(revertFunc);
 
 				var token = $("#token").val();
 
