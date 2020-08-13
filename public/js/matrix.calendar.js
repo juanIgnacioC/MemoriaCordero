@@ -30,10 +30,10 @@ $(document).ready(function(){
 	    }
 	});
 
-	console.log("waiting");
+	//console.log("waiting");
 	$.when (promesa1).done(function (response) {
 	            var feriados = [];
-	            console.log("query");
+	            //console.log("query");
 	            /*console.log($(response['items']));
 	            console.log($(response['items']['0'])  );*/
 
@@ -48,10 +48,10 @@ $(document).ready(function(){
 	                overlap: false
 	            });
 	        });
-	            console.log("envets!!!!!");
+	            //console.log("envets!!!!!");
 	            var json = JSON.stringify(feriados);
 	            $('#feriados').val(json).trigger('change');
-	            console.log(feriados);
+	            //console.log(feriados);
 
 
 
@@ -71,7 +71,7 @@ $(document).ready(function(){
 	    })
 	//var fds = await iniciarCalendario();
 	//console.log(fds);
-	console.log("go");
+	//console.log("go");
 
 		
 });
@@ -105,9 +105,9 @@ maruti = {
 
 		var clasesBD = $("#clases").val();
 		var clasesJson = JSON.parse(clasesBD);
-		console.log("clasesBD");
+		//.log("clasesBD");
 		//console.log(clasesBD);
-		console.log(clasesJson);
+		//console.log(clasesJson);
 		//var events = [];
       	/*events.push({
 	        title: $(this).attr('title'),
@@ -168,19 +168,20 @@ maruti = {
 				copiedEventObject.start = date;
 				copiedEventObject.allDay = allDay;
 
+
 				console.log("copiedEvent");
 				console.log(copiedEventObject);
 
 				//Guardar BD Ajax
 				json = copiedEventObject['json'];
-				console.log(json);
+				//console.log(json);
 
 				var token = $("#token").val();
 				//var idFc = json[]
 				var start = copiedEventObject.start;
 				var end = copiedEventObject.end;
-				console.log("startPrev");
-				console.log(start);
+				///console.log("startPrev");
+				///console.log(start);
 				//console.log(start.toISOString());
 				//console.log(start.toGMTString());
 
@@ -200,9 +201,9 @@ maruti = {
 				console.log(min);
 				console.log(s);*/
 
-				console.log("dateN");
+				//console.log("dateN");
 				var dateN = String(`${y}-${m}-${d} ${h}:${min}:${s}`);
-				console.log(dateN);
+				//console.log(dateN);
 				start = dateN;
 
 
@@ -210,8 +211,8 @@ maruti = {
 				  replace(/T/, ' ').      // replace T with a space
 				  replace(/\..+/, '')     // delete the dot and everything after*/
 
-				console.log("start");
-				console.log(start);
+				//console.log("start");
+				//console.log(start);
 
 				var title = copiedEventObject.title;
 				var description = copiedEventObject.description;
@@ -227,6 +228,11 @@ maruti = {
 
 				var idInstanciaUnidad = json['idInstanciaUnidad'];
 				var idInstanciaUnidadObjetivo = json['evaluacion']['idInstanciaUnidadObjetivo'];
+
+				copiedEventObject.idInstanciaUnidad = idInstanciaUnidad;
+				copiedEventObject.idInstanciaUnidadObjetivo = aidInstanciaUnidadObjetivollDay;
+
+
 
 			    var base_url = "<? echo base_url()?>";
 			    $.post(
@@ -301,7 +307,7 @@ maruti = {
 				//var dateN = this.parseDate(start);
 				//var dateEnd = this.parseDate(end);
 
-				console.log(dateN);
+				//console.log(dateN);
 				start = dateN;
 
 				if(end != null){
@@ -387,7 +393,7 @@ maruti = {
 				//var dateN = this.parseDate(start);
 				//var dateEnd = this.parseDate(end);
 
-				console.log(dateN);
+				//console.log(dateN);
 				start = dateN;
 
 				if(end != null){
