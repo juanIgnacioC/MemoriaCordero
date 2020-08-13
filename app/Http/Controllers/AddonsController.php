@@ -118,7 +118,8 @@ class AddonsController extends Controller
         //dd($InstanciaClase);
         //dump($InstanciaClase);
         $InstanciaClase->save();
-        dump($InstanciaClase);
+        //dump($InstanciaClase);
+        return($InstanciaClase);
 
         //retornar a vista vista calendar
         /*$curso = $request->get('curso');
