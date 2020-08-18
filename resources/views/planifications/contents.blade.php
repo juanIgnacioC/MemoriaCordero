@@ -314,8 +314,9 @@
           <div class="modal-header">
             <h5>Objetivos prioritarios sin usar</h5>
           </div>
+
           <div class="modal-body">
-            <table class="table table-bordered data-table">
+            <table class="table table-bordered data">
               <thead>
                 <tr>
                   <th>Objetivo Aprendizaje (OA)</th>
@@ -326,8 +327,6 @@
                 @isset($indicadorPrioridad)
                 <?$i=0;foreach($indicadorPrioridad[1] as $row):?>
                   <tr class="trhideclass<?=$i?>">
-
-
                     <td><input type="hidden" id="indicadorPrioridad<?=$i?>" value="<?=$row->id?>" readonly>
                       <p><?=$row->idObj?></p>
                     </td>
@@ -342,18 +341,20 @@
               </tbody>
             </table>
           </div>
+
           <div class="modal-footer">
             <button class="btn" data-dismiss="modal">Cerrar</button>
           </div>
+
         </div>
       </div>
 </div>
 
 <script src="js/jquery.min.js"></script> 
 <script src="js/jquery.ui.custom.js"></script> 
-<script src="js/bootstrap.min.js"></script> 
 <script src="js/jquery.uniform.js"></script> 
 <script src="js/select2.min.js"></script> 
+<script src="js/bootstrap.min.js"></script> 
 <script src="js/jquery.dataTables.min.js"></script> 
 <script src="js/matrix.js"></script> 
 <script src="js/matrix.tables.js"></script>

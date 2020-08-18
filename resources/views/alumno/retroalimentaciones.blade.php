@@ -88,7 +88,7 @@
             <input type="hidden" id="comentario">
             <input type="hidden" id="ComentariosJson" name="ComentariosJson" value="">
 
-          <table class="table table-bordered data-table" id="tableModal" name="tableModal">
+          <table class="table table-bordered data" id="tableModal" name="tableModal">
             <thead>
               <tr>
                 <th>Alumno</th>
