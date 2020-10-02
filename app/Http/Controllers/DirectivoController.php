@@ -187,7 +187,7 @@ class DirectivoController extends Controller
         ]);
 
         $user = Auth::user();
-        if($user->privilegioDirectivoExclusivo($user['type']) ) {
+        if($user->privilegioDirectivo($user['type']) ) {
 
             $correccionesJson = $request->get('correcciones');
             $obj = json_decode($correccionesJson);
@@ -228,7 +228,7 @@ class DirectivoController extends Controller
         ]);
 
         $user = Auth::user();
-        if($user->privilegioDirectivoExclusivo($user['type']) ) {
+        if($user->privilegioDirectivo($user['type']) ) {
 
             $idInstanciaUnidad = $request->get('instanciaUnidad');
             $idInstanciaUnidad = Crypt::decrypt($idInstanciaUnidad);

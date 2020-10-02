@@ -13,7 +13,7 @@
         <!--<li class="bg_lb"> <a href="{{ route('dashboard.index') }}"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> Mi Tablero </a> </li>-->
         <li class="bg_lo span3"> <a href="planifications"> <i class="icon-th-list"></i> Planificaciones</a> </li>
         
-        <li class="bg_lg span3"> <a href="{{ route('directivo.index') }}"> <i class="icon-pencil"></i> <span class="label label-important"><!--{{$totalCorrecciones}}--></span> Correcciones UTP</a> </li>
+        <li class="bg_lg span3"> <a href="{{ route('directivo.index') }}"> <i class="icon-pencil"></i> <span class="label label-important"></span> Correcciones UTP</a> </li>
         <!--<li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i> Establecimientos</a> </li>-->
         <li class="bg_ls span3"> <a href="{{ route('alumno.index') }}"> <i class="icon-group"></i> Alumnos</a> </li>
         <!--<li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i> Full width</a> </li>-->
@@ -89,18 +89,18 @@
           </div>
           <div class="widget-content">
             <ul class="unstyled">
-              <li> <span class="icon24 icomoon-icon-arrow-up-2 red"><a title="" href="#"></span> <!--{{$avgPlanificaciones}}-->% Planificaciones <span class="pull-right strong"><!--{{$totalPlani}}--></span>
+              <li> <span class="icon24 icomoon-icon-arrow-up-2 red"><a title="" href="#"></span> % Planificaciones <span class="pull-right strong"></span>
                 <div class="progress progress-danger progress-striped ">
                   <div style="width: 0%;" class="bar"></div>
                 </div>
               </li>
 
-              <li> <span class="icon24 icomoon-icon-arrow-up-2 green"> <a title="" href="#2"></span> <!--{{$avgCorrecciones}}-->% Correcciones UTP <span class="pull-right strong"><!--{{$totalCorrecciones}}--></span>
+              <li> <span class="icon24 icomoon-icon-arrow-up-2 green"> <a title="" href="#2"></span>% Correcciones UTP <span class="pull-right strong"></span>
                 <div class="progress progress-success progress-striped ">
                   <div style="width: 0%;" class="bar"></div>
                 </div>
               </li>
-              <li> <span class="icon24 icomoon-icon-arrow-down-2 blue"> <a title="" href="#3"></span> <!--{{$avgRetroUnidad}}-->% Retroalimentaciones alumnos <span class="pull-right strong"></span>
+              <li> <span class="icon24 icomoon-icon-arrow-down-2 blue"> <a title="" href="#3"></span> % Retroalimentaciones alumnos <span class="pull-right strong"></span>
                 <div class="progress progress-striped ">
                   <div style="width: 0%;" class="bar"></div>
                 </div>
